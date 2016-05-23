@@ -11,10 +11,7 @@ use Illuminate\Support\Facades\Input;
 
 class UserController extends Controller
 {
-    public function index()
-    {
-        return view('dashboard.dashboard');
-    }
+
     /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
@@ -22,6 +19,12 @@ class UserController extends Controller
     {
         return view('admin.login');
     }
+
+    /**
+     * Add Login
+     * @param Request $request
+     * @return mixed
+     */
     public function addLogin(Request $request)
     {
         $credentials = array(
@@ -35,6 +38,11 @@ class UserController extends Controller
             return Redirect::to('login');
         }
     }
+
+    /**
+     * Logout
+     * @return mixed
+     */
     public function logout()
     {
         \Auth::logout();
