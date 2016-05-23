@@ -17,14 +17,18 @@ class CreateUsersTable extends Migration
             $table->string('first_name');
             $table->string('last_name');
             $table->string('user_name');
-            $table->string('email')->unique();
             $table->string('password');
-            $table->Integer('type');
-            $table->Integer('contact_phone');
+            $table->string('contact_no');
+            $table->string('user_type');
             $table->rememberToken();
             $table->timestamps();
+
+
         });
+
+
     }
+
 
     /**
      * Reverse the migrations.
@@ -33,6 +37,6 @@ class CreateUsersTable extends Migration
      */
     public function down()
     {
-        Schema::drop('users');
+        schema::drop('users');
     }
 }
