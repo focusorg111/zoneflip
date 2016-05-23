@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Vendor;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -20,11 +21,27 @@ class UserController extends Controller
         return view('admin.login');
     }
 
+
     /**
      * Add Login
      * @param Request $request
      * @return mixed
      */
+
+
+    public function register()
+    {
+        return view('seller.register');
+    }
+
+    public function store()
+    {
+        $inputs = \Request::all();
+        //print_r($inputs);
+        Vendor::create($inputs);
+    }
+
+
     public function addLogin(Request $request)
     {
         $credentials = array(
@@ -47,5 +64,9 @@ class UserController extends Controller
     {
         \Auth::logout();
         return Redirect::route('login');
+
     }
 }
+
+
+

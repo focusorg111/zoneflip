@@ -21,11 +21,13 @@
         ],
         "psr-4": {
             "App\\": "app/"
+
         },
         "files": [
             "config/constants.php"
         ]
     },
+
     "autoload-dev": {
         "classmap": [
             "tests/TestCase.php"

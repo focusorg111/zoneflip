@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateVendorTable extends Migration
+class CreateVendorsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,10 +12,10 @@ class CreateVendorTable extends Migration
      */
     public function up()
     {
-
-        Schema::create('vendor', function (Blueprint $table) {
+        Schema::create('vendors', function (Blueprint $table) {
             $table->increments('vendor_id');
             $table->string('description');
+            $table->string('email_address');
             $table->string('address', 150);
             $table->integer('user_id')->unsigned();
             $table->rememberToken();
@@ -31,6 +31,8 @@ class CreateVendorTable extends Migration
 
     }
 
+
+
     /**
      * Reverse the migrations.
      *
@@ -38,11 +40,12 @@ class CreateVendorTable extends Migration
      */
     public function down()
     {
-        Schema::table('vendor', function (Blueprint $table) {
-            $table->dropForeign('vendor_user_id_foreign');
+        Schema::table('vendors', function (Blueprint $table) {
+            $table->dropForeign('vendors_user_id_foreign');
 
         });
 
-        Schema::drop('vendor');
+        Schema::drop('vendors');
     }
+
 }
