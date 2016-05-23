@@ -51,15 +51,6 @@
                     </div>
                 </div>
 
-                <div class="form-group">
-                    <label for="email" class="cols-sm-2 control-label">Your Email</label>
-                    <div class="cols-sm-10">
-                        <div class="input-group">
-                            <span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
-                            <input type="text" class="form-control" name="email" id="email"  placeholder="Enter your Email"/>
-                        </div>
-                    </div>
-                </div>
 
                 <div class="form-group">
                     <label for="username" class="cols-sm-2 control-label">Username</label>
