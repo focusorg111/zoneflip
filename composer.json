@@ -23,7 +23,7 @@
             "App\\": "app/"
         },
         "files": [
-            "app/constants.php"
+            "config/constants.php"
         ]
     },
     "autoload-dev": {

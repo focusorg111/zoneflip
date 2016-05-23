@@ -6,3 +6,4 @@ return [
     'VENDOR' => 2
 ]
 ];
+?>

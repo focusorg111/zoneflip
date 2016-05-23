@@ -26,7 +26,8 @@
         <div class="login-panel panel panel-default">
             <div class="panel-heading">Log in</div>
             <div class="panel-body">
-                <form role="form">
+                <form role="form" action="{{route('admin.login')}}" method="post">
+                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
                     <fieldset>
                         <div class="form-group">
                             <input class="form-control" placeholder="E-mail" name="email" type="email" autofocus="">
@@ -39,7 +40,7 @@
                                 <input name="remember" type="checkbox" value="Remember Me">Remember Me
                             </label>
                         </div>
-                        <a href="index.html" class="btn btn-primary">Login</a>
+                        <button type="submit" class="btn btn-primary">Login</button>
                     </fieldset>
                 </form>
             </div>
