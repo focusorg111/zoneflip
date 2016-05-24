@@ -8,6 +8,8 @@
     <link href="{{asset('assets/css/bootstrap.min.css')}}" rel="stylesheet">
     <link href="{{asset('assets/css/datepicker3.css')}}" rel="stylesheet">
     <link href="{{asset('assets/css/styles.css')}}" rel="stylesheet">
+    <link href="{{asset('assets/css/jquery.dataTables.min.css')}}" rel="stylesheet">
+    <link href="{{asset('assets/css/myform.css')}}" rel="stylesheet">
 
     <!--Icons-->
     <script src="{{asset('assets/js/lumino.glyphs.js')}}"></script>
@@ -36,7 +38,7 @@
                     <ul class="dropdown-menu" role="menu">
                         <li><a href="#"><svg class="glyph stroked male-user"><use xlink:href="#stroked-male-user"></use></svg> Profile</a></li>
                         <li><a href="#"><svg class="glyph stroked gear"><use xlink:href="#stroked-gear"></use></svg> Settings</a></li>
-                        <li><a href="{{ URL::route('admin.logout') }}"><svg class="glyph stroked cancel"><use xlink:href="#stroked-cancel"></use></svg> Logout</a></li>
+                        <li><a href="{{ URL::route('logout') }}"><svg class="glyph stroked cancel"><use xlink:href="#stroked-cancel"></use></svg> Logout</a></li>
                     </ul>
                 </li>
             </ul>
@@ -53,8 +55,8 @@
     </form>
     <ul class="nav menu">
         <li class="active"><a href="index.html"><svg class="glyph stroked dashboard-dial"><use xlink:href="#stroked-dashboard-dial"></use></svg> Dashboard</a></li>
-        <li><a href="widgets.html"><svg class="glyph stroked calendar"><use xlink:href="#stroked-calendar"></use></svg> Widgets</a></li>
-        <li><a href="charts.html"><svg class="glyph stroked line-graph"><use xlink:href="#stroked-line-graph"></use></svg> Charts</a></li>
+        <li><a href="{{url(route('get.venderlist'))}}"><svg class="glyph stroked calendar"><use xlink:href="#stroked-calendar"></use></svg> Register Vendor</a></li>
+        <li><a href=""><svg class="glyph stroked line-graph"><use xlink:href="#stroked-line-graph"></use></svg> Charts</a></li>
         <li><a href="tables.html"><svg class="glyph stroked table"><use xlink:href="#stroked-table"></use></svg> Tables</a></li>
         <li><a href="forms.html"><svg class="glyph stroked pencil"><use xlink:href="#stroked-pencil"></use></svg> Forms</a></li>
         <li><a href="panels.html"><svg class="glyph stroked app-window"><use xlink:href="#stroked-app-window"></use></svg> Alerts &amp; Panels</a></li>
@@ -108,6 +110,7 @@
 <script src="{{asset('assets/js/easypiechart.js')}}"></script>
 <script src="{{asset('assets/js/easypiechart-data.js')}}"></script>
 <script src="{{asset('assets/js/bootstrap-datepicker.js')}}"></script>
+<script src="{{asset('assets/js/jquery.dataTables.min.js')}}"></script>
 <script>
     $('#calendar').datepicker({
     });

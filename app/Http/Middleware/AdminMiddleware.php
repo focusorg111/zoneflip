@@ -15,7 +15,16 @@ class AdminMiddleware
      */
     public function handle($request, Closure $next)
     {
-        return $next($request);
+
+        $user =\Auth::user();
+        if($user['user_type']==1)
+        {
+            return $next($request);
+        }
+        else{
+            return response('Unauthorized.', 401);
+        }
+
 
 
     }
