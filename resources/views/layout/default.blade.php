@@ -8,7 +8,6 @@
     <link href="{{asset('assets/css/bootstrap.min.css')}}" rel="stylesheet">
     <link href="{{asset('assets/css/datepicker3.css')}}" rel="stylesheet">
     <link href="{{asset('assets/css/styles.css')}}" rel="stylesheet">
-    <link href="{{asset('assets/css/jquery.dataTables.min.css')}}" rel="stylesheet">
     <link href="{{asset('assets/css/myform.css')}}" rel="stylesheet">
 
     <!--Icons-->
@@ -110,7 +109,6 @@
 <script src="{{asset('assets/js/easypiechart.js')}}"></script>
 <script src="{{asset('assets/js/easypiechart-data.js')}}"></script>
 <script src="{{asset('assets/js/bootstrap-datepicker.js')}}"></script>
-<script src="{{asset('assets/js/jquery.dataTables.min.js')}}"></script>
 <script>
     $('#calendar').datepicker({
     });

@@ -20,6 +20,7 @@ class UserController extends Controller
     /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
+
     public function login()
     {
         return view('admin.login');
@@ -27,16 +28,17 @@ class UserController extends Controller
 
 
     /**
-     * Add Login
-     * @param Request $request
-     * @return mixed
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-
 
     public function register()
     {
         return view('seller.register');
     }
+
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
 
     public function store()
     {
@@ -49,8 +51,13 @@ class UserController extends Controller
 
     }
 
+    /**
+     * Add Login
+     * @param Request $request
+     * @return mixed
+     */
 
-    public function addLogin(LoginRequest $loginRequest)
+    public function addLogin()
     {
         $credentials = array(
             'user_name' => Input::get('user_name'),
