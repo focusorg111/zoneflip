@@ -10,5 +10,5 @@ class Vendor extends Model
 
     protected $primaryKey ='vendor_id';
 
-    protected $fillable =['first_name','last_name','user_name','password','contact_no','email_address'];
+    protected $fillable =['description','email_address','address','company_name','register_date','is_approved','user_id'];
 }

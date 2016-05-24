@@ -23,6 +23,8 @@ class CreateUsersTable extends Migration
             $table->Integer('user_type');
             $table->Integer('contact_phone');
 
+
+            $table->Integer('user_type');
             $table->rememberToken();
             $table->timestamps();
 
