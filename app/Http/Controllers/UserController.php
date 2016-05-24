@@ -53,11 +53,11 @@ class UserController extends Controller
     public function addLogin(LoginRequest $loginRequest)
     {
         $credentials = array(
-            'user_name' => Input::get('email'),
+            'user_name' => Input::get('user_name'),
             'password' => Input::get('password')
         );
         if (\Auth::attempt($credentials)) {
-            return Redirect::to(route('admin.index'));
+            return Redirect::to(route('dashboard'));
         }
         else{
             return Redirect::to('login');

@@ -26,9 +26,18 @@ Route::group(['middleware' => ['web']], function () {
 
     Route::get('login',['as'=>'login', 'uses'=>'UserController@login']);
     Route::post('login',['as'=>'admin.login','uses'=>'UserController@addLogin']);
-    Route::get('dashboard',['as'=>'admin.index','uses'=>'DashboardController@index']);
-    Route::get('logout',['as'=>'admin.logout','uses'=>'UserController@logout']);
+    Route::group(['middleware' => ['auth']], function () {
+        Route::get('dashboard',['as'=>'dashboard','uses'=>'DashboardController@index']);
+        Route::get('logout',['as'=>'logout','uses'=>'UserController@logout']);
+        Route::group(['middleware' => ['superadmin']], function () {
+            Route::get('resgister-list',['as'=>'get.venderlist','uses'=>'AdminController@registerList']);
+        });
+
+
+    });
+
 });
+
 
 
 /*Route::group(['middleware' => [Auth']], function()
