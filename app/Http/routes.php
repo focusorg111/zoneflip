@@ -19,9 +19,10 @@ Route::get('/', function () {
 Route::group(['middleware' => ['web']], function () {
 
 
-    Route::get('login',['as'=>'admin.lodin','uses'=>'UserController@login']);
+
     Route::get('register',['as'=>'seller.register','uses'=>'UserController@register']);
     Route::post('register',['as'=>'seller.store','uses'=>'UserController@store']);
+
 
     Route::get('login',['as'=>'login', 'uses'=>'UserController@login']);
     Route::post('login',['as'=>'admin.login','uses'=>'UserController@addLogin']);
