@@ -13,10 +13,7 @@ use Illuminate\Support\Facades\Input;
 
 class UserController extends Controller
 {
-    public function index()
-    {
-        return view('dashboard.dashboard');
-    }
+
     /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
@@ -24,6 +21,13 @@ class UserController extends Controller
     {
         return view('admin.login');
     }
+
+
+    /**
+     * Add Login
+     * @param Request $request
+     * @return mixed
+     */
 
 
     public function register()
@@ -41,6 +45,7 @@ class UserController extends Controller
        Vendor::create(['description' => $inputs['description'],'address' => $inputs['address'],'user_id' => $inputs['user_id'],'company_name' => $inputs['company_name'],'register_date'=> $inputs['register_date'],'is_approved'=> $inputs['is_approved']]);
     }
 
+
     public function addLogin(Request $request)
     {
         $credentials = array(
@@ -54,6 +59,11 @@ class UserController extends Controller
             return Redirect::to('login');
         }
     }
+
+    /**
+     * Logout
+     * @return mixed
+     */
     public function logout()
     {
         \Auth::logout();
