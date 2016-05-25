@@ -5,7 +5,7 @@
         <select class="drop">
             <option value="" disabled="disabled" selected="selected">Please select</option>
             <option value="1">Is Approved</option>
-            <option value="2">pending approved</option>
+            <option value="2">Pending Approved</option>
         </select>
     </div>
     </div>
