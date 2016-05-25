@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\User;
 use App\Vendor;
 use Session;
+use App\Helper;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -33,6 +34,7 @@ class UserController extends Controller
 
     public function register()
     {
+
         return view('seller.register');
     }
 
@@ -40,7 +42,7 @@ class UserController extends Controller
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
 
-    public function store()
+    public function store(Request $request)
     {
         $inputs = \Request::all();
         $pwd = bcrypt($inputs['password']);
@@ -59,6 +61,7 @@ class UserController extends Controller
 
     public function addLogin()
     {
+
         $credentials = array(
             'user_name' => Input::get('user_name'),
             'password' => Input::get('password')
@@ -81,6 +84,11 @@ class UserController extends Controller
         return Redirect::route('login');
 
     }
+
+     public function helper()
+     {
+
+     }
 }
 
 

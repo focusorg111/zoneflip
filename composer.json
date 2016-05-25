@@ -25,7 +25,8 @@
 
         },
         "files": [
-            "config/constants.php"
+            "config/constants.php",
+            "app/helper.php"
         ]
     },
 
