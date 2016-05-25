@@ -4,9 +4,12 @@ namespace App\Http\Controllers;
 
 use App\User;
 use App\Vendor;
+use Session;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
+use App\Http\Requests\RegisterRequest;
+use App\Http\Requests\LoginRequest;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Input;
 
@@ -17,6 +20,7 @@ class UserController extends Controller
     /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
+
     public function login()
     {
         return view('admin.login');
@@ -24,29 +28,36 @@ class UserController extends Controller
 
 
     /**
-     * Add Login
-     * @param Request $request
-     * @return mixed
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-
 
     public function register()
     {
         return view('seller.register');
     }
 
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+
     public function store()
     {
         $inputs = \Request::all();
-        print_r($inputs);
-        //$userData = User::create([]);
-        $userData = User::create(['first_name'=> $inputs['first_name'],'last_name'=> $inputs['last_name'],'user_name'=> $inputs['user_name'],'password'=> $inputs['password'],'contact_no' => $inputs['contact_no'],'user_id'=> $inputs['user_id']]);
+        $pwd = bcrypt($inputs['password']);
+        $userData = User::create(['first_name'=> $inputs['first_name'],'last_name'=> $inputs['last_name'],'user_name'=> $inputs['user_name'],'password'=>$pwd,'contact_no' => $inputs['contact_no']]);
         $user_id = $userData['user_id'];
-       Vendor::create(['description' => $inputs['description'],'address' => $inputs['address'],'user_id' => $inputs['user_id'],'company_name' => $inputs['company_name'],'register_date'=> $inputs['register_date'],'is_approved'=> $inputs['is_approved']]);
+        Vendor::create(['user_id' => $user_id,'company_name' => $inputs['company_name'],'register_date'=> $inputs['register_date'],'is_approved'=> 0])->with('u r registered successfully');
+        return view('seller.register');
+
     }
 
+    /**
+     * Add Login
+     * @param Request $request
+     * @return mixed
+     */
 
-    public function addLogin(Request $request)
+    public function addLogin()
     {
         $credentials = array(
             'user_name' => Input::get('user_name'),
