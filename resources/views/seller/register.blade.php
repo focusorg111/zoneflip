@@ -19,6 +19,18 @@
     <title>Registration</title>
 </head>
 <body>
+@if(session('message'))
+    {{session('message')}}
+@endif
+{{--@if (count($errors) > 0)
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif--}}
 <div class="container">
     <div class="row main">
         <div class="panel-heading">
@@ -30,13 +42,15 @@
         </div>
         <div class="main-login main-center">
 
-            @if (session('success'))
+            {{--@if (session('success'))
                 <div class="flash-message">
                     <div class="alert alert-success">
 
                     </div>
                 </div>
-            @endif
+            @endif--}}
+
+
 
             <form class="form-horizontal" method="post" action="{{route('seller.store')}}">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">

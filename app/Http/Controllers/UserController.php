@@ -40,14 +40,21 @@ class UserController extends Controller
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
 
-    public function store()
+    public function store(Request $request)
     {
-        $inputs = \Request::all();
-        $pwd = bcrypt($inputs['password']);
-        $userData = User::create(['first_name'=> $inputs['first_name'],'last_name'=> $inputs['last_name'],'user_name'=> $inputs['user_name'],'password'=>$pwd,'contact_no' => $inputs['contact_no']]);
-        $user_id = $userData['user_id'];
-        Vendor::create(['user_id' => $user_id,'company_name' => $inputs['company_name'],'register_date'=> $inputs['register_date'],'is_approved'=> 0])->with('u r registered successfully');
-        return view('seller.register');
+
+         $inputs = \Request::all();
+         $pwd = bcrypt($inputs['password']);
+         $userData = User::create([
+             'first_name'=> $inputs['first_name'],
+             'last_name'=> $inputs['last_name'],
+             'user_name'=> $inputs['user_name'],
+             'password'=> $pwd,
+             'contact_no' => $inputs['contact_no']
+         ]);
+         $user_id = $userData['user_id'];
+         Vendor::create(['user_id' => $user_id,'company_name' => $inputs['company_name'],'register_date'=> $inputs['register_date'],'is_approved'=> 0]);
+         return view('seller.register')->with('message','Success');;
 
     }
 
@@ -57,7 +64,7 @@ class UserController extends Controller
      * @return mixed
      */
 
-    public function addLogin()
+    public function addLogin(LoginRequest $LoginRequest)
     {
         $credentials = array(
             'user_name' => Input::get('user_name'),
