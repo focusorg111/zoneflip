@@ -28,4 +28,25 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function getRegisterData()
+    {
+            return $this
+            ->join('vendors', 'users.user_id', '=', 'vendors.user_id')
+            ->select(['users.user_id',
+                'users.first_name',
+                'users.last_name',
+                'vendors.company_name',
+                'vendors.register_date',
+                \DB::raw('CONCAT(First_Name, " ", Last_Name) AS full_name'
+                )])
+            ->paginate(2);
+
+    }
+    public function getVenderDetail($id)
+    {
+            return $this->join('vendors', 'users.user_id', '=', 'vendors.user_id')->where('users.user_id',$id)
+            ->first();
+
+    }
 }
