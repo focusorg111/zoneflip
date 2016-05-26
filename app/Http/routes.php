@@ -31,9 +31,11 @@ Route::group(['middleware' => ['web']], function () {
         Route::get('logout',['as'=>'logout','uses'=>'UserController@logout']);
 
         Route::group(['middleware' => ['superadmin']], function () {
-            Route::get('resgister-list',['as'=>'get.venderlist','uses'=>'AdminController@registerList']);
+            Route::get('register-list',['as'=>'get.venderlist','uses'=>'AdminController@registerList']);
             Route::get('get/registerlist/{id?}',['as'=>'get.registerdetail','uses'=>'AdminController@getRegisterDetail']);
             Route::post('approve',['as'=>'check.approve','uses'=>'AdminController@checkIsApprove']);
+            Route::get('get/approvelist',['as'=>'get.approvelist','uses'=>'AdminController@getApprovelist']);
+
         });
         Route::group(['middleware' => ['seller']], function () {
 

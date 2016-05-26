@@ -29,20 +29,33 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    public function getRegisterData()
+    /**
+     * Get Register data
+     * @param int $status
+     * @return mixed
+     */
+    public function getRegisterData($status=0)
     {
             return $this
             ->join('vendors', 'users.user_id', '=', 'vendors.user_id')
+                ->where('vendors.is_approved',$status)
             ->select(['users.user_id',
                 'users.first_name',
                 'users.last_name',
                 'vendors.company_name',
                 'vendors.register_date',
+                'vendors.is_approved',
                 \DB::raw('CONCAT(First_Name, " ", Last_Name) AS full_name'
                 )])
-            ->paginate(2);
+            ->paginate(5);
 
     }
+
+    /**
+     * Vender Detail
+     * @param $id
+     * @return mixed
+     */
     public function getVenderDetail($id)
     {
             return $this->join('vendors', 'users.user_id', '=', 'vendors.user_id')->where('users.user_id',$id)
