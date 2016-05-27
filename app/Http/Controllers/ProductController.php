@@ -31,18 +31,20 @@ class ProductController extends Controller
     public function  store()
     {
         $inputs = \Request::all();
-        print_r($inputs);
-       // $prodId = $inputs['product_id'];
+        $users = \Auth::user();
+        $usersID =$users['user_id'];
         Products::create([
-            //'product_id' => $prodId,
             'product_name' => $inputs['product_name'],
             'category_id' => $inputs['category_id'],
             'subcategory_id' => $inputs['subcategory_id'],
             'price' => $inputs['price'],
             'quantity' => $inputs['quantity'],
             'discount' => $inputs['discount'],
-            'product_description' => $inputs['product_description']
+            'product_description' => $inputs['product_description'],
+            'created_by'  =>$usersID,
+            'updated_by' =>$usersID
             ]);
+
     }
 
     /**
@@ -55,5 +57,12 @@ class ProductController extends Controller
         $catId = $inputs['subcategory_id'];
         $subCats = Subcategory::where('category_id',$catId)->get();
         return view('products.subcategory_list', compact('subCats'));
+    }
+
+
+    public function productDetils()
+    {
+        $products = Products::all();
+       return  view('products.product_detail',compact('products'));
     }
 }

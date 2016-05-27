@@ -47,6 +47,9 @@ Route::group(['middleware' => ['web']], function () {
             Route::post('product/store',['as' => 'product.store','uses'=>'ProductController@store']);
             Route::get('product/sub-category',['as' => 'product.get-subcategory','uses'=>'ProductController@productSubcategory']);
 
+
+            Route::get('product/detail-list',['uses'=>'ProductController@productDetils']);
+
         });
     });
 
