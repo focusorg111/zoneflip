@@ -30,6 +30,9 @@ Route::group(['middleware' => ['web']], function () {
     Route::group(['middleware' => ['auth']], function () {
         Route::get('dashboard',['as'=>'dashboard','uses'=>'DashboardController@index']);
         Route::get('logout',['as'=>'logout','uses'=>'UserController@logout']);
+        Route::get('change-password',['as'=>'change.password','uses'=>'UserController@changePassword']);
+        Route::post('update-change-password',['as'=>'update.change.password','uses'=>'UserController@updateChangePassword']);
+
 
         Route::group(['middleware' => ['superadmin']], function () {
             Route::get('register-list',['as'=>'get.venderlist','uses'=>'AdminController@registerList']);

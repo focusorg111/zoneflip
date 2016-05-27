@@ -15,6 +15,11 @@
                     selected="selected"
                     @endif
                     >Approved</option>
+            <option value="2"
+                    @if($status==2)
+                    selected="selected"
+                    @endif
+                    >Rejected</option>
 
         </select>
         <button type="submit" class=".btn btn-info">Filter</button>
@@ -40,7 +45,7 @@
                     @endforeach
             </table>
             <div align="center">
-                {!! $users->render() !!}
+                {!! $users->appends(['approved_status' => $status])->render() !!}
             </div>
 
         </div>
