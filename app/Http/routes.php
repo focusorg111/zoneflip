@@ -17,6 +17,7 @@ Route::get('/', function () {
 
 
 
+
 Route::group(['middleware' => ['web']], function () {
 
     Route::get('register',['as'=>'seller.register','uses'=>'UserController@register']);
@@ -38,6 +39,10 @@ Route::group(['middleware' => ['web']], function () {
 
         });
         Route::group(['middleware' => ['seller']], function () {
+            //Route::resource('products', 'ProductController');
+            Route::get('products',['as' => 'get.products','uses'=>'ProductController@create']);
+            Route::post('product/store',['as' => 'product.store','uses'=>'ProductController@store']);
+            Route::get('product/sub-category',['as' => 'product.get-subcategory','uses'=>'ProductController@productSubcategory']);
 
         });
     });
@@ -45,8 +50,5 @@ Route::group(['middleware' => ['web']], function () {
 });
 
 
-
-/*Route::group(['middleware' => [Auth']], function()
-{*/
 
 
