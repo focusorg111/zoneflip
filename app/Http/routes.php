@@ -47,6 +47,7 @@ Route::group(['middleware' => ['web']], function () {
 
             Route::get('product/detail-list',['uses'=>'ProductController@productDetils']);
 
+
         });
     });
 

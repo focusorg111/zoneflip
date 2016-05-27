@@ -24,5 +24,20 @@ class Products extends Model
         'updated_by',
     ];
 
+    public function getProductData()
+    {
+        return $this
+            ->join('categories', 'categories.category_id', '=', 'products.category_id')
+            ->join('subcategories', 'subcategories.subcategory_id', '=', 'products.subcategory_id')
+            ->select(['categories.category_name',
+            'subcategories.subcategory_name',
+                'products.product_name',
+                'products.price',
 
+            ])
+             ->get();
+
+
+
+    }
 }

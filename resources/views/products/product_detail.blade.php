@@ -1,5 +1,12 @@
 @extends('layout.default')
 @section('content')
+    <div class="col-md-12">
+        <form method="get" action="{{route('get.venderlist')}}">
+                <select class="drop" name="category_name"></select>
+                <select class="drop" name="subcategory_name"></select>
+                <button type="submit" class=".btn btn-info">Filter</button>
+            </form>
+</div>
     <div class="row">
         <div class="col-md-12">
             <table class="table table-bordered">
@@ -10,18 +17,47 @@
                 <th>Price</th>
                 <th>Action</th>
             </tr>
-            @foreach($products as $product)
-                <tr><td>{{$product->product_name}}
-                <td>{{$product->category_id }}</td>
-                <td>{{$product->subcategory_id }}</td>
-                <td>{{$product->price }}</td>
+                @foreach($productInfos as $productInfo)
+                <tr><td>{{$productInfo->product_name}}
+                <td>{{$productInfo->category_name }}</td>
+                <td>{{$productInfo->subcategory_name }}</td>
+                <td>{{$productInfo->price }}</td>
                     <td><i class="glyphicon-edit"></i></td>
-
                 </tr>
-            @endforeach
+                @endforeach
+            </table>
         </div>
     </div>
-        </table>
+
 
 
     @endsection
+
+
+@section('script')
+
+    <script>
+
+        $(document).ready(function(){
+            $("#category_id").change(function(){
+                var countryId=$("#category_id").val();
+                $.ajax( {
+                    method:'get',
+                    data:{
+                        subcategory_id: countryId
+                    },
+                    url : '{{route("product.get-subcategory")}}',
+                    success:     function(data) {
+                        // console.log(data);
+                        $('#subcategory_id').html(data);
+                        // console.log('hhhjngkn');
+                    }
+                });
+            });
+        });
+
+
+
+    </script>
+
+@endsection
