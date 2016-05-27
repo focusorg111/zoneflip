@@ -1,15 +1,7 @@
 @extends('layout.default')
 @section('content')
     <div class="row" align="center">
-        @if(isset($success)&& $success->any())
-            <div class="alert alert-success alert-block">
-                <button type="button" class="close" data-dismiss="alert">&times;</button>
-                <h4>Success</h4>
-                <ul>
-                    {{ implode('', $success->all('<li>:message</li>')) }}
-                </ul>
-            </div>
-        @endif
+      @include('common.messages')
         <form action="{{route('update.change.password')}}" method="post">
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
             <div>

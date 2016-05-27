@@ -13,6 +13,7 @@ use App\Http\Requests\ProductRequest;
 
 
 
+
 class ProductController extends Controller
 {
 
@@ -70,5 +71,22 @@ class ProductController extends Controller
     }
 
 
+
+
+
+    public function manageImage()
+    {
+        return view('products.manage_image');
+    }
+    public function uploadImage()
+    {
+            $input = Input::all();
+            $destinationPath = public_path() . '/product_image';
+            $extension = Input::file('file')->getClientOriginalExtension();
+            $fileName = time() . '.' . $extension;
+            $upload_success = Input::file('file')->move($destinationPath, $fileName);
+            
+
+    }
 
 }

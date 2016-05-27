@@ -10,12 +10,12 @@
     <div class="row">
         <div class="col-md-12">
             <table class="table table-bordered">
-            <tr>
                 <th>Product Name</th>
                 <th>Category</th>
                 <th>Sub-category</th>
                 <th>Price</th>
                 <th>Action</th>
+<<<<<<< HEAD
             </tr>
                 @foreach($productInfos as $productInfo)
                 <tr><td>{{$productInfo->product_name}}
@@ -61,3 +61,18 @@
     </script>
 
 @endsection
+=======
+            @foreach($products as $product)
+                <tr><td>{{$product->product_name}}</td>
+                <td>{{$product->category_id }}</td>
+                <td>{{$product->subcategory_id }}</td>
+                <td>{{$product->price }}</td>
+                    <td><i class="glyphicon-edit"></i>
+                    <a class="btn btn-default" href="{{route('product.manage-image')}}">Manage Image</a></td>
+                </tr>
+            @endforeach
+            </table>
+        </div>
+    </div>
+    @endsection
+>>>>>>> eb177cad61840e412ac69416858f6e4635ed4aca
