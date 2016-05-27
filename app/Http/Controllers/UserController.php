@@ -13,6 +13,7 @@ use App\Http\Requests\RegisterRequest;
 use App\Http\Requests\LoginRequest;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Input;
+use App\Http\Requests\ChangePasswordRequest;
 
 
 class UserController extends Controller
@@ -82,6 +83,31 @@ class UserController extends Controller
     }
 
     /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function changePassword()
+    {
+       return view('common.change_password');
+    }
+    public function updateChangePassword()
+    {
+        $inputs =\Request::all();
+        $user = \Auth::user();
+        if (\Hash::check($inputs['current_password'], $user->password))
+        {
+            $password = bcrypt($inputs['new_password']);
+            User::where('user_id', $user->user_id)->update(['password' => $password]);
+            return Redirect::to(route('change.password'))->withSuccess('Your password has been updated');
+        }
+        else
+        {
+
+            return Redirect::to(route('login'));
+        }
+
+    }
+
+    /**
      * Logout
      * @return mixed
      */
@@ -92,10 +118,7 @@ class UserController extends Controller
 
     }
 
-     public function helper()
-     {
 
-     }
 }
 
 

@@ -3,3 +3,14 @@
     width: 200px;
     height: 25px;
 }
+.text-width{
+    width: 200px;
+}
+.panel-width{
+    width:500px;
+    height: 400px;
+    background-color: aliceblue;
+}
+.text-size{
+    font-size: 30px;
+}

@@ -7,7 +7,7 @@ return [
 ],
     'VENDOR_STATUS' => [
         'APPROVE' => 1,
-        'REJECTED' =>0
+        'REJECTED' =>2
     ]
 ];
 ?>

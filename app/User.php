@@ -34,7 +34,7 @@ class User extends Authenticatable
      * @param int $status
      * @return mixed
      */
-    public function getRegisterData($status=0)
+    public function getRegisterData($status)
     {
             return $this
             ->join('vendors', 'users.user_id', '=', 'vendors.user_id')
@@ -47,7 +47,7 @@ class User extends Authenticatable
                 'vendors.is_approved',
                 \DB::raw('CONCAT(First_Name, " ", Last_Name) AS full_name'
                 )])
-            ->paginate(5);
+            ->paginate(1);
 
     }
 
