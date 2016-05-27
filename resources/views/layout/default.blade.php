@@ -8,6 +8,7 @@
     <link href="{{asset('assets/css/bootstrap.min.css')}}" rel="stylesheet">
     <link href="{{asset('assets/css/styles.css')}}" rel="stylesheet">
     <link href="{{asset('assets/css/myform.css')}}" rel="stylesheet">
+    <link href="{{asset('assets/css/dropzone.css')}}" rel="stylesheet">
 
     <!--Icons-->
     <script src="{{asset('assets/js/lumino.glyphs.js')}}"></script>
@@ -72,6 +73,7 @@
 
 <script src="{{asset('assets/js/jquery-1.11.1.min.js')}}"></script>
 <script src="{{asset('assets/js/bootstrap.min.js')}}"></script>
+<script src="{{asset('assets/js/dropzone.js')}}"></script>
 @yield('script')
 </body>
 

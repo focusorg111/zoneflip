@@ -89,7 +89,7 @@ class UserController extends Controller
     {
        return view('common.change_password');
     }
-    public function updateChangePassword()
+    public function updateChangePassword(ChangePasswordRequest $ChangePasswordRequest)
     {
         $inputs =\Request::all();
         $user = \Auth::user();

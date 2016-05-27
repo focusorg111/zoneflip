@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Input;
 
 
 
+
 class ProductController extends Controller
 {
 
@@ -64,5 +65,19 @@ class ProductController extends Controller
     {
         $products = Products::all();
        return  view('products.product_detail',compact('products'));
+    }
+    public function manageImage()
+    {
+        return view('products.manage_image');
+    }
+    public function uploadImage()
+    {
+            $input = Input::all();
+            $destinationPath = public_path() . '/product_image';
+            $extension = Input::file('file')->getClientOriginalExtension();
+            $fileName = time() . '.' . $extension;
+            $upload_success = Input::file('file')->move($destinationPath, $fileName);
+            
+
     }
 }
