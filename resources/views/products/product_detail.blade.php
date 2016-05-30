@@ -1,11 +1,42 @@
 @extends('layout.default')
 @section('content')
     <div class="col-md-12">
-        <form method="get" action="{{route('get.venderlist')}}">
-                <select class="drop" name="category_name"></select>
-                <select class="drop" name="subcategory_name"></select>
-                <button type="submit" class=".btn btn-info">Filter</button>
-            </form>
+        <div class="form-group">
+            {!!
+    Form::open(array('url' => route('get.product-list'), 'method' => 'GET'))
+    !!}
+        </div>
+
+        <div class="form-group">
+            <label class="control-label">Choose category: </label>
+            {!!
+            Form::select('category_id', array('' => 'Select Category') +$category,[],array('id' => 'category_id'),
+            ['class' => 'form-control',
+            'id' => 'category_id',
+            'name'=>'category_id'
+            ])
+             !!}
+        </div>
+
+        <div class="form-group">
+            <label class="control-label">Choose sub-category: </label>
+            {!!
+            Form::select('subcategory_id', array('' => 'Select Sub-Category') + $subCategory,array('id' => 'subcategory_id'),
+            ['class' => 'form-control',
+            'id' => 'subcategory_id',
+            'name'=>'subcategory_id'
+             ])
+             !!}
+        </div>
+
+        <div class="form-group">
+            <button type="submit" class=".btn btn-info">Filter</button>
+        </div>
+        <div>
+
+            {!! Form::close() !!}
+        </div>
+
 </div>
     <div class="row">
         <div class="col-md-12">
@@ -15,7 +46,7 @@
                 <th>Sub-category</th>
                 <th>Price</th>
                 <th>Action</th>
-<<<<<<< HEAD
+
             </tr>
                 @foreach($productInfos as $productInfo)
                 <tr><td>{{$productInfo->product_name}}
@@ -38,41 +69,29 @@
 
     <script>
 
-        $(document).ready(function(){
-            $("#category_id").change(function(){
-                var countryId=$("#category_id").val();
-                $.ajax( {
-                    method:'get',
-                    data:{
-                        subcategory_id: countryId
-                    },
-                    url : '{{route("product.get-subcategory")}}',
-                    success:     function(data) {
-                        // console.log(data);
-                        $('#subcategory_id').html(data);
-                        // console.log('hhhjngkn');
-                    }
+        $(document).ready(function() {
+            $("#category_id").change(function () {
+                var countryId = $("#category_id").val();
+                $.ajax({
+                        method: 'get',
+                        data: {
+                            subcategory_id: countryId
+                        },
+                        url: '{{route("get.subcategory-list")}}',
+                        success: function (data) {
+                            //console.log(data);
+                            $('#subcategory_id').html(data);
+                             console.log('hhhjngkn');
+                        }
+                    });
                 });
             });
-        });
+
+
 
 
 
     </script>
 
 @endsection
-=======
-            @foreach($products as $product)
-                <tr><td>{{$product->product_name}}</td>
-                <td>{{$product->category_id }}</td>
-                <td>{{$product->subcategory_id }}</td>
-                <td>{{$product->price }}</td>
-                    <td><i class="glyphicon-edit"></i>
-                    <a class="btn btn-default" href="{{route('product.manage-image')}}">Manage Image</a></td>
-                </tr>
-            @endforeach
-            </table>
-        </div>
-    </div>
-    @endsection
->>>>>>> eb177cad61840e412ac69416858f6e4635ed4aca
+

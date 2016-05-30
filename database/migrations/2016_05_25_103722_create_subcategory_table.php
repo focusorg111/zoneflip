@@ -17,7 +17,6 @@ class CreateSubcategoryTable extends Migration
             $table->string('subcategory_name');
             $table->boolean('is_active');
             $table->integer('category_id')->unsigned();
-            $table->rememberToken();
             $table->timestamps();
 
 

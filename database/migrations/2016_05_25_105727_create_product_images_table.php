@@ -16,7 +16,6 @@ class CreateProductImagesTable extends Migration
             $table->increments('product_id');
             $table->string('product_image');
             $table->boolean('is_main_image');
-            $table->rememberToken();
             $table->timestamps();
         });
     }

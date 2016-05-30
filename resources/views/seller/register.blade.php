@@ -20,24 +20,7 @@
 </head>
 <body>
 
-@if (count($errors) > 0)
 
-@if(session('message'))
-    {{session('message')}}
-@endif
-{{--@if (count($errors) > 0)
->>>>>>> 3c10c56944dfcfbf6f20f1517e79b8c9a1482375
-    <div class="alert alert-danger">
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
-<<<<<<< HEAD
-@endif
-
-@endif--}}
 
 <div class="container">
     <div class="row main">
@@ -130,6 +113,16 @@
 
 
                 <div class="form-group">
+                    <label for="confirm" class="cols-sm-2 control-label">Address</label>
+                    <div class="cols-sm-10">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
+                            <input type="textarea" class="form-control" name="address" id="address"  placeholder="address"/>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
                     <label for="confirm" class="cols-sm-2 control-label">Contact no.</label>
                     <div class="cols-sm-10">
                         <div class="input-group">
@@ -139,15 +132,6 @@
                     </div>
                 </div>
 
-                <div class="form-group">
-                    <label for="confirm" class="cols-sm-2 control-label">Registered date</label>
-                    <div class="cols-sm-10">
-                        <div class="input-group">
-                            <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
-                            <input type="date" class="form-control" name="register_date" id="register_date"  placeholder="Choose date"/>
-                        </div>
-                    </div>
-                </div>
 
 
                 <div class="form-group ">

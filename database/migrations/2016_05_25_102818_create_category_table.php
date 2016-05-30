@@ -16,7 +16,6 @@ class CreateCategoryTable extends Migration
             $table->increments('category_id');
             $table->string('category_name');
             $table->boolean('is_active');
-            $table->rememberToken();
             $table->timestamps();
     });
     }

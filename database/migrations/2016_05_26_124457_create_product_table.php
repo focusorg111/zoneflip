@@ -20,6 +20,7 @@ class CreateProductTable extends Migration
             $table->integer('quantity');
             $table->string('product_size');
             $table->integer('discount');
+            $table->integer('vendor_id')->unsigned();
             $table->integer('category_id')->unsigned();
             $table->integer('subcategory_id')->unsigned();
             $table->integer('created_by')->unsigned();
