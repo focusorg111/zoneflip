@@ -77,7 +77,7 @@ class ProductController extends Controller
             $extension = Input::file('file')->getClientOriginalExtension();
             $fileName = time() . '.' . $extension;
             $upload_success = Input::file('file')->move($destinationPath, $fileName);
-            
+
 
     }
 }
