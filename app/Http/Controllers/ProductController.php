@@ -6,8 +6,10 @@ use App\Category;
 use App\Subcategory;
 use App\Products;
 use App\Http\Requests;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
+use App\Http\Requests\ProductRequest;
 
 
 
@@ -63,9 +65,15 @@ class ProductController extends Controller
 
     public function productDetils()
     {
-        $products = Products::all();
-       return  view('products.product_detail',compact('products'));
+        $productOjb = (new Products());
+        $productInfos = $productOjb->getProductData();
+        return  view('products.product_detail',compact('productInfos'));
     }
+
+
+
+
+
     public function manageImage()
     {
         return view('products.manage_image');
@@ -80,4 +88,5 @@ class ProductController extends Controller
 
 
     }
+
 }

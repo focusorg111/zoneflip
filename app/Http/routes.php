@@ -50,6 +50,7 @@ Route::group(['middleware' => ['web']], function () {
             Route::get('product/manage-image',['as'=>'product.manage-image','uses'=>'ProductController@manageImage']);
             Route::post('product/upload-image',['as'=>'product.upload-image','uses'=>'ProductController@uploadImage']);
 
+
         });
     });
 
