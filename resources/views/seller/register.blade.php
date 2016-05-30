@@ -20,24 +20,7 @@
 </head>
 <body>
 
-@if (count($errors) > 0)
 
-@if(session('message'))
-    {{session('message')}}
-@endif
-{{--@if (count($errors) > 0)
->>>>>>> 3c10c56944dfcfbf6f20f1517e79b8c9a1482375
-    <div class="alert alert-danger">
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
-<<<<<<< HEAD
-@endif
-
-@endif--}}
 
 <div class="container">
     <div class="row main">

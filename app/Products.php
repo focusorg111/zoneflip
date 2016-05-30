@@ -33,6 +33,7 @@ class Products extends Model
             'subcategories.subcategory_name',
                 'products.product_name',
                 'products.price',
+                'products.product_id'
 
             ])
              ->get();

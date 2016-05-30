@@ -10,8 +10,8 @@ use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use App\Http\Requests\ProductRequest;
-
-
+use App\ProductImage;
+use Illuminate\Support\Facades\Redirect;
 
 
 class ProductController extends Controller
@@ -70,23 +70,25 @@ class ProductController extends Controller
         return  view('products.product_detail',compact('productInfos'));
     }
 
-
-
-
-
-    public function manageImage()
+    public function manageImage($product_id)
     {
-        return view('products.manage_image');
+        $productImages = ProductImage::all();
+        return view('products.manage_image',compact('productImages','product_id'));
     }
     public function uploadImage()
     {
             $input = Input::all();
-            $destinationPath = public_path() . '/product_image';
+            $productId=$input['product_id'];
+            $destinationPath = public_path() . '/assets/product_image';
             $extension = Input::file('file')->getClientOriginalExtension();
             $fileName = time() . '.' . $extension;
             $upload_success = Input::file('file')->move($destinationPath, $fileName);
-
+           ProductImage::create(['product_image'=>$fileName,'product_id'=>$productId]);
+    }
+    public function updateMainImage($id)
+    {
+        ProductImage::where('image_id',$id)->update(['is_main_image'=>1]);
+      return Redirect::to(route('product.manage-image'));
 
     }
-
 }

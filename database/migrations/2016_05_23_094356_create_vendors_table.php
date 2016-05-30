@@ -17,7 +17,6 @@ class CreateVendorsTable extends Migration
             $table->string('description');
             $table->string('address', 150);
             $table->integer('user_id')->unsigned();
-            $table->rememberToken();
             $table->timestamps();
 
 
