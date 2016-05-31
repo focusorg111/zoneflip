@@ -38,10 +38,14 @@ class Products extends Model
 
             ]);
 
+        if ($cat>=1)
+
+
         if ($cat>1)
+
             $query->where('products.category_id', '=', $cat);
 
-        if ($sub>1)
+        if ($sub>=1)
             $query->where('products.subcategory_id', '=', $sub);
         $result = $query->get();
         return $result;

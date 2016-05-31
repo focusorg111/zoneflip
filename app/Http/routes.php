@@ -42,12 +42,20 @@ Route::group(['middleware' => ['web']], function () {
 
         });
         Route::group(['middleware' => ['seller']], function () {
-            //Route::resource('products', 'ProductController');
+
             Route::get('products',['as' => 'get.products','uses'=>'ProductController@create']);
+            Route::get('products/edit/{id}',['as' => 'get.products-edit','uses'=>'ProductController@edit']);
+            Route::put('products/update',['as' => 'product.update','uses'=>'ProductController@update']);
+
             Route::post('product/store',['as' => 'product.store','uses'=>'ProductController@store']);
             Route::get('product/sub-category',['as' => 'product.get-subcategory','uses'=>'ProductController@productSubcategory']);
             Route::get('product/detail-list',['as'=>'get.product-list','uses'=>'ProductController@productDetails']);
+
+           Route::get('product/showSubcategory-list',['as'=>'get.subcategory-list','uses'=>'ProductController@showSubcategoryList']);
+
+
              Route::get('product/showSubcategory-list',['as'=>'get.subcategory-list','uses'=>'ProductController@showSubcategoryList']);
+
 
 
             Route::get('product/manage-image/{id?}',['as'=>'product.manage-image','uses'=>'ProductController@manageImage']);
