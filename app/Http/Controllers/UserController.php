@@ -91,15 +91,16 @@ class UserController extends Controller
             elseif($user['user_type']==2)
             {
                 $userId=$user['user_id'];
-                $vender=Vendor::where('user_id',$userId)->select('vendor_id','is_approved')->first();
-                $vender->vendor_id;
-               if('is_approved'==0)
+                $vendor=Vendor::where('user_id',$userId)->select('vendor_id','is_approved')->first();
+                $vendor->vendor_id;
+               if($vendor->is_approved==1)
                {
-                   return Redirect::to(route('login'));
+                   session(['vendor_id' => $vendor->vendor_id]);
+                   return Redirect::to(route('dashboard'));
                }
                 else{
-
-                    return Redirect::to(route('dashboard'));
+                    \Auth::logout();
+                    return Redirect::to(route('login'));
                 }
             }
         }

@@ -87,12 +87,6 @@ class ProductController extends Controller
 
     }
 
-    public function manageImage()
-
-        $productInfos = $productOjb->getProductData();
-        return  view('products.product_detail',compact('productInfos'));
-    }
-
     public function manageImage($product_id)
     {
         $productImages = ProductImage::all();
