@@ -84,7 +84,6 @@ class ProductController extends Controller
 
     }
 
-
     public function manageImage($product_id)
 
     {
