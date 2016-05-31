@@ -85,11 +85,13 @@ class UserController extends Controller
             {
                 $userId=$user['user_id'];
                 $vender=Vendor::where('user_id',$userId)->select('vendor_id','is_approved')->first();
+                $vender->vendor_id;
                if('is_approved'==0)
                {
                    return Redirect::to(route('login'));
                }
                 else{
+
                     return Redirect::to(route('dashboard'));
                 }
             }
