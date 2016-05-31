@@ -50,16 +50,23 @@ class UserController extends Controller
          $inputs = \Request::all();
         $current = date('Y-m-d');
          $pwd = bcrypt($inputs['password']);
+        $userType= \Config::get('constants.USER_TYPE.SELLER');
          $userData = User::create([
              'first_name'=> $inputs['first_name'],
              'last_name'=> $inputs['last_name'],
              'user_name'=> $inputs['user_name'],
              'password'=> $pwd,
-             'contact_no' => $inputs['contact_no']
+             'contact_no' => $inputs['contact_no'],
+             'user_type'=>$userType
          ]);
          $user_id = $userData['user_id'];
+
          Vendor::create(['user_id' => $user_id,'company_name' => $inputs['company_name'],'address'=> $inputs['address'],'register_date'=> $current,'is_approved'=> 0]);
          return view('seller.register');
+
+         Vendor::create(['user_id' => $user_id,'company_name' => $inputs['company_name'],'register_date'=> $inputs['register_date'],'is_approved'=> 0]);
+         return view('seller.register')->with('message','Success');
+
 
     }
 
@@ -77,11 +84,24 @@ class UserController extends Controller
             'password' => Input::get('password')
         );
         if (\Auth::attempt($credentials)) {
-            return Redirect::to(route('dashboard'));
+            $user=\Auth::user();
+            if($user['user_type']==1){
+                return Redirect::to(route('dashboard'));
+            }
+            elseif($user['user_type']==2)
+            {
+                $userId=$user['user_id'];
+                $vender=Vendor::where('user_id',$userId)->select('vendor_id','is_approved')->first();
+               if('is_approved'==0)
+               {
+                   return Redirect::to(route('login'));
+               }
+                else{
+                    return Redirect::to(route('dashboard'));
+                }
+            }
         }
-        else{
-            return Redirect::to('login');
-        }
+
     }
 
     /**
@@ -103,7 +123,6 @@ class UserController extends Controller
         }
         else
         {
-
             return Redirect::to(route('login'));
         }
 

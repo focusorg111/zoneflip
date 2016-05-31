@@ -47,13 +47,17 @@
                 <th>Price</th>
                 <th>Action</th>
 
+
+
+
             </tr>
                 @foreach($productInfos as $productInfo)
                 <tr><td>{{$productInfo->product_name}}
                 <td>{{$productInfo->category_name }}</td>
                 <td>{{$productInfo->subcategory_name }}</td>
                 <td>{{$productInfo->price }}</td>
-                    <td><i class="glyphicon-edit"></i></td>
+                    <td><i class="glyphicon-edit"></i>
+                    <a class="btn btn-default" href="{{route('product.manage-image',$productInfo->product_id)}}">Manage Image</a></td>
                 </tr>
                 @endforeach
             </table>
@@ -93,5 +97,9 @@
 
     </script>
 
+
 @endsection
+
+    @endsection
+
 

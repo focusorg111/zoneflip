@@ -42,5 +42,12 @@ class Products extends Model
         $result = $query->get();
         return $result;
 
+                'products.product_id'
+
+            ])
+             ->get();
+
+
+
     }
 }
