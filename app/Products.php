@@ -29,6 +29,7 @@ class Products extends Model
       $query= $this
             ->join('categories', 'categories.category_id', '=', 'products.category_id')
             ->join('subcategories', 'subcategories.subcategory_id', '=', 'products.subcategory_id')
+          ->where('vendor_id',session('vendor_id'))
             ->select(['categories.category_name',
             'subcategories.subcategory_name',
                 'products.product_name',
@@ -36,7 +37,12 @@ class Products extends Model
                 'products.product_id'
 
             ]);
+
         if ($cat>=1)
+
+
+        if ($cat>1)
+
             $query->where('products.category_id', '=', $cat);
 
         if ($sub>=1)
@@ -44,5 +50,13 @@ class Products extends Model
         $result = $query->get();
         return $result;
 
+    }
+    public function isValidProduct($product_id)
+    {
+        return $this
+            ->where('vendor_id',session('vendor_id'))
+            ->where('products.product_id',$product_id)
+            ->select(['products.product_name'])
+            ->first();
     }
 }
