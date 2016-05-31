@@ -7,7 +7,7 @@
     <ul class="nav menu">
         <li class="active"><a href="index.html"><svg class="glyph stroked dashboard-dial"><use xlink:href="#stroked-dashboard-dial"></use></svg> Dashboard</a></li>
         <li><a href="{{url(route('get.venderlist'))}}"><svg class="glyph stroked calendar"><use xlink:href="#stroked-calendar"></use></svg> Register Vendor</a></li>
-    
+
     </ul>
 
 </div><!--/.sidebar-->

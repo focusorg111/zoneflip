@@ -48,6 +48,8 @@ Route::group(['middleware' => ['web']], function () {
             Route::get('product/sub-category',['as' => 'product.get-subcategory','uses'=>'ProductController@productSubcategory']);
             Route::get('product/detail-list',['as'=>'get.product-list','uses'=>'ProductController@productDetails']);
              Route::get('product/showSubcategory-list',['as'=>'get.subcategory-list','uses'=>'ProductController@showSubcategoryList']);
+
+
             Route::get('product/manage-image/{id?}',['as'=>'product.manage-image','uses'=>'ProductController@manageImage']);
             Route::post('product/upload-image',['as'=>'product.upload-image','uses'=>'ProductController@uploadImage']);
             Route::get('product/main-image',['as'=>'product.main-image','uses'=>'ProductController@updateMainImage']);

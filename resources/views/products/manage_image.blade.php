@@ -31,3 +31,14 @@
                 @endforeach
     </div>
 @endsection
+
+@section('script')
+    <script>
+        Dropzone.options.myAwesomeDropzone = {
+
+            success: function (response, data) {
+                location.reload();
+            }
+        };
+    </script>
+    @endsection

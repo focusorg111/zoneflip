@@ -97,6 +97,10 @@ class ProductController extends Controller
             return response('Unauthorized.', 401);
         }
     }
+
+    /**
+     * Upload Image
+     */
     public function uploadImage()
     {
             $input = Input::all();
@@ -108,6 +112,10 @@ class ProductController extends Controller
            ProductImage::create(['product_image'=>$fileName,'product_id'=>$productId]);
     }
 
+    /**
+     * Set main Image and Delete
+     * @return mixed
+     */
     public function updateMainImage()
     {
         $inputs = \Request::all();
