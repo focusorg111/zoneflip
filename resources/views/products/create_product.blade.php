@@ -54,7 +54,7 @@
             </div>
 
             <div class="form-group">
-                <label class="control-label">Discount: </label>
+                <label class="control-label">Discount: %</label>
                 {!! Form::text('discount', null,
                 ['class' => 'form-control',
                  'placeholder' => 'Enter the discount'])

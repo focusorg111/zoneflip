@@ -35,16 +35,9 @@ class Products extends Model
                 'products.product_name',
                 'products.price',
                 'products.product_id'
-
             ]);
-
         if ($cat>=1)
-
-
-        if ($cat>1)
-
             $query->where('products.category_id', '=', $cat);
-
         if ($sub>=1)
             $query->where('products.subcategory_id', '=', $sub);
         $result = $query->get();

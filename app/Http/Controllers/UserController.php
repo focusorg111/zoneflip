@@ -64,8 +64,7 @@ class UserController extends Controller
          Vendor::create(['user_id' => $user_id,'company_name' => $inputs['company_name'],'address'=> $inputs['address'],'register_date'=> $current,'is_approved'=> 0]);
          return view('seller.register');
 
-         Vendor::create(['user_id' => $user_id,'company_name' => $inputs['company_name'],'register_date'=> $inputs['register_date'],'is_approved'=> 0]);
-         return view('seller.register')->with('message','Success');
+
 
 
     }

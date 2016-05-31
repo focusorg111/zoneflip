@@ -9,7 +9,7 @@
         <li class="active"><a href="index.html"><svg class="glyph stroked dashboard-dial"><use xlink:href="#stroked-dashboard-dial"></use></svg> Dashboard</a></li>
         <li><a href="{{url(route('get.products'))}}"><svg class="glyph stroked calendar"><use xlink:href="#stroked-calendar"></use></svg>Add Products</a></li>
         <li><a href="{{url(route('get.product-list'))}}"><svg class="glyph stroked line-graph"><use xlink:href="#stroked-line-graph"></use></svg> Product List</a></li>
-<<<<<<< HEAD
+
         <li class="parent ">
 
             <ul class="children collapse" id="sub-item-1">
@@ -32,8 +32,8 @@
         </li>
         <li role="presentation" class="divider"></li>
 
-=======
->>>>>>> c81a032824c3d9966985166594b4bdc9c97c8297
+
+
     </ul>
 
 </div><!--/.sidebar-->
