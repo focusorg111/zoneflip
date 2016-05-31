@@ -45,9 +45,10 @@ class ProductController extends Controller
             'discount' => $inputs['discount'],
             'product_description' => $inputs['product_description'],
             'created_by'  =>$usersID,
-            'updated_by' =>$usersID
+            'updated_by' =>$usersID,
+            'vendor_id'=>session('vendor_id')
             ]);
-
+        return Redirect::to(route('get.products'));
     }
 
     /**

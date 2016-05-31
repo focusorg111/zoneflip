@@ -18,7 +18,6 @@ class AdminController extends Controller
 
     public  function registerList()
     {
-
         $inputs=\Request::all();
        $status= isset($inputs['approved_status'])?$inputs['approved_status']:0;
         $userObject = (new User());

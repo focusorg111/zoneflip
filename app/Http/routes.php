@@ -52,7 +52,7 @@ Route::group(['middleware' => ['web']], function () {
 
             Route::get('product/manage-image',['as'=>'product.manage-image','uses'=>'ProductController@manageImage']);
 
-            Route::get('product/detail-list',['as'=>'get.product-list','uses'=>'ProductController@productDetils']);
+            Route::get('product/detail-list',['as'=>'get.product-list','uses'=>'ProductController@productDetails']);
             Route::get('product/manage-image/{id?}',['as'=>'product.manage-image','uses'=>'ProductController@manageImage']);
             Route::post('product/upload-image',['as'=>'product.upload-image','uses'=>'ProductController@uploadImage']);
             Route::get('product/main-image/{id?}',['as'=>'product.main-image','uses'=>'ProductController@updateMainImage']);
