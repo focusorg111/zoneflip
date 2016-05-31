@@ -75,6 +75,8 @@ class ProductController extends Controller
         return  view('products.product_detail',compact('productInfos','category','subCategory'));
 
     }
+
+
     public function showSubcategoryList()
     {
         $inputs = \Request::all();
@@ -82,6 +84,29 @@ class ProductController extends Controller
         $subCats = Subcategory::where('category_id',$catId)->get();
         return view('products.subcategory_list', compact('subCats'));
 
+    }
+
+    public  function edit($product_id)
+    {
+        $product = Products::find($product_id);
+        $category = Category::lists('category_name','category_id')->toArray();
+        $subCategory = Subcategory::lists('subcategory_name','subcategory_id')->toArray();
+        return view('products.product_edit',compact('product','category','subCategory','product_id'));
+    }
+
+    public function update()
+    {
+        $inputs = \Request::all();
+        $prodId = $inputs['product_id'];
+        $prod = Products::where('product_id',$prodId)->update(['product_name' =>$inputs['product_name'],
+            'category_id' =>$inputs['category_id'],
+            'subcategory_id'=> $inputs['subcategory_id'],
+            'price'=>$inputs['price'],
+            'quantity'=>$inputs['quantity'],
+            'discount'=>$inputs['discount'],
+            'product_description'=> $inputs['product_description']
+        ]);
+        return Redirect::route('get.product-list');
     }
 
     public function manageImage($product_id)
