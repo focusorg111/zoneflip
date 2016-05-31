@@ -105,7 +105,7 @@
                     <label for="confirm" class="cols-sm-2 control-label">Company Name</label>
                     <div class="cols-sm-10">
                         <div class="input-group">
-                            <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
+                            <span class="input-group-addon"></span>
                             <input type="text" class="form-control" name="company_name" id="company_name"  placeholder="enter company name"/>
                         </div>
                     </div>
@@ -116,7 +116,7 @@
                     <label for="confirm" class="cols-sm-2 control-label">Address</label>
                     <div class="cols-sm-10">
                         <div class="input-group">
-                            <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
+                            <span class="input-group-addon"></span>
                             <input type="textarea" class="form-control" name="address" id="address"  placeholder="address"/>
                         </div>
                     </div>
@@ -126,7 +126,7 @@
                     <label for="confirm" class="cols-sm-2 control-label">Contact no.</label>
                     <div class="cols-sm-10">
                         <div class="input-group">
-                            <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
+                            <span class="input-group-addon"></span>
                             <input type="text" class="form-control" name="contact_no" id="contact_no"  placeholder="Contact no"/>
                         </div>
                     </div>

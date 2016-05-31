@@ -94,7 +94,6 @@
 
     $(document).ready(function(){
         $("#category_id").change(function(){
-            alet('h');
             var countryId=$("#category_id").val();
             $.ajax( {
                 method:'get',
