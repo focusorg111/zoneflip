@@ -67,15 +67,12 @@ class ProductController extends Controller
     public function productDetails()
     {
         $inputs=\Request::all();
-       // dd($inputs);
         $cat= isset($inputs['category_id'])?$inputs['category_id']:'';
         $sub= isset($inputs['subcategory_id'])?$inputs['subcategory_id']:'';
         $category = Category::lists('category_name','category_id')->toArray();
         $subCategory = Subcategory::lists('subcategory_name','subcategory_id')->toArray();
         $productOjb = (new Products());
-
         $productInfos = $productOjb->getProductData($cat,$sub);
-        //dd($productInfos);
         return  view('products.product_detail',compact('productInfos','category','subCategory'));
 
     }
@@ -89,6 +86,7 @@ class ProductController extends Controller
     }
 
     public function manageImage($product_id)
+
     {
         $productImages = ProductImage::all();
         return view('products.manage_image',compact('productImages','product_id'));
@@ -103,6 +101,7 @@ class ProductController extends Controller
             $upload_success = Input::file('file')->move($destinationPath, $fileName);
            ProductImage::create(['product_image'=>$fileName,'product_id'=>$productId]);
     }
+
     public function updateMainImage($id)
     {
         ProductImage::where('image_id',$id)->update(['is_main_image'=>1]);

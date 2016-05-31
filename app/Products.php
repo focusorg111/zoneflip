@@ -33,6 +33,7 @@ class Products extends Model
             'subcategories.subcategory_name',
                 'products.product_name',
                 'products.price',
+
             ]);
 
         if ($cat>1)

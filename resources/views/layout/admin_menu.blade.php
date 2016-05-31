@@ -1,4 +1,3 @@
-
 <div id="sidebar-collapse" class="col-sm-3 col-lg-2 sidebar">
     <form role="search">
         <div class="form-group">
@@ -40,3 +39,7 @@
     </ul>
 
 </div><!--/.sidebar-->
+
+
+
+

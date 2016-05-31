@@ -47,7 +47,7 @@ class User extends Authenticatable
                 'vendors.is_approved',
                 \DB::raw('CONCAT(First_Name, " ", Last_Name) AS full_name'
                 )])
-            ->paginate(1);
+            ->paginate(4);
 
     }
 
