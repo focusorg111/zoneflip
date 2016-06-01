@@ -45,6 +45,7 @@
                 <th>Product Name</th>
                 <th>Category</th>
                 <th>Sub-category</th>
+                <th>Quantity</th>
                 <th>Price</th>
                 <th>Action</th>
                 </tr>
@@ -52,6 +53,7 @@
                 <tr><td>{{$productInfo->product_name}}
                 <td>{{$productInfo->category_name }}</td>
                 <td>{{$productInfo->subcategory_name }}</td>
+                    <td>{{$productInfo->quantity }}</td>
                 <td>{{$productInfo->price }}</td>
                     <td> <a href="{{route('get.products-edit',$productInfo->product_id)}}">
                             <span class="glyphicon glyphicon-edit"></span>

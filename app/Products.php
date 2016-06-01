@@ -39,6 +39,7 @@ class Products extends Model
             ->select(['categories.category_name',
             'subcategories.subcategory_name',
                 'products.product_name',
+                'products.quantity',
                 'products.price',
                 'products.product_id'
             ]);

@@ -115,7 +115,7 @@ class ProductController extends Controller
     {
         $inputs = \Request::all();
         $prodId = $inputs['product_id'];
-        $prod = Products::where('product_id',$prodId)->update(['product_name' =>$inputs['product_name'],
+         Products::where('product_id',$prodId)->update(['product_name' =>$inputs['product_name'],
             'category_id' =>$inputs['category_id'],
             'subcategory_id'=> $inputs['subcategory_id'],
             'price'=>$inputs['price'],
