@@ -10,7 +10,7 @@
         <div class="form-group">
             <label class="control-label">Choose category: </label>
             {!!
-            Form::select('category_id', array('' => 'Select Category') +$category,[],array('id' => 'category_id'),
+            Form::select('category_id', array('' => 'Select Category') +$category,[$cat],array('id' => 'category_id'),
             ['class' => 'form-control',
             'id' => 'category_id',
             'name'=>'category_id'
@@ -22,7 +22,9 @@
             {!!
 
             Form::select('subcategory_id', array('' => 'Select Sub-Category') ,[],array('id' => 'subcategory_id'),
-              ['class' => 'form-control',
+
+            Form::select('subcategory_id', array('' => 'Select Sub-Category')+$subCategory,[$sub],array('id' => 'subcategory_id'),
+             ['class' => 'form-control',
             'id' => 'subcategory_id',
             'name'=>'subcategory_id'
              ])
@@ -85,7 +87,7 @@
                         success: function (data) {
                             //console.log(data);
                             $('#subcategory_id').html(data);
-                             console.log('hhhjngkn');
+                             //console.log('hhhjngkn');
                         }
                     });
                 });

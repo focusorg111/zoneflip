@@ -73,10 +73,10 @@ class ProductController extends Controller
         $cat= isset($inputs['category_id'])?$inputs['category_id']:'';
         $sub= isset($inputs['subcategory_id'])?$inputs['subcategory_id']:'';
         $category = Category::lists('category_name','category_id')->toArray();
-        $subCategory = Subcategory::lists('subcategory_name','subcategory_id')->toArray();
+        $subCategory = Subcategory::where('category_id',$cat)->lists('subcategory_name','subcategory_id')->toArray();
         $productOjb = (new Products());
         $productInfos = $productOjb->getProductData($cat,$sub);
-        return  view('products.product_detail',compact('productInfos','category','subCategory'));
+        return  view('products.product_detail',compact('productInfos','category','subCategory','cat','sub'));
 
     }
 

@@ -36,12 +36,14 @@ class Products extends Model
                 'products.price',
                 'products.product_id'
             ]);
+
         if ($cat>=1)
             $query->where('products.category_id', '=', $cat);
         if ($sub>=1)
             $query->where('products.subcategory_id', '=', $sub);
         $result = $query->get();
         return $result;
+
 
     }
     public function isValidProduct($product_id)
