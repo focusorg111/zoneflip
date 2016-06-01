@@ -76,7 +76,7 @@ class ProductController extends Controller
         $subCategory = Subcategory::where('category_id',$cat)->lists('subcategory_name','subcategory_id')->toArray();
         $productOjb = (new Products());
         $productInfos = $productOjb->getProductData($cat,$sub);
-        return  view('products.product_detail',compact('productInfos','category','subCategory','cat','sub'));
+        return  view('products.product_detail',compact('productInfos','category','subCategory','cat','sub','users'));
 
     }
 
@@ -191,4 +191,6 @@ class ProductController extends Controller
         }
         return Redirect::to(route('product.manage-image', $inputs['product_id']));
     }
+
+
 }
