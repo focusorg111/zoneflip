@@ -21,8 +21,10 @@
             <label class="control-label">Choose sub-category: </label>
             {!!
 
+            Form::select('subcategory_id', array('' => 'Select Sub-Category') ,[],array('id' => 'subcategory_id'),
+
             Form::select('subcategory_id', array('' => 'Select Sub-Category')+$subCategory,[$sub],array('id' => 'subcategory_id'),
-              ['class' => 'form-control',
+             ['class' => 'form-control',
             'id' => 'subcategory_id',
             'name'=>'subcategory_id'
              ])
