@@ -169,12 +169,17 @@ class ProductController extends Controller
         $inputs = \Request::all();
        $products= ProductImage::where('product_id', $inputs['product_id'])
             ->where('image_id', $inputs['image_id']);
-        if ($inputs['type'] == 1) {
+        if ($inputs['type'] == 1)
+        {
 
             $products->update(['is_main_image' => 1]);
-        } elseif ($inputs['type'] == 2) {
+        }
+        elseif ($inputs['type'] == 2)
+        {
             $products->update(['is_main_image' => 0]);
-        } elseif ($inputs['type'] == 0) {
+        }
+        elseif ($inputs['type'] == 0)
+        {
             $productimage = ProductImage::where('image_id', $inputs['image_id'])->select('product_image')->first();
             $filename=$productimage['product_image'];
             $fullPath = public_path() . '/assets/product_image';

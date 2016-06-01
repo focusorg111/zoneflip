@@ -47,11 +47,13 @@ class AdminController extends Controller
         $userId =$inputs['user_id'];
         $vendorStatus=$inputs['vendor_status'];
         if($vendorStatus!=1){
-            Vendor::where('user_id',$userId)->update(['is_approved'=>2]);
+            $status=2;
         }
         else{
-            Vendor::where('user_id',$userId)->update(['is_approved'=>1]);
+            $status=1;
+
         }
+        Vendor::where('user_id',$userId)->update(['is_approved'=>$status]);
        return Redirect::to(route('get.venderlist'));
 
     }
