@@ -4,7 +4,6 @@
     <div class="col-md-6">
         <form method="get" action="{{route('get.venderlist')}}">
         <select class="drop" name="approved_status">
-            <option value="" >Please select</option>
             <option value="0"
                     @if($status==0)
                     selected="selected"

@@ -103,6 +103,9 @@ class UserController extends Controller
                 }
             }
         }
+        else{
+            return Redirect::to(route('login'));
+        }
 
     }
 
@@ -111,6 +114,7 @@ class UserController extends Controller
      */
     public function changePassword()
     {
+        $user = \Auth::user();
        return view('common.change_password');
     }
     public function updateChangePassword(ChangePasswordRequest $ChangePasswordRequest)
