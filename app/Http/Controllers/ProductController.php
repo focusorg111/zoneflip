@@ -48,7 +48,7 @@ class ProductController extends Controller
             'updated_by' =>$usersID,
             'vendor_id'=>session('vendor_id')
             ]);
-        return Redirect::to(route('get.products'));
+        return Redirect::to(route('get.product-list'));
     }
 
     /**
@@ -63,6 +63,9 @@ class ProductController extends Controller
         return view('products.subcategory_list', compact('subCats'));
     }
 
+    /**
+     * show the product detail list
+     */
 
     public function productDetails()
     {
@@ -77,7 +80,11 @@ class ProductController extends Controller
 
     }
 
-
+    /**
+     * show sub category list
+     * @return mixed
+     *
+     */
     public function showSubcategoryList()
     {
         $inputs = \Request::all();
@@ -87,14 +94,23 @@ class ProductController extends Controller
 
     }
 
+    /**
+     * edit the product
+     * @param $product_id
+     * @return mixed
+     */
     public  function edit($product_id)
     {
         $product = Products::find($product_id);
         $category = Category::lists('category_name','category_id')->toArray();
-        $subCategory = Subcategory::lists('subcategory_name','subcategory_id')->toArray();
+        $subCategory = Subcategory::where('category_id',$product->category_id)->lists('subcategory_name','subcategory_id')->toArray();
         return view('products.product_edit',compact('product','category','subCategory','product_id'));
     }
 
+    /**
+     * update the product
+     * @return mixed
+     */
     public function update()
     {
         $inputs = \Request::all();
@@ -110,6 +126,11 @@ class ProductController extends Controller
         return Redirect::route('get.product-list');
     }
 
+    /**
+     *
+     * @param $product_id
+     * @return mixed
+     */
     public function manageImage($product_id)
     {
         $productOjb = (new Products());
@@ -125,6 +146,7 @@ class ProductController extends Controller
 
     /**
      * Upload Image
+     * upload the image
      */
     public function uploadImage()
     {
@@ -139,6 +161,7 @@ class ProductController extends Controller
 
     /**
      * Set main Image and Delete
+     * update main image
      * @return mixed
      */
     public function updateMainImage()

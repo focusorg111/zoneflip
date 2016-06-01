@@ -91,3 +91,37 @@
 
 @endsection
 
+@section('script')
+
+    <script>
+
+        $(document).ready(function() {
+            $("#category_id").change(function () {
+                var countryId = $("#category_id").val();
+                $.ajax({
+                    method: 'get',
+                    data: {
+                        subcategory_id: countryId
+                    },
+                    url: '{{route("get.subcategory-list")}}',
+                    success: function (data) {
+                        //console.log(data);
+                        $('#subcategory_id').html(data);
+                        console.log('hhhjngkn');
+                    }
+                });
+            });
+        });
+
+
+
+
+
+    </script>
+
+
+@endsection
+
+
+
+

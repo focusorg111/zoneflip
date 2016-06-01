@@ -16,22 +16,20 @@
             'name'=>'category_id'
             ])
              !!}
-        </div>
 
-        <div class="form-group">
+
             <label class="control-label">Choose sub-category: </label>
             {!!
 
             Form::select('subcategory_id', array('' => 'Select Sub-Category') + $subCategory,[],array('id' => 'subcategory_id'),
-
-            Form::select('subcategory_id', array('' => 'Select Sub-Category') ,array('id' => 'subcategory_id'),
-
-            ['class' => 'form-control',
+              ['class' => 'form-control',
             'id' => 'subcategory_id',
             'name'=>'subcategory_id'
              ])
              !!}
         </div>
+
+
 
         <div class="form-group">
             <button type="submit" class=".btn btn-info">Filter</button>
