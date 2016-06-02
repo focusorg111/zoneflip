@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Category;
+use App\Subcategory;
 use App\User;
 use App\Vendor;
 use Session;
@@ -19,6 +21,12 @@ use App\Http\Requests\ChangePasswordRequest;
 
 class UserController extends Controller
 {
+    public function index()
+    {
+        $categories=Category::all();
+        $subcategories=Subcategory::all();
+        return view('user.index',compact('categories','subcategories'));
+    }
 
     /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View

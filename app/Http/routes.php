@@ -26,7 +26,7 @@ Route::group(['middleware' => ['web']], function () {
 
     Route::get('login',['as'=>'login', 'uses'=>'UserController@login']);
     Route::post('login',['as'=>'admin.login','uses'=>'UserController@addLogin']);
-
+    Route::get('user/index',['as'=>'user.index','uses'=> 'UserController@index']);
     Route::group(['middleware' => ['auth']], function () {
         Route::get('dashboard',['as'=>'dashboard','uses'=>'DashboardController@index']);
         Route::get('logout',['as'=>'logout','uses'=>'UserController@logout']);
@@ -47,16 +47,9 @@ Route::group(['middleware' => ['web']], function () {
             Route::post('product/store',['as' => 'product.store','uses'=>'ProductController@store']);
             Route::get('products/edit/{id}',['as' => 'get.products-edit','uses'=>'ProductController@edit']);
             Route::put('products/update',['as' => 'product.update','uses'=>'ProductController@update']);
-
-
             Route::get('product/sub-category',['as' => 'product.get-subcategory','uses'=>'ProductController@productSubcategory']);
             Route::get('product/detail-list',['as'=>'get.product-list','uses'=>'ProductController@productDetails']);
-
-
-             Route::get('product/showSubcategory-list',['as'=>'get.subcategory-list','uses'=>'ProductController@showSubcategoryList']);
-
-
-
+            Route::get('product/showSubcategory-list',['as'=>'get.subcategory-list','uses'=>'ProductController@showSubcategoryList']);
             Route::get('product/manage-image/{id?}',['as'=>'product.manage-image','uses'=>'ProductController@manageImage']);
             Route::post('product/upload-image',['as'=>'product.upload-image','uses'=>'ProductController@uploadImage']);
             Route::get('product/main-image',['as'=>'product.main-image','uses'=>'ProductController@updateMainImage']);
