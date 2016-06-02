@@ -24,6 +24,12 @@ class Products extends Model
         'updated_by',
     ];
 
+    /**
+     * get product data
+     * @param $cat
+     * @param $sub
+     * @return mixed
+     */
     public function getProductData($cat,$sub)
     {
       $query= $this
@@ -33,6 +39,7 @@ class Products extends Model
             ->select(['categories.category_name',
             'subcategories.subcategory_name',
                 'products.product_name',
+                'products.quantity',
                 'products.price',
                 'products.product_id'
             ]);
@@ -41,7 +48,7 @@ class Products extends Model
             $query->where('products.category_id', '=', $cat);
         if ($sub>=1)
             $query->where('products.subcategory_id', '=', $sub);
-        $result = $query->get();
+        $result = $query->paginate(4);
         return $result;
 
 

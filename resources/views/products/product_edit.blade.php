@@ -97,11 +97,11 @@
 
         $(document).ready(function() {
             $("#category_id").change(function () {
-                var countryId = $("#category_id").val();
+                var categoryId = $("#category_id").val();
                 $.ajax({
                     method: 'get',
                     data: {
-                        subcategory_id: countryId
+                        subcategory_id: categoryId
                     },
                     url: '{{route("get.subcategory-list")}}',
                     success: function (data) {
