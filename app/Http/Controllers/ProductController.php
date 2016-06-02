@@ -58,7 +58,7 @@ class ProductController extends Controller
     public  function  productSubcategory()
     {
         $inputs = \Request::all();
-        $catId = $inputs['subcategory_id'];
+        $catId = $inputs['category_id'];
         $subCats = Subcategory::where('category_id',$catId)->get();
         return view('products.subcategory_list', compact('subCats'));
     }
@@ -88,7 +88,7 @@ class ProductController extends Controller
     public function showSubcategoryList()
     {
         $inputs = \Request::all();
-        $catId = $inputs['subcategory_id'];
+        $catId = $inputs['category_id'];
         $subCats = Subcategory::where('category_id',$catId)->get();
         return view('products.subcategory_list', compact('subCats'));
 

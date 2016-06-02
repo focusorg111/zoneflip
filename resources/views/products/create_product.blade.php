@@ -98,7 +98,7 @@
             $.ajax( {
                 method:'get',
                 data:{
-                    subcategory_id: categoryId
+                    category_id: categoryId
                 },
                 url : '{{route("product.get-subcategory")}}',
                 success:     function(data) {
