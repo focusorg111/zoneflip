@@ -75,7 +75,7 @@ class UserController extends Controller
      * @return mixed
      */
 
-    public function addLogin(LoginRequest $LoginRequest)
+    public function addLogin()
     {
 
         $credentials = array(
