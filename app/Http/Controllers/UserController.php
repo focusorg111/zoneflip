@@ -44,13 +44,7 @@ class UserController extends Controller
 
     public function login()
     {
-        try {
-            \DB::beginTransaction();
         return view('admin.login');
-            \DB::commit();
-        } catch (\Exception $e) {
-            \DB::rollback();
-        }
     }
 
     /**
@@ -58,12 +52,7 @@ class UserController extends Controller
      */
     public function registerView()
     {
-        try {
-            \DB::beginTransaction();
         return view('common.first_register');
-        } catch (\Exception $e) {
-            \DB::rollback();
-        }
 
     }
     /**
@@ -71,13 +60,7 @@ class UserController extends Controller
      */
     public function register()
     {
-        try {
-             \DB::beginTransaction();
-              return view('seller.register');
-             \DB::commit();
-        } catch (\Exception $e) {
-             \DB::rollback();
-        }
+        return view('seller.register');
     }
 
     /**
@@ -121,7 +104,6 @@ class UserController extends Controller
     {
         try {
             \DB::beginTransaction();
-
             $credentials = array(
                 'user_name' => Input::get('user_name'),
                 'password' => Input::get('password')
@@ -164,14 +146,8 @@ class UserController extends Controller
      */
     public function changePassword()
     {
-        try {
-            \DB::beginTransaction();
         $user = \Auth::user();
        return view('common.change_password');
-        \DB::commit();
-        } catch (\Exception $e) {
-        \DB::rollback();
-         }
     }
 
     /**
