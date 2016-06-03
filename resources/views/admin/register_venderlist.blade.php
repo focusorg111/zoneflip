@@ -121,9 +121,9 @@
                $(document).ready(function() {
                    $(".check_approve").click(function () {
                       var status =$(this).attr('data-status-type');
-                       var id=$(this).attr('data-user-type');
-                       var name=$(this).attr('data-user-name');
-                        $('#user-id').val(id);
+                       var id=$(this).attr('data-index-type');
+                       var name=$(this).attr('data-index-name');
+                        $('#index-id').val(id);
                         $('#vender_status').val(status);
                        var val= $('.show_name').html(name);
                        if($(this).attr('data-status-type')==1){

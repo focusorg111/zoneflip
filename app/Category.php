@@ -11,4 +11,9 @@ class Category extends Model
     protected $primaryKey ='category_id';
 
     protected $fillable =['category_name','is_active'];
+
+    public function subcategories()
+    {
+        return $this->hasMany(Subcategory::class, 'category_id');
+    }
 }

@@ -11,6 +11,7 @@
             </div>
 
             <div class="form-group">
+                @include('common.messages')
                 <label class="control-label">Product Name: </label>
                 {!! Form::text('product_name', null,
                 ['class' => 'form-control',

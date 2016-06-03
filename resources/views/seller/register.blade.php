@@ -27,26 +27,13 @@
         <div class="panel-heading">
             <div class="panel-title text-center">
                 <h1 class="title">Registration</h1>
-
-                <hr />
             </div>
-        </div>
+        </div >
+        @if(Session::has('flash_message'))
+            <div class="alert alert-success"><em> {!! session('flash_message') !!}</em></div>
+        @endif
+        <div> @include('common.messages')</div>
         <div class="main-login main-center">
-
-
-
-
-            {{--@if (session('success'))
-                <div class="flash-message">
-                    <div class="alert alert-success">
-
-                    </div>
-                </div>
-            @endif--}}
-
-
-
-
             <form class="form-horizontal" method="post" action="{{route('seller.store')}}">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
@@ -138,7 +125,7 @@
                     <button type="submit" class="btn btn-primary btn-lg btn-block login-button">Register</button>
                 </div>
                 <div class="login-register">
-                    <a href="login">Login</a>
+                    <a href="{{route('login')}}">Login</a>
                 </div>
             </form>
 

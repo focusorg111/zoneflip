@@ -7,7 +7,7 @@ use App\Http\Requests\Request;
 class ChangePasswordRequest extends Request
 {
     /**
-     * Determine if the user is authorized to make this request.
+     * Determine if the index is authorized to make this request.
      *
      * @return bool
      */
@@ -28,5 +28,6 @@ class ChangePasswordRequest extends Request
             'new_password'=>'required|min:6',
             'confirm_password'=>'required|min:6|same:new_password',
         ];
+
     }
 }

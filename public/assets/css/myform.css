@@ -15,10 +15,23 @@
     font-size: 30px;
 }
 
+
 .textbox
 {
 font-size:15px;
 height:20px;
 width:25px;
+}
+
+
+.img-size
+{
+    width:200px;
+    height: 200px;
+}
+.main-body
+{
+    width: 600px;
+    height: 500px;
 }
 

@@ -3,11 +3,12 @@
 namespace App\Http\Requests;
 
 use App\Http\Requests\Request;
+use Illuminate\Support\Facades\Input;
 
 class LoginRequest extends Request
 {
     /**
-     * Determine if the user is authorized to make this request.
+     * Determine if the index is authorized to make this request.
      *
      * @return bool
      */
@@ -28,4 +29,5 @@ class LoginRequest extends Request
             'password' =>  'required|min:6',
         ];
     }
+
 }

@@ -16,6 +16,15 @@ use Illuminate\Support\Facades\Redirect;
 
 class ProductController extends Controller
 {
+
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function index()
+    {
+        return view('index.index');
+    }
+
     /**
      * create product
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
@@ -38,7 +47,7 @@ class ProductController extends Controller
     /**
      * store data in the datadbase
      */
-    public function  store()
+    public function  store(ProductRequest $productRequest )
     {
         try {
             \DB::beginTransaction();
@@ -57,19 +66,18 @@ class ProductController extends Controller
             'updated_by' =>$usersID,
             'vendor_id'=>session('vendor_id')
             ]);
+
              return Redirect::to(route('get.product-list'));
             \DB::commit();
             } catch (\Exception $e) {
               \DB::rollback();
-
-            }
+        }
     }
 
     /**
      * get sub-category list
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-
     public  function  productSubcategory()
     {
         try {
@@ -107,9 +115,7 @@ class ProductController extends Controller
             \DB::rollback();
 
          }
-
     }
-
     /**
      * show sub-category list
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
@@ -259,10 +265,17 @@ class ProductController extends Controller
         }
     }
 
-
-
-
-
-
+    /**
+     * @param $subcategory_id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function productList($subcategory_id)
+    {
+        $productOjb = (new Products());
+        $products = $productOjb->getProductList($subcategory_id);
+        $image = Products::with(['productimage'])->get();
+        dd($image);
+        return view('products.product',compact('products','image'));
+    }
 
 }

@@ -11,4 +11,10 @@ class Subcategory extends Model
     protected $primaryKey ='subcategory_id';
 
     protected $fillable =['category_id','subcategory_name','is_active'];
+
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class, 'category_id');
+    }
 }

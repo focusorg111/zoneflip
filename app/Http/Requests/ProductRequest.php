@@ -7,7 +7,7 @@ use App\Http\Requests\Request;
 class ProductRequest extends Request
 {
     /**
-     * Determine if the user is authorized to make this request.
+     * Determine if the index is authorized to make this request.
      *
      * @return bool
      */
@@ -29,8 +29,16 @@ class ProductRequest extends Request
             'price' => 'required',
             'quantity' =>'required',
             'discount' => 'required',
-
-
+            'category_id'=>'required',
+            'subcategory_id'=>'required'
         ];
+    }
+    public function messages()
+    {
+        return [
+            'category_id.required'=>'Please select category',
+            'subcategory_id.required'=>'Please select subcategory'
+        ];
+
     }
 }

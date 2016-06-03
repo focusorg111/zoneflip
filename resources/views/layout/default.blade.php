@@ -18,6 +18,7 @@
     <script src="{{asset('assets/js/respond.min.js')}}"></script>
     <![endif]-->
 
+
 </head>
 
 <body>
@@ -71,9 +72,11 @@
     </div>
 </div>
 
+<script src="{{asset('assets/js/jquery.min.js')}}"></script>
 <script src="{{asset('assets/js/jquery-1.11.1.min.js')}}"></script>
 <script src="{{asset('assets/js/bootstrap.min.js')}}"></script>
 <script src="{{asset('assets/js/dropzone.js')}}"></script>
+<script src="{{asset('assets/js/jquery.validate.min.js')}}"></script>
 @yield('script')
 </body>
 
