@@ -182,15 +182,8 @@ class UserController extends Controller
      */
     public function logout()
     {
-        try {
-            \DB::beginTransaction();
-            \Auth::logout();
+        \Auth::logout();
             return Redirect::route('login');
-            \DB::commit();
-        } catch (\Exception $e) {
-            \DB::rollback();
-            }
-
     }
 
 

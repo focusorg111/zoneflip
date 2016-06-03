@@ -14,14 +14,8 @@ class DashboardController extends Controller
 
     public function index()
     {
-        try {
-            \DB::beginTransaction();
-            return view('dashboard.dashboard');
-            \DB::commit();
-        } catch (\Exception $e) {
-            \DB::rollback();
+        return view('dashboard.dashboard');
 
-        }
     }
 
 }
