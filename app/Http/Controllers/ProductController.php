@@ -16,7 +16,11 @@ use Illuminate\Support\Facades\Redirect;
 
 class ProductController extends Controller
 {
+    public function index()
+    {
 
+        return view('index.index');
+    }
     /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
@@ -31,7 +35,7 @@ class ProductController extends Controller
     /**
      * store data in the datadbase
      */
-    public function  store()
+    public function  store(ProductRequest $productRequest )
     {
         $inputs = \Request::all();
         $users = \Auth::user();
@@ -49,6 +53,7 @@ class ProductController extends Controller
             'vendor_id'=>session('vendor_id')
             ]);
         return Redirect::to(route('get.product-list'));
+
     }
 
     /**
@@ -192,5 +197,12 @@ class ProductController extends Controller
         return Redirect::to(route('product.manage-image', $inputs['product_id']));
     }
 
-
+    public function productList($subcategory_id)
+    {
+        $productOjb = (new Products());
+        $products = $productOjb->getProductList($subcategory_id);
+        $image = Products::with(['productimage'])->get();
+        dd($image);
+        return view('products.product',compact('products','image'));
+    }
 }

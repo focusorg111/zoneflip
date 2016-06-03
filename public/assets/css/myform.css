@@ -14,3 +14,13 @@
 .text-size{
     font-size: 30px;
 }
+.img-size
+{
+    width:200px;
+    height: 200px;
+}
+.main-body
+{
+    width: 600px;
+    height: 500px;
+}

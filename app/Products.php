@@ -61,4 +61,21 @@ class Products extends Model
             ->select(['products.product_name'])
             ->first();
     }
+    public  function getProductList($subcategory_id)
+    {
+        return $this
+            ->join('product_images','product_images.product_id', '=', 'products.product_id')
+            ->where('products.subcategory_id',$subcategory_id)
+            ->with('productimage')
+            ->select(['product_images.product_image',
+                'products.product_name',
+                'products.price',
+                'products.discount',
+                'product_images.is_main_image'
+            ])->get();
+    }
+    public function productimage()
+    {
+        return $this->hasOne(ProductImage::class, 'product_id');
+    }
 }

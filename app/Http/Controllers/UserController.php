@@ -17,16 +17,13 @@ use App\Http\Requests\LoginRequest;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Input;
 use App\Http\Requests\ChangePasswordRequest;
+use Illuminate\Validation;
+
 
 
 class UserController extends Controller
 {
-    public function index()
-    {
-        $categories=Category::all();
-        $subcategories=Subcategory::all();
-        return view('user.index',compact('categories','subcategories'));
-    }
+
 
     /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
@@ -37,11 +34,17 @@ class UserController extends Controller
         return view('admin.login');
     }
 
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function registerView()
+    {
+        return view('common.first_register');
+    }
 
     /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-
     public function register()
     {
 
@@ -52,10 +55,10 @@ class UserController extends Controller
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
 
-    public function store()
+    public function store(RegisterRequest $registerRequest)
     {
 
-         $inputs = \Request::all();
+        $inputs = \Request::all();
         $current = date('Y-m-d');
          $pwd = bcrypt($inputs['password']);
         $userType= \Config::get('constants.USER_TYPE.SELLER');
@@ -70,10 +73,8 @@ class UserController extends Controller
          $user_id = $userData['user_id'];
 
          Vendor::create(['user_id' => $user_id,'company_name' => $inputs['company_name'],'address'=> $inputs['address'],'register_date'=> $current,'is_approved'=> 0]);
-         return view('seller.register');
-
-
-
+         return Redirect(route('seller.register'))->with('flash_message', 'You Are Successfully Register')
+             ->with('flash_type', 'alert-success');;
 
     }
 
@@ -83,38 +84,50 @@ class UserController extends Controller
      * @return mixed
      */
 
-    public function addLogin()
+    public function addLogin(LoginRequest $loginRequest)
     {
+        /*$validator = \Validator::make($loginRequest->all(), [
+            'user_name' => 'required',
+            'password' => 'required',
+        ]);
 
-        $credentials = array(
-            'user_name' => Input::get('user_name'),
-            'password' => Input::get('password')
-        );
-        if (\Auth::attempt($credentials)) {
-            $user=\Auth::user();
-            if($user['user_type']==1){
-                return Redirect::to(route('dashboard'));
-            }
-            elseif($user['user_type']==2)
-            {
-                $userId=$user['user_id'];
-                $vendor=Vendor::where('user_id',$userId)->select('vendor_id','is_approved')->first();
-                $vendor->vendor_id;
-               if($vendor->is_approved==1)
-               {
-                   session(['vendor_id' => $vendor->vendor_id]);
-                   return Redirect::to(route('dashboard'));
-               }
-                else{
-                    \Auth::logout();
-                    return Redirect::to(route('login'));
+        if ($validator->fails()) {
+            //dd($validator->errors()->all());
+            return redirect()->back()
+                ->withErrors($validator)
+                ->withInput();
+        }*/
+
+            $credentials = array(
+                'user_name' => Input::get('user_name'),
+                'password' => Input::get('password')
+            );
+            if (\Auth::attempt($credentials)) {
+                $user=\Auth::user();
+                if($user['user_type']==1){
+                    return Redirect::to(route('dashboard'));
+                }
+                elseif($user['user_type']==2)
+                {
+                    $userId=$user['user_id'];
+                    $vendor=Vendor::where('user_id',$userId)->select('vendor_id','is_approved')->first();
+                    $vendor->vendor_id;
+                    if($vendor->is_approved==1)
+                    {
+                        session(['vendor_id' => $vendor->vendor_id]);
+                        return Redirect::to(route('dashboard'));
+                    }
+                    else{
+                        \Auth::logout();
+                        return Redirect::to(route('login'));
+                    }
                 }
             }
-        }
-        else{
-            return Redirect::to(route('login'));
-        }
-
+            else{
+                return Redirect::to(route('login'))
+                    ->with('flash_message', 'Invalid Login')
+                    ->with('flash_type', 'alert-danger');;
+            }
     }
 
     /**
@@ -125,7 +138,7 @@ class UserController extends Controller
         $user = \Auth::user();
        return view('common.change_password');
     }
-    public function updateChangePassword(ChangePasswordRequest $ChangePasswordRequest)
+    public function updateChangePassword()
     {
         $inputs =\Request::all();
         $user = \Auth::user();
@@ -133,7 +146,9 @@ class UserController extends Controller
         {
             $password = bcrypt($inputs['new_password']);
             User::where('user_id', $user->user_id)->update(['password' => $password]);
-            return Redirect::to(route('change.password'))->withSuccess('Your password has been updated');
+            return Redirect::to(route('change.password'))->withSuccess('Your password has been updated')
+                ->with('flash_message', 'Password Successfully Changed')
+                ->with('flash_type', 'alert-success');
         }
         else
         {
