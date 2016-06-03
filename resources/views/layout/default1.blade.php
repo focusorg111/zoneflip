@@ -53,7 +53,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         </div>
         <!---->
         <div class="top-nav">
-            <ul class="memenu skyblue"><li class="active"><a href="index.html">Home</a></li>
+            <ul class="memenu skyblue"><li class="active"><a href="{{route('index')}}">Home</a></li>
                 <li class="grid"><a href="#">Products</a>
                     <div class="mepanel">
                         <div class="row">

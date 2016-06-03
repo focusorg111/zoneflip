@@ -274,7 +274,6 @@ class ProductController extends Controller
         $productOjb = (new Products());
         $products = $productOjb->getProductList($subcategory_id);
         $image = Products::with(['productimage'])->get();
-        dd($image);
         return view('products.product',compact('products','image'));
     }
 

@@ -28,7 +28,7 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('register',['as'=>'register.view','uses'=>'UserController@registerView']);
     Route::get('seller/register',['as'=>'seller.register','uses'=>'UserController@register']);
     Route::post('seller/register',['as'=>'seller.store','uses'=>'UserController@store']);
-    Route::get('/',['as'=>'index.index','uses'=> 'ProductController@index']);
+    Route::get('/',['as'=>'index','uses'=> 'ProductController@index']);
     Route::get('productsllist/{id?}',['as'=>'product.list','uses'=> 'ProductController@productList']);
 
     Route::group(['middleware' => ['auth']], function () {
