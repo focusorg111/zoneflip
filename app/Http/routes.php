@@ -19,11 +19,18 @@ Route::group(['middleware' => ['web']], function () {
 
     Route::get('login',['as'=>'login', 'uses'=>'UserController@login']);
     Route::post('login',['as'=>'admin.login','uses'=>'UserController@addLogin']);
+
+    Route::get('user/index',['as'=>'user.index','uses'=> 'UserController@index']);
+
+    //Route::get('search/autocomplete',['as'=>'get.autocomplete','uses'=>'ProductController@autocomplete']);
+
+
     Route::get('register',['as'=>'register.view','uses'=>'UserController@registerView']);
     Route::get('seller/register',['as'=>'seller.register','uses'=>'UserController@register']);
     Route::post('seller/register',['as'=>'seller.store','uses'=>'UserController@store']);
     Route::get('/',['as'=>'index','uses'=> 'ProductController@index']);
     Route::get('productsllist/{id?}',['as'=>'product.list','uses'=> 'ProductController@productList']);
+
     Route::group(['middleware' => ['auth']], function () {
         Route::get('dashboard',['as'=>'dashboard','uses'=>'DashboardController@index']);
         Route::get('logout',['as'=>'logout','uses'=>'UserController@logout']);
@@ -56,7 +63,6 @@ Route::group(['middleware' => ['web']], function () {
     });
 
 });
-
 
 
 

@@ -26,11 +26,16 @@
         <div class="login-panel panel panel-default">
             <div class="panel-heading">Log in</div>
             <div class="panel-body">
+
+                @include('common.messages')
+                <form role="form" action="{{route('admin.login')}}" method="post" id="login-form">
+
                 @if(Session::has('flash_message'))
                     <div class="alert alert-danger"><em> {!! session('flash_message') !!}</em></div>
                 @endif
                 @include('common.messages')
                 <form role="form" action="{{route('admin.login')}}" method="post">
+
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                     <fieldset>
                         <div class="form-group">
@@ -44,7 +49,7 @@
                                 <input name="remember" type="checkbox" value="Remember Me">Remember Me
                             </label>
                         </div>
-                        <button type="submit" class="btn btn-primary">Login</button>
+                        <button type="submit" class="btn btn-primary" id="button">Login</button>
                         <a href="register">Register</a>
                     </fieldset>
                 </form>
@@ -74,5 +79,4 @@
     })
 </script>
 </body>
-
 </html>
