@@ -9,10 +9,18 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <head>
     <title>ZONEFLIP</title>
     <link href="{{asset('assets/css/bootstrap.css')}}" rel="stylesheet" type="text/css" media="all" />
+    <link href="{{asset('assets/css/bootstrap.min.css')}}" rel="stylesheet" type="text/css" media="all" />
     <!-- Custom Theme files -->
     <!--theme style-->
     <link href="{{asset('assets/css/style.css')}}" rel="stylesheet" type="text/css" media="all" />
+    <link href="{{asset('assets/css/myform.css')}}" rel="stylesheet" type="text/css" />
+
+    <link href="{{asset('assets/css/jquery.auto-complete.css')}}" rel="stylesheet" type="text/css" />
+
     <script src="{{asset('assets/js/jquery.min.js')}}"></script>
+    <script src="{{asset('assets/js/jquery.auto-complete.js')}}"></script>
+    <script src="{{asset('assets/js/jquery.auto-complete.min.js')}}"></script>
+    <script src="{{asset('assets/js/jquery-ui.js')}}"></script>
 
     <!--//theme style-->
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -48,6 +56,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         <div class="logo">
             <h1><a href="index.html">ZONEFLIP</a></h1>
         </div>
+
         <!---->
         <div class="top-nav">
             <ul class="memenu skyblue"><li class="active"><a href="index.html">Home</a></li>
@@ -112,9 +121,29 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 </li>
                 <li class="grid"><a href="typo.html">Typo</a></li>
                 <li class="grid"><a href="contact.html">Contact</a></li>
+
             </ul>
+
         </div>
+
         <!---->
+        <div class="row">
+
+
+                <div class="input-group">
+                    <input type="text" class="searchname" name="searchname" id="searchname"  placeholder="Search"/>
+                    <datalist id="products">
+                        <option value="bags">
+                        <option value="cloths">
+                        <option value="all watches">
+                        <option value="bby cloths">
+                        <option value="Ruby">
+                    </datalist>
+                </div>
+                </div>
+
+</div>
+
         <div class="cart box_1">
             <a href="checkout.html">
                 <div class="total">
@@ -128,6 +157,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         <!---->
     </div>
     <div class="clearfix"> </div>
+    </div>
 </div>
 <!---->
 <div class="slider">
@@ -381,5 +411,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     </div>
 </div>
 <!---->
+
 </body>
 </html>

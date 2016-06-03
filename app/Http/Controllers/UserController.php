@@ -8,9 +8,7 @@ use App\User;
 use App\Vendor;
 use Session;
 use App\Helper;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
-
 use App\Http\Requests;
 use App\Http\Requests\RegisterRequest;
 use App\Http\Requests\LoginRequest;
@@ -21,11 +19,21 @@ use App\Http\Requests\ChangePasswordRequest;
 
 class UserController extends Controller
 {
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+
     public function index()
     {
-        $categories=Category::all();
-        $subcategories=Subcategory::all();
-        return view('user.index',compact('categories','subcategories'));
+        try {
+            \DB::beginTransaction();
+            $categories=Category::all();
+            $subcategories=Subcategory::all();
+            return view('user.index',compact('categories','subcategories'));
+            \DB::commit();
+           } catch (\Exception $e) {
+          \DB::rollback();
+        }
     }
 
     /**
@@ -34,7 +42,13 @@ class UserController extends Controller
 
     public function login()
     {
+        try {
+            \DB::beginTransaction();
         return view('admin.login');
+            \DB::commit();
+        } catch (\Exception $e) {
+            \DB::rollback();
+        }
     }
 
 
@@ -44,17 +58,23 @@ class UserController extends Controller
 
     public function register()
     {
-
-        return view('seller.register');
+        try {
+             \DB::beginTransaction();
+              return view('seller.register');
+             \DB::commit();
+        } catch (\Exception $e) {
+             \DB::rollback();
+        }
     }
 
     /**
+     * store data in the database
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-
     public function store()
     {
-
+        try {
+            \DB::beginTransaction();
          $inputs = \Request::all();
         $current = date('Y-m-d');
          $pwd = bcrypt($inputs['password']);
@@ -71,10 +91,10 @@ class UserController extends Controller
 
          Vendor::create(['user_id' => $user_id,'company_name' => $inputs['company_name'],'address'=> $inputs['address'],'register_date'=> $current,'is_approved'=> 0]);
          return view('seller.register');
-
-
-
-
+            \DB::commit();
+        } catch (\Exception $e) {
+            \DB::rollback();
+        }
     }
 
     /**
@@ -85,7 +105,8 @@ class UserController extends Controller
 
     public function addLogin()
     {
-
+        try {
+            \DB::beginTransaction();
         $credentials = array(
             'user_name' => Input::get('user_name'),
             'password' => Input::get('password')
@@ -114,30 +135,49 @@ class UserController extends Controller
         else{
             return Redirect::to(route('login'));
         }
-
+        \DB::commit();
+        } catch (\Exception $e) {
+        \DB::rollback();
+    }
     }
 
     /**
+     * change the password
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function changePassword()
     {
+        try {
+            \DB::beginTransaction();
         $user = \Auth::user();
        return view('common.change_password');
+        \DB::commit();
+        } catch (\Exception $e) {
+        \DB::rollback();
+         }
     }
+
+    /**
+     * update the password
+     * @param ChangePasswordRequest $ChangePasswordRequest
+     * @return mixed
+     */
     public function updateChangePassword(ChangePasswordRequest $ChangePasswordRequest)
     {
-        $inputs =\Request::all();
-        $user = \Auth::user();
-        if (\Hash::check($inputs['current_password'], $user->password))
-        {
-            $password = bcrypt($inputs['new_password']);
-            User::where('user_id', $user->user_id)->update(['password' => $password]);
-            return Redirect::to(route('change.password'))->withSuccess('Your password has been updated');
-        }
-        else
-        {
-            return Redirect::to(route('login'));
+        try {
+            \DB::beginTransaction();
+            $inputs = \Request::all();
+            $user = \Auth::user();
+            if (\Hash::check($inputs['current_password'], $user->password)) {
+                $password = bcrypt($inputs['new_password']);
+                User::where('user_id', $user->user_id)->update(['password' => $password]);
+                return Redirect::to(route('change.password'))->withSuccess('Your password has been updated');
+            } else {
+                return Redirect::to(route('login'));
+                \DB::commit();
+            } \DB::commit();
+             } catch (\Exception $e) {
+             \DB::rollback();
         }
 
     }
@@ -148,10 +188,17 @@ class UserController extends Controller
      */
     public function logout()
     {
-        \Auth::logout();
-        return Redirect::route('login');
+        try {
+            \DB::beginTransaction();
+            \Auth::logout();
+            return Redirect::route('login');
+            \DB::commit();
+        } catch (\Exception $e) {
+            \DB::rollback();
+            }
 
     }
+
 
 
 }
