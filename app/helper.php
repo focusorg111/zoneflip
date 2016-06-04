@@ -30,4 +30,13 @@ function get_navigation()
 {
     return Category::with(['subcategories'])->get();
 }
+
+
+  function alert_messages()
+{
+    return Redirect::back()
+       ->with('flash_message', 'internal server errors')
+        ->with('flash_type', 'alert-danger');
+ }
+
 ?>

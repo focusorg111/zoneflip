@@ -4,10 +4,10 @@ namespace App\Http\Requests;
 
 use App\Http\Requests\Request;
 
-class ProductRequest extends Request
+class EditProductRequest extends Request
 {
     /**
-     * Determine if the index is authorized to make this request.
+     * Determine if the user is authorized to make this request.
      *
      * @return bool
      */

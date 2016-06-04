@@ -19,6 +19,11 @@
                 ['class' => 'form-control',
                  'placeholder' => 'Enter product name'])
                  !!}
+                @if($errors->has('product_name'))
+                    <div class="form-group">
+                        <div class="cols-sm-10 required">{{ $errors->first('product_name') }}</div>
+                    </div>
+                @endif
             </div>
 
             <div class="form-group">
@@ -29,6 +34,11 @@
                 'id' => 'category_id',
                 ])
                  !!}
+                @if($errors->has('category_id'))
+                    <div class="form-group">
+                        <div class="cols-sm-10 required">{{ $errors->first('category_id') }}</div>
+                    </div>
+                @endif
             </div>
 
             <div class="form-group">
@@ -39,6 +49,11 @@
                 'id' => 'subcategory_id',
                  ])
                  !!}
+                @if($errors->has('subcategory_id'))
+                    <div class="form-group">
+                        <div class="cols-sm-10 required">{{ $errors->first('subcategory_id') }}</div>
+                    </div>
+                @endif
             </div>
 
             <div class="form-group">
@@ -46,6 +61,11 @@
                 {!! Form::text('price', $product->price,
                  ['class' => 'form-control',
                  'placeholder' => 'Enter price']) !!}
+                @if($errors->has('price'))
+                    <div class="form-group">
+                        <div class="cols-sm-10 required">{{ $errors->first('price') }}</div>
+                    </div>
+                @endif
             </div>
 
             <div class="form-group">
@@ -54,6 +74,11 @@
                 ['class' => 'form-control',
                  'placeholder' => 'Enter the quantity'])
                   !!}
+                @if($errors->has('quantity'))
+                    <div class="form-group">
+                        <div class="cols-sm-10 required">{{ $errors->first('quantity') }}</div>
+                    </div>
+                @endif
             </div>
 
             <div class="form-group">
@@ -62,6 +87,11 @@
                 ['class' => 'form-control',
                  'placeholder' => 'Enter the discount'])
                   !!}
+                @if($errors->has('discount'))
+                    <div class="form-group">
+                        <div class="cols-sm-10 required">{{ $errors->first('discount') }}</div>
+                    </div>
+                @endif
             </div>
 
 
@@ -71,6 +101,11 @@
                 ['class' => 'form-control',
                  'placeholder' => 'Enter the description'])
                   !!}
+                @if($errors->has('product_description'))
+                    <div class="form-group">
+                        <div class="cols-sm-10 required">{{ $errors->first('product_description') }}</div>
+                    </div>
+                @endif
             </div>
 
             <div class="form-group">

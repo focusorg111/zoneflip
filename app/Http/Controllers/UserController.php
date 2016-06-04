@@ -28,13 +28,16 @@ class UserController extends Controller
      */
     public function index()
     {
+        try{
+            $categories = Category::all();
+            $subcategories = Subcategory::all();
+            return view('user.index', compact('categories', 'subcategories'));
+           } catch (\Exception $e) {
+            return alert_messages();
+            }
 
-        $categories = Category::all();
-        $subcategories = Subcategory::all();
-        return view('user.index', compact('categories', 'subcategories'));
 
     }
-
     /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
@@ -140,12 +143,12 @@ class UserController extends Controller
             } else {
                 return Redirect::to(route('login'))
                     ->with('flash_message', 'Invalid Login')
-                    ->with('flash_type', 'alert-danger');;
+                    ->with('flash_type', 'alert-danger');
             }
 
         } catch (\Exception $e) {
-            \DB::rollback();
 
+            return alert_messages();
         }
     }
 
@@ -168,27 +171,28 @@ class UserController extends Controller
      */
     public function updateChangePassword(ChangePasswordRequest $ChangePasswordRequest)
     {
-
-        try {
-
+        try{
             $inputs = \Request::all();
             $user = \Auth::user();
             if (\Hash::check($inputs['current_password'], $user->password)) {
                 $password = bcrypt($inputs['new_password']);
-                User::where('user_id1', $user->user_id)->update(['password' => $password]);
+                User::where('user_id', $user->user_id)->update(['password' => $password]);
                 return Redirect::to(route('change.password'))
                     ->with('flash_message', 'Password Successfully Changed')
                     ->with('flash_type', 'alert-success');
             } else {
                 return Redirect::to(route('login'));
             }
-            \DB::commit();
-        } catch (\Exception $e) {
-            return Redirect::back()
-                ->with('flash_message', 'internal server errors')
-                ->with('flash_type', 'alert-danger');
         }
-    }
+              catch (\Exception $e) {
+                 return alert_messages();
+              }
+            }
+
+
+
+
+
 
     /**
      * Logout
