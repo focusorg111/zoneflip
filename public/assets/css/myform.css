@@ -35,3 +35,12 @@ width:25px;
     height: 500px;
 }
 
+.required
+{
+    color: red;
+}
+.textbox-size
+{
+    width: 270px !important;
+    height: 30px;
+}

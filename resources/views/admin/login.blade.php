@@ -26,8 +26,6 @@
         <div class="login-panel panel panel-default">
             <div class="panel-heading">Log in</div>
             <div class="panel-body">
-
-                @include('common.messages')
                 <form role="form" action="{{route('admin.login')}}" method="post" id="login-form">
 
                 @if(Session::has('flash_message'))
@@ -39,7 +37,12 @@
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                     <fieldset>
                         <div class="form-group">
-                            <input class="form-control" placeholder="E-mail" name="user_name" type="email" autofocus="">
+                            <input class="form-control" placeholder="E-mail"  value="{{old('user_name')}}" name="user_name" type="email" autofocus="">
+                            @if($errors->has('user_name'))
+                                <div class="input-group">
+                                    <div class="cols-sm-10 required">{{ $errors->first('user_name') }}</div>
+                                </div>
+                            @endif
                         </div>
                         <div class="form-group">
                             <input class="form-control" placeholder="Password" name="password" type="password" value="">

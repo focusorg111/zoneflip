@@ -24,13 +24,14 @@ class RegisterRequest extends Request
     public function rules()
     {
         return [
-                 'first_name' => 'required',
-                 'last_name' => 'required',
+                 'first_name' => 'required|alpha_spaces',
+                 'last_name' => 'required|alpha_spaces',
                  'user_name' => 'required|unique:users|email',
                  'password'  =>  'required|min:6',
                  'confirm_password' => 'required|min:6|same:password',
-                  'company_name' => 'required',
-                  'contact_no' => 'required|numeric|max:10',
+                  'company_name' => 'required|alpha_spaces',
+                  'contact_no' => 'required|numeric',
+                'address' => 'required'
 
         ];
     }
