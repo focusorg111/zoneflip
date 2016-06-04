@@ -30,8 +30,9 @@ class RegisterRequest extends Request
                  'password'  =>  'required|min:6',
                  'confirm_password' => 'required|min:6|same:password',
                   'company_name' => 'required|alpha_spaces',
-                  'contact_no' => 'required|numeric',
-                'address' => 'required'
+                    'address' => 'required',
+                  'contact_no' => 'required|numeric|digits:10',
+
 
         ];
     }

@@ -123,6 +123,7 @@
                       var status =$(this).attr('data-status-type');
                        var id=$(this).attr('data-index-type');
                        var name=$(this).attr('data-index-name');
+                       console.log(name);
                         $('#index-id').val(id);
                         $('#vender_status').val(status);
                        var val= $('.show_name').html(name);

@@ -6,6 +6,7 @@ use App\Category;
 use App\Subcategory;
 use App\User;
 use App\Vendor;
+use Mockery\CountValidator\Exception;
 use Session;
 use App\Helper;
 use Illuminate\Http\Request;
@@ -28,9 +29,9 @@ class UserController extends Controller
     public function index()
     {
 
-            $categories=Category::all();
-            $subcategories=Subcategory::all();
-            return view('user.index',compact('categories','subcategories'));
+        $categories = Category::all();
+        $subcategories = Subcategory::all();
+        return view('user.index', compact('categories', 'subcategories'));
 
 
     }
@@ -42,6 +43,7 @@ class UserController extends Controller
     public function login()
     {
 
+
         return view('admin.login');
 
     }
@@ -52,17 +54,19 @@ class UserController extends Controller
     public function registerView()
     {
 
+
         return view('common.first_register');
 
 
     }
+
     /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function register()
     {
-              return view('seller.register');
 
+        return view('seller.register');
     }
 
     /**
@@ -74,21 +78,21 @@ class UserController extends Controller
 
         $inputs = \Request::all();
         $current = date('Y-m-d');
-         $pwd = bcrypt($inputs['password']);
-        $userType= \Config::get('constants.USER_TYPE.SELLER');
-         $userData = User::create([
-             'first_name'=> $inputs['first_name'],
-             'last_name'=> $inputs['last_name'],
-             'user_name'=> $inputs['user_name'],
-             'password'=> $pwd,
-             'contact_no' => $inputs['contact_no'],
-             'user_type'=>$userType
-         ]);
-         $user_id = $userData['user_id'];
-            Vendor::create(['user_id' => $user_id,'company_name' => $inputs['company_name'],'address'=> $inputs['address'],'register_date'=> $current,'is_approved'=> 0]);
-            return Redirect(route('seller.register'))->with('flash_message', 'You Are Successfully Register')
-                ->with('flash_type', 'alert-success');
-            \DB::commit();
+        $pwd = bcrypt($inputs['password']);
+        $userType = \Config::get('constants.USER_TYPE.SELLER');
+        $userData = User::create([
+            'first_name' => $inputs['first_name'],
+            'last_name' => $inputs['last_name'],
+            'user_name' => $inputs['user_name'],
+            'password' => $pwd,
+            'contact_no' => $inputs['contact_no'],
+            'user_type' => $userType
+        ]);
+        $user_id = $userData['user_id'];
+        Vendor::create(['user_id' => $user_id, 'company_name' => $inputs['company_name'], 'address' => $inputs['address'], 'register_date' => $current, 'is_approved' => 0]);
+        return Redirect(route('seller.register'))->with('flash_message', 'You Are Successfully Register')
+            ->with('flash_type', 'alert-success');
+        \DB::commit();
 
     }
 
@@ -101,39 +105,40 @@ class UserController extends Controller
     public function addLogin(LoginRequest $loginRequest)
     {
 
+        try {
+            \DB::beginTransaction();
             $credentials = array(
                 'user_name' => Input::get('user_name'),
                 'password' => Input::get('password')
             );
             if (\Auth::attempt($credentials)) {
-                $user=\Auth::user();
-                if($user['user_type']==1){
+                $user = \Auth::user();
+                if ($user['user_type'] == 1) {
                     return Redirect::to(route('dashboard'));
-                }
-                elseif($user['user_type']==2)
-                {
-                    $userId=$user['user_id'];
-                    $vendor=Vendor::where('user_id',$userId)->select('vendor_id','is_approved')->first();
+                } elseif ($user['user_type'] == 2) {
+                    $userId = $user['user_id'];
+                    $vendor = Vendor::where('user_id', $userId)->select('vendor_id', 'is_approved')->first();
                     $vendor->vendor_id;
-                    if($vendor->is_approved==1)
-                    {
+                    if ($vendor->is_approved == 1) {
                         session(['vendor_id' => $vendor->vendor_id]);
                         return Redirect::to(route('dashboard'));
-                    }
-                    else{
+                    } else {
                         \Auth::logout();
                         return Redirect::to(route('login'));
                     }
                 }
-            }
-            else{
+            } else {
                 return Redirect::to(route('login'))
                     ->with('flash_message', 'Invalid Login')
                     ->with('flash_type', 'alert-danger');;
             }
-            \DB::commit();
 
+        }catch (Exception $e)
+        {
+        }
     }
+
+
 
     /**
      * change the password
@@ -176,6 +181,7 @@ class UserController extends Controller
      */
     public function logout()
     {
+
 
             \Auth::logout();
             return Redirect::route('login');
