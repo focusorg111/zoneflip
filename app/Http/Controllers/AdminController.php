@@ -60,9 +60,8 @@ class AdminController extends Controller
                 $status = 1;
             }
             Vendor::where('user_id', $userId)->update(['is_approved' => $status]);
-
-            return Redirect::to(route('get.venderlist'));
-
+            return Redirect::to(route('get.venderlist'))->with('flash_message', 'Successfully Approved.')
+                ->with('flash_type', 'alert-success');
         } catch (\Exception $e) {
             return alert_messages();
         }
