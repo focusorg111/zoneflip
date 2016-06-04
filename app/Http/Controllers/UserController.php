@@ -81,13 +81,15 @@ class UserController extends Controller
             $current = date('Y-m-d');
             $pwd = bcrypt($inputs['password']);
             $userType= \Config::get('constants.USER_TYPE.SELLER');
+            $token = bin2hex(random_bytes(50));
             $userData = User::create([
                 'first_name'=> $inputs['first_name'],
                 'last_name'=> $inputs['last_name'],
                 'user_name'=> $inputs['user_name'],
                 'password'=> $pwd,
                 'contact_no' => $inputs['contact_no'],
-                'user_type'=>$userType
+                'user_type'=>$userType,
+                'verification_token'=>$token
             ]);
             $user_id = $userData['user_id'];
 
@@ -96,12 +98,39 @@ class UserController extends Controller
                 'company_name' => $inputs['company_name'],
                 'address'=> $inputs['address'],
                 'register_date'=> $current,'is_approved'=> 0]);
+            //dd(Input::get('user_name'));
+
+           /* \Mail::send('seller.mail', array('first_name'=>Input::get('first_name'),'token'=>$token), function($message){
+                $message->to(Input::get('user_name'), Input::get('first_name').' '.Input::get('last_name'))->subject('Welcome to the Laravel 4 Auth App!');
+            });*/
+
             \DB::commit();
             return Redirect(route('seller.register'))->with('flash_message', 'You Are Successfully Register')
                 ->with('flash_type', 'alert-success');
         } catch (\Exception $e) {
 
             \DB::rollback();
+            dd($e);
+        }
+
+    }
+
+    public function verifyEmail()
+    {
+        $inputs=\Request::all();
+      $vryToken=$inputs['token'];
+        $data=User::where('verification_token',$vryToken)->first();
+        if($data)
+        {
+           User::update(['verification_token'=>'','verification_email'=>1]);
+            return Redirect::to(route('login'))
+                ->with('flash_message', 'You Are Successfully Verified...please Login')
+                ->with('flash_type', 'alert-success');
+        }
+        else{
+            return Redirect::to(route('login'))
+                ->with('flash_message', 'Something Wrong')
+                ->with('flash_type', 'alert-danger');
         }
 
     }
