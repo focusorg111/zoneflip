@@ -8,6 +8,7 @@
     <link href="{{asset('assets/css/bootstrap.min.css')}}" rel="stylesheet">
     <link href="{{asset('assets/css/datepicker3.css')}}" rel="stylesheet">
     <link href="{{asset('assets/css/styles.css')}}" rel="stylesheet">
+    <link href="{{asset('assets/css/myform.css')}}" rel="stylesheet">
 
     <!--Icons-->
     <script src="{{asset('assets/js/lumino.glyphs.js')}}"></script>
@@ -28,23 +29,26 @@
             <div class="panel-body">
                 <form role="form" action="{{route('admin.login')}}" method="post" id="login-form">
 
-                @if(Session::has('flash_message'))
-                    <div class="alert alert-danger"><em> {!! session('flash_message') !!}</em></div>
-                @endif
+                @include('common.messages')
 
 
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                     <fieldset>
-                        <div class="form-group">
-                            <input class="form-control" placeholder="E-mail"  value="{{old('user_name')}}" name="user_name" type="email" autofocus="">
+                        <div class="form-group @if($errors->has('user_name')) has-error @endif">
+                            <input class="form-control" placeholder="E-mail"  value="{{old('user_name')}}" name="user_name"  autofocus="">
                             @if($errors->has('user_name'))
-                                <div class="input-group">
+                                <div class="form-group">
                                     <div class="cols-sm-10 required">{{ $errors->first('user_name') }}</div>
                                 </div>
                             @endif
                         </div>
-                        <div class="form-group">
+                        <div class="form-group @if($errors->has('password')) has-error @endif">
                             <input class="form-control" placeholder="Password" name="password" type="password" value="">
+                            @if($errors->has('password'))
+                                <div class="form-group">
+                                    <div class="cols-sm-10 required">{{ $errors->first('password') }}</div>
+                                </div>
+                            @endif
                         </div>
                         <div class="checkbox">
                             <label>

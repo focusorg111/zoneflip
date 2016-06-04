@@ -17,7 +17,7 @@ class User extends Authenticatable
     protected $primaryKey ='user_id';
 
     protected $fillable = [
-        'first_name', 'last_name','user_name', 'password','contact_no','user_type'
+        'first_name', 'last_name','user_name', 'password','contact_no','user_type','verification_token','verification_email'
     ];
 
     /**
@@ -39,6 +39,7 @@ class User extends Authenticatable
             return $this
             ->join('vendors', 'users.user_id', '=', 'vendors.user_id')
                 ->where('vendors.is_approved',$status)
+                ->where('verification_email',1)
             ->select(['users.user_id',
                 'users.first_name',
                 'users.last_name',
