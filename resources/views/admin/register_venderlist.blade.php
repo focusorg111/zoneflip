@@ -36,7 +36,7 @@
                     <td>{{$user->register_date}}</td>
                     <td><button class="btn btn-info seller-detail" data-url="{{route('get.registerdetail',$user->user_id)}}" data-toggle="modal" data-target="#myModal" data-user-type="{{$user->user_id}}">Detail</button>
                     @if($user->is_approved!= \Config::get('constants.VENDOR_STATUS.APPROVE'))
-                            <button class="btn btn-success check_approve" data-toggle="modal" data-target="#myModalApprove" data-status-type="{{\Config::get('constants.VENDOR_STATUS.APPROVE')}}"data-user-type="{{$user->user_id}}" data-user-name="{{$user->full_name}}">Approve</button></td></tr>
+                            <button class="btn btn-success check_approve" data-toggle="modal" data-target="#myModalApprove" data-status-type="{{\Config::get('constants.VENDOR_STATUS.APPROVE')}}" data-user-type="{{$user->user_id}}" data-user-name="{{$user->full_name}}">Approve</button></td></tr>
                     @else
                         <button class="btn btn-success check_approve" data-toggle="modal" data-target="#myModalApprove" data-status-type="{{\Config::get('constants.VENDOR_STATUS.REJECTED')}}" data-user-type="{{$user->user_id}}" data-user-name="{{$user->full_name}}">Reject</button></td></tr>
 
@@ -121,10 +121,9 @@
                $(document).ready(function() {
                    $(".check_approve").click(function () {
                       var status =$(this).attr('data-status-type');
-                       var id=$(this).attr('data-index-type');
-                       var name=$(this).attr('data-index-name');
-                       console.log(name);
-                        $('#index-id').val(id);
+                       var id=$(this).attr('data-user-type');
+                       var name=$(this).attr('data-user-name');
+                        $('#user-id').val(id);
                         $('#vender_status').val(status);
                        var val= $('.show_name').html(name);
                        if($(this).attr('data-status-type')==1){
