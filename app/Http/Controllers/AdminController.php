@@ -23,8 +23,7 @@ class AdminController extends Controller
         $status= isset($inputs['approved_status'])?$inputs['approved_status']:0;
         $userObject = (new User());
         $users=$userObject->getRegisterData($status);
-
-        return view('admin.register_venderlist',compact('users','status'));
+            return view('admin.register_venderlist',compact('users','status'));
         } catch (\Exception $e) {
             return alert_messages();
         }
