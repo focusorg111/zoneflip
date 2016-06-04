@@ -36,8 +36,8 @@ class ProductController extends Controller
           \DB::beginTransaction();
           $category = Category::lists('category_name','category_id')->toArray();
           $subCategory = Subcategory::lists('subcategory_name','subcategory_id')->toArray();
-           return view('products.create_product',compact('category','subCategory'));
           \DB::commit();
+           return view('products.create_product',compact('category','subCategory'));
       } catch (\Exception $e) {
           \DB::rollback();
 
@@ -66,10 +66,9 @@ class ProductController extends Controller
             'updated_by' =>$usersID,
             'vendor_id'=>session('vendor_id')
             ]);
-
-             return Redirect::to(route('get.product-list'));
             \DB::commit();
-            } catch (\Exception $e) {
+             return Redirect::to(route('get.product-list'));
+        } catch (\Exception $e) {
               \DB::rollback();
         }
     }
@@ -85,9 +84,9 @@ class ProductController extends Controller
             $inputs = \Request::all();
             $catId = $inputs['category_id'];
             $subCats = Subcategory::where('category_id',$catId)->get();
-            return view('products.subcategory_list', compact('subCats'));
             \DB::commit();
-            } catch (\Exception $e) {
+            return view('products.subcategory_list', compact('subCats'));
+        } catch (\Exception $e) {
             \DB::rollback();
 
         }
@@ -109,9 +108,9 @@ class ProductController extends Controller
             $subCategory = Subcategory::where('category_id',$cat)->lists('subcategory_name','subcategory_id')->toArray();
             $productOjb = (new Products());
             $productInfos = $productOjb->getProductData($cat,$sub);
-            return  view('products.product_detail',compact('productInfos','category','subCategory','cat','sub','users'));
             \DB::commit();
-            } catch (\Exception $e) {
+            return  view('products.product_detail',compact('productInfos','category','subCategory','cat','sub','users'));
+        } catch (\Exception $e) {
             \DB::rollback();
 
          }
@@ -127,9 +126,9 @@ class ProductController extends Controller
             $inputs = \Request::all();
             $catId = $inputs['category_id'];
             $subCats = Subcategory::where('category_id',$catId)->get();
+            \DB::commit();
             return view('products.subcategory_list', compact('subCats'));
-             \DB::commit();
-            } catch (\Exception $e) {
+        } catch (\Exception $e) {
             \DB::rollback();
 
         }
@@ -147,9 +146,9 @@ class ProductController extends Controller
         $product = Products::find($product_id);
         $category = Category::lists('category_name','category_id')->toArray();
         $subCategory = Subcategory::where('category_id',$product->category_id)->lists('subcategory_name','subcategory_id')->toArray();
+            \DB::commit();
         return view('products.product_edit',compact('product','category','subCategory','product_id'));
-        \DB::commit();
-         } catch (\Exception $e) {
+        } catch (\Exception $e) {
         \DB::rollback();
         }
     }
@@ -172,9 +171,9 @@ class ProductController extends Controller
             'discount'=>$inputs['discount'],
             'product_description'=> $inputs['product_description']
             ]);
-            return Redirect::route('get.product-list');
             \DB::commit();
-             } catch (\Exception $e) {
+            return Redirect::route('get.product-list');
+        } catch (\Exception $e) {
             \DB::rollback();
         }
     }
@@ -258,8 +257,8 @@ class ProductController extends Controller
                 ProductImage::where('image_id', $inputs['image_id'])->delete();
             }
         }
-        return Redirect::to(route('product.manage-image', $inputs['product_id']));
             \DB::commit();
+        return Redirect::to(route('product.manage-image', $inputs['product_id']));
         } catch (\Exception $e) {
             \DB::rollback();
         }
@@ -271,10 +270,16 @@ class ProductController extends Controller
      */
     public function productList($subcategory_id)
     {
+        try {
+            \DB::beginTransaction();
         $productOjb = (new Products());
         $products = $productOjb->getProductList($subcategory_id);
         $image = Products::with(['productimage'])->get();
+            \DB::commit();
         return view('products.product',compact('products','image'));
+        } catch (\Exception $e) {
+            \DB::rollback();
+        }
     }
 
 }

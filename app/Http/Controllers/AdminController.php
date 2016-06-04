@@ -69,8 +69,9 @@ class AdminController extends Controller
             $status=1;
            }
         Vendor::where('user_id',$userId)->update(['is_approved'=>$status]);
-       return Redirect::to(route('get.venderlist'));
             \DB::commit();
+       return Redirect::to(route('get.venderlist'));
+
         } catch (\Exception $e) {
             \DB::rollback();
 

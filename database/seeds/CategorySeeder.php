@@ -11,6 +11,9 @@ class CategorySeeder extends Seeder
      */
     public function run()
     {
+
+      //  \DB::table('categories')->truncate();
+        //\DB::table('subcategories')->truncate();
         $categoryId = \DB::table('categories')->insertGetId([
             'category_name' => 'all watches',
 
@@ -43,7 +46,6 @@ class CategorySeeder extends Seeder
 
         $categoryId = \DB::table('categories')->insertGetId([
             'category_name' => 'all footwear',
-
         ]);
 
         \DB::table('subcategories')->insert([
@@ -81,7 +83,23 @@ class CategorySeeder extends Seeder
             ['category_id' => $categoryId, 'subcategory_name' => 'Boys Clothing'],
             ['category_id' => $categoryId, 'subcategory_name' => 'Baby Girls Clothing'],
             ['category_id' => $categoryId, 'subcategory_name' => 'Baby Boys Clothing'],
+            ['category_id' => $categoryId, 'subcategory_name' => 'Schools Bages'],
+            ['category_id' => $categoryId, 'subcategory_name' => 'Lunch Box'],
 
+
+        ]);
+
+        $categoryId = \DB::table('categories')->insertGetId([
+            'category_name' => 'electronics',
+
+        ]);
+
+        \DB::table('subcategories')->insert([
+            ['category_id' => $categoryId, 'subcategory_name' => 'mobile'],
+            ['category_id' => $categoryId, 'subcategory_name' => 'laptops'],
+            ['category_id' => $categoryId, 'subcategory_name' => 'Computer Accessories'],
+            ['category_id' => $categoryId, 'subcategory_name' => 'Tablets'],
+            ['category_id' => $categoryId, 'subcategory_name' => 'Mobile Accessories'],
         ]);
     }
 

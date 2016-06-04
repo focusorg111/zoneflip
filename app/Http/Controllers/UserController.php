@@ -27,15 +27,10 @@ class UserController extends Controller
      */
     public function index()
     {
-        try {
-            \DB::beginTransaction();
-            $categories=Category::all();
-            $subcategories=Subcategory::all();
-            return view('user.index',compact('categories','subcategories'));
-            \DB::commit();
-           } catch (\Exception $e) {
-          \DB::rollback();
-        }
+        $categories=Category::all();
+        $subcategories=Subcategory::all();
+        return view('user.index',compact('categories','subcategories'));
+
     }
 
     /**
@@ -71,25 +66,30 @@ class UserController extends Controller
     {
         try {
             \DB::beginTransaction();
-        $inputs = \Request::all();
-        $current = date('Y-m-d');
-         $pwd = bcrypt($inputs['password']);
-        $userType= \Config::get('constants.USER_TYPE.SELLER');
-         $userData = User::create([
-             'first_name'=> $inputs['first_name'],
-             'last_name'=> $inputs['last_name'],
-             'user_name'=> $inputs['user_name'],
-             'password'=> $pwd,
-             'contact_no' => $inputs['contact_no'],
-             'user_type'=>$userType
-         ]);
-         $user_id = $userData['user_id'];
+            $inputs = \Request::all();
+            $current = date('Y-m-d');
+            $pwd = bcrypt($inputs['password']);
+            $userType= \Config::get('constants.USER_TYPE.SELLER');
+            $userData = User::create([
+                'first_name'=> $inputs['first_name'],
+                'last_name'=> $inputs['last_name'],
+                'user_name'=> $inputs['user_name'],
+                'password'=> $pwd,
+                'contact_no' => $inputs['contact_no'],
+                'user_type'=>$userType
+            ]);
+            $user_id = $userData['user_id'];
 
-         Vendor::create(['user_id' => $user_id,'company_name' => $inputs['company_name'],'address'=> $inputs['address'],'register_date'=> $current,'is_approved'=> 0]);
+            Vendor::create([
+                'user_id' => $user_id,
+                'company_name' => $inputs['company_name'],
+                'address'=> $inputs['address'],
+                'register_date'=> $current,'is_approved'=> 0]);
+            \DB::commit();
             return Redirect(route('seller.register'))->with('flash_message', 'You Are Successfully Register')
                 ->with('flash_type', 'alert-success');
-            \DB::commit();
         } catch (\Exception $e) {
+
             \DB::rollback();
         }
     }
@@ -103,7 +103,7 @@ class UserController extends Controller
     public function addLogin(LoginRequest $loginRequest)
     {
         try {
-            \DB::beginTransaction();
+
             $credentials = array(
                 'user_name' => Input::get('user_name'),
                 'password' => Input::get('password')
@@ -134,7 +134,7 @@ class UserController extends Controller
                     ->with('flash_message', 'Invalid Login')
                     ->with('flash_type', 'alert-danger');;
             }
-            \DB::commit();
+
         } catch (\Exception $e) {
             \DB::rollback();
         }
@@ -147,7 +147,7 @@ class UserController extends Controller
     public function changePassword()
     {
         $user = \Auth::user();
-       return view('common.change_password');
+        return view('common.change_password');
     }
 
     /**
@@ -158,21 +158,22 @@ class UserController extends Controller
     public function updateChangePassword(ChangePasswordRequest $ChangePasswordRequest)
     {
         try {
-            \DB::beginTransaction();
             $inputs = \Request::all();
             $user = \Auth::user();
             if (\Hash::check($inputs['current_password'], $user->password)) {
                 $password = bcrypt($inputs['new_password']);
-                User::where('user_id', $user->user_id)->update(['password' => $password]);
+                User::where('user_id1', $user->user_id)->update(['password' => $password]);
                 return Redirect::to(route('change.password'))
                     ->with('flash_message', 'Password Successfully Changed')
                     ->with('flash_type', 'alert-success');
             } else {
                 return Redirect::to(route('login'));
             }
-            \DB::commit();
+
         } catch (\Exception $e) {
-            \DB::rollback();
+            return Redirect::back()
+                ->with('flash_message', 'internal server errors')
+                ->with('flash_type', 'alert-danger');
         }
     }
 
@@ -183,7 +184,7 @@ class UserController extends Controller
     public function logout()
     {
         \Auth::logout();
-            return Redirect::route('login');
+        return Redirect::route('login');
     }
 
 

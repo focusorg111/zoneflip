@@ -33,8 +33,7 @@
                 @if(Session::has('flash_message'))
                     <div class="alert alert-danger"><em> {!! session('flash_message') !!}</em></div>
                 @endif
-                @include('common.messages')
-                <form role="form" action="{{route('admin.login')}}" method="post">
+
 
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                     <fieldset>
