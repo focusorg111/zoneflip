@@ -2,6 +2,9 @@
 @section('content')
     <div class="col-md-12">
         <div class="form-group">
+            @if(Session::has('flash_message'))
+                <div class="alert alert-success"><em> {!! session('flash_message') !!}</em></div>
+            @endif
             {!!
     Form::open(array('url' => route('get.product-list'), 'method' => 'GET'))
     !!}

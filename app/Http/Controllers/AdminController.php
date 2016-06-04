@@ -18,15 +18,15 @@ class AdminController extends Controller
 
     public  function registerList()
     {
-
-            $inputs=\Request::all();
-            $status= isset($inputs['approved_status'])?$inputs['approved_status']:0;
-            $userObject = (new User());
-            $users=$userObject->getRegisterData($status);
-            return view('admin.register_venderlist',compact('users','status'));
-
-
-
+        try{
+        $inputs=\Request::all();
+        $status= isset($inputs['approved_status'])?$inputs['approved_status']:0;
+        $userObject = (new User());
+        $users=$userObject->getRegisterData($status);
+        return view('admin.register_venderlist',compact('users','status'));
+        } catch (\Exception $e) {
+            return alert_messages();
+        }
     }
 
     /**
@@ -50,7 +50,7 @@ class AdminController extends Controller
     public function checkIsApprove()
     {
         try {
-            \DB::beginTransaction();
+
             $inputs = \Request::all();
             $userId = $inputs['user_id'];
             $vendorStatus = $inputs['vendor_status'];
@@ -60,11 +60,11 @@ class AdminController extends Controller
                 $status = 1;
             }
             Vendor::where('user_id', $userId)->update(['is_approved' => $status]);
-            \DB::commit();
+
             return Redirect::to(route('get.venderlist'));
 
         } catch (\Exception $e) {
-            \DB::rollback();
+            return alert_messages();
         }
     }
 }
