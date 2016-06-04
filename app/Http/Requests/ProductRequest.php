@@ -26,9 +26,9 @@ class ProductRequest extends Request
         return [
             'product_name' => 'required',
             'product_description' => 'required',
-            'price' => 'required',
-            'quantity' =>'required',
-            'discount' => 'required',
+            'price' => 'required|numeric',
+            'quantity' =>'required|numeric',
+            'discount' => 'required|numeric',
             'category_id'=>'required',
             'subcategory_id'=>'required'
         ];

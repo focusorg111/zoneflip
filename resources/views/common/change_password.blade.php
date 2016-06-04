@@ -7,9 +7,7 @@
                 <label class="text-size">Change Password</label>
             </div>
             <div class="panel panel-width">
-                @if(Session::has('flash_message'))
-                    <div class="alert alert-success"><em> {!! session('flash_message') !!}</em></div>
-                @endif
+
                 @include('common.messages')
                 <div class="form-group">
                     <label>Current Password</label>

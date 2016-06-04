@@ -49,17 +49,22 @@ class AdminController extends Controller
      */
     public function checkIsApprove()
     {
+        try {
+            \DB::beginTransaction();
+            $inputs = \Request::all();
+            $userId = $inputs['user_id'];
+            $vendorStatus = $inputs['vendor_status'];
+            if ($vendorStatus != 1) {
+                $status = 2;
+            } else {
+                $status = 1;
+            }
+            Vendor::where('user_id', $userId)->update(['is_approved' => $status]);
+            \DB::commit();
+            return Redirect::to(route('get.venderlist'));
 
-        $inputs = \Request::all();
-        $userId = $inputs['user_id'];
-        $vendorStatus = $inputs['vendor_status'];
-        if ($vendorStatus != 1) {
-            $status = 2;
-        } else {
-            $status = 1;
+        } catch (\Exception $e) {
+            \DB::rollback();
         }
-        Vendor::where('user_id', $userId)->update(['is_approved' => $status]);
-        return Redirect::to(route('get.venderlist'));
     }
-
 }

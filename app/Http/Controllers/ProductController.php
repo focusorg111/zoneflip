@@ -31,19 +31,19 @@ class ProductController extends Controller
      */
 
   public  function create()
-  {
-          $category = Category::lists('category_name','category_id')->toArray();
+  {         $category = Category::lists('category_name','category_id')->toArray();
           $subCategory = Subcategory::lists('subcategory_name','subcategory_id')->toArray();
            return view('products.create_product',compact('category','subCategory'));
 
-  }
+
+}
 
     /**
      * store data in the datadbase
      */
     public function  store(ProductRequest $productRequest )
     {
-
+            try{
             $inputs = \Request::all();
             $users = \Auth::user();
             $usersID =$users['user_id'];
@@ -60,7 +60,11 @@ class ProductController extends Controller
             'vendor_id'=>session('vendor_id')
             ]);
 
+            \DB::commit();
              return Redirect::to(route('get.product-list'));
+        } catch (\Exception $e) {
+              \DB::rollback();
+        }
 
     }
 
@@ -95,6 +99,7 @@ class ProductController extends Controller
             $productInfos = $productOjb->getProductData($cat,$sub);
             return  view('products.product_detail',compact('productInfos','category','subCategory','cat','sub','users'));
 
+
     }
     /**
      * show sub-category list
@@ -106,9 +111,8 @@ class ProductController extends Controller
             $inputs = \Request::all();
             $catId = $inputs['category_id'];
             $subCats = Subcategory::where('category_id',$catId)->get();
+            \DB::commit();
             return view('products.subcategory_list', compact('subCats'));
-
-
 
     }
 
@@ -120,10 +124,9 @@ class ProductController extends Controller
     public  function edit($product_id)
     {
         $product = Products::find($product_id);
-        $category = Category::lists('category_name','category_id')->toArray();
-        $subCategory = Subcategory::where('category_id',$product->category_id)->lists('subcategory_name','subcategory_id')->toArray();
-        return view('products.product_edit',compact('product','category','subCategory','product_id'));
-
+        $category = Category::lists('category_name', 'category_id')->toArray();
+        $subCategory = Subcategory::where('category_id', $product->category_id)->lists('subcategory_name', 'subcategory_id')->toArray();
+        return view('products.product_edit', compact('product', 'category', 'subCategory', 'product_id'));
     }
 
     /**
@@ -144,7 +147,6 @@ class ProductController extends Controller
             'product_description'=> $inputs['product_description']
             ]);
             return Redirect::route('get.product-list');
-
     }
 
     /**
@@ -212,7 +214,9 @@ class ProductController extends Controller
                 ProductImage::where('image_id', $inputs['image_id'])->delete();
             }
         }
+
         return Redirect::to(route('product.manage-image', $inputs['product_id']));
+
     }
     /**
      * @param $subcategory_id
@@ -220,10 +224,16 @@ class ProductController extends Controller
      */
     public function productList($subcategory_id)
     {
+        try {
+            \DB::beginTransaction();
         $productOjb = (new Products());
         $products = $productOjb->getProductList($subcategory_id);
         $image = Products::with(['productimage'])->get();
+            \DB::commit();
         return view('products.product',compact('products','image'));
+        } catch (\Exception $e) {
+            \DB::rollback();
+        }
     }
 
 }
