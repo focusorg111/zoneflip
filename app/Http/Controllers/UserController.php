@@ -125,7 +125,7 @@ class UserController extends Controller
         $data=User::where('verification_token',$vryToken)->first();
         if($data)
         {
-           User::update(['verification_token'=>'','verification_email'=>1]);
+           User::where('verification_token',$vryToken)->update(['verification_token'=>'','verification_email'=>1]);
             return Redirect::to(route('login'))
                 ->with('flash_message', 'You Are Successfully Verified...please Login')
                 ->with('flash_type', 'alert-success');

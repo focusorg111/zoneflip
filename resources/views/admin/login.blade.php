@@ -29,9 +29,7 @@
             <div class="panel-body">
                 <form role="form" action="{{route('admin.login')}}" method="post" id="login-form">
 
-                @if(Session::has('flash_message'))
-                    <div class="flash_type"><em> {!! session('flash_message') !!}</em></div>
-                @endif
+                @include('common.messages')
 
 
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">

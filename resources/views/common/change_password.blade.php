@@ -47,7 +47,7 @@
                 </div>
                 <div class="form-group">
                     <button  type="submit" class="btn btn-success" id="chngepas-button">Save Changes</button>
-                    <button  class="btn btn-default">Cancel</button>
+                    <a  class="btn btn-default" href="{{route('get.venderlist')}}">Cancel</a>
                 </div>
             </div>
         </form>
