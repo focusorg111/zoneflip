@@ -20,17 +20,12 @@ class CreateProductTable extends Migration
             $table->integer('quantity');
             $table->string('product_size');
             $table->integer('discount');
-            $table->integer('vendor_id')->unsigned();
             $table->integer('category_id')->unsigned();
             $table->integer('subcategory_id')->unsigned();
             $table->integer('created_by')->unsigned();
             $table->integer('updated_by')->unsigned();
             $table->timestamps();
 
-
-            $table->foreign('vendor_id')
-                ->references('vendor_id')->on('vendors')
-                ->onDelete('cascade');
 
 
             $table->foreign('category_id')
@@ -62,7 +57,6 @@ class CreateProductTable extends Migration
     public function down()
     {
         Schema::table('products', function (Blueprint $table) {
-            $table->dropForeign('products_vendor_id_foreign');
             $table->dropForeign('products_category_id_foreign');
             $table->dropForeign('products_subcategory_id_foreign');
             $table->dropForeign('products_created_by_foreign');

@@ -27,7 +27,7 @@
     <div class="row main">
         <div class="panel-heading">
             <div class="panel-title text-center">
-                <h1 class="title">Registration</h1>
+                <h1 class="title">Seller Registration</h1>
             </div>
         </div >
         @if(Session::has('flash_message'))
