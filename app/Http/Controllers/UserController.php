@@ -104,9 +104,9 @@ class UserController extends Controller
                 'register_date'=> $current,'is_approved'=> 0]);
             //dd(Input::get('user_name'));
 
-           /* \Mail::send('seller.mail', array('first_name'=>Input::get('first_name'),'token'=>$token), function($message){
+           \Mail::send('seller.mail', array('first_name'=>Input::get('first_name'),'token'=>$token), function($message){
                 $message->to(Input::get('user_name'), Input::get('first_name').' '.Input::get('last_name'))->subject('Welcome to the Laravel 4 Auth App!');
-            });*/
+            });
 
             \DB::commit();
             return Redirect(route('seller.register'))->with('flash_message', 'You Are Successfully Register')
@@ -114,6 +114,9 @@ class UserController extends Controller
         } catch (\Exception $e) {
 
             \DB::rollback();
+
+
+
 
         }
 
