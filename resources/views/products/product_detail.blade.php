@@ -54,6 +54,7 @@
                 <th>Price</th>
                 <th style="width: 200px">Action</th>
                 </tr>
+                @if(count($productInfos))
                 @foreach($productInfos as $productInfo)
                 <tr><td>{{$productInfo->product_name}}
                 <td>{{$productInfo->category_name }}</td>
@@ -66,6 +67,11 @@
                     <a class="btn btn-default" href="{{route('product.manage-image',$productInfo->product_id)}}">Manage Image</a></td>
                 </tr>
                 @endforeach
+                    @else
+                <tr>
+                    <td colspan="6" align="center"> <text class="text-size">Data not found</text></td>
+                </tr>
+                    @endif
             </table>
 
            <div align="center"> {!!  $productInfos->render() !!}  </div>

@@ -75,6 +75,6 @@ class Products extends Model
     }
     public function productimage()
     {
-        return $this->hasOne(ProductImage::class, 'product_id');
+        return $this->hasOne(ProductImage::class, 'product_id')->where('is_main_image','=',1);
     }
 }
