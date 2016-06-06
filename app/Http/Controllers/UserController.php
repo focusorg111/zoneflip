@@ -103,8 +103,8 @@ class UserController extends Controller
                 'register_date'=> $current,'is_approved'=> 0]);
             //dd(Input::get('user_name'));
 
-           \Mail::send('seller.mail', array('first_name'=>Input::get('first_name'),'token'=>$token), function($message){
-                $message->to(Input::get('user_name'), Input::get('first_name').' '.Input::get('last_name'))->subject('Welcome to the Laravel 4 Auth App!');
+           \Mail::send('seller.mail', array('first_name'=>$inputs['first_name'],'token'=>$token), function($message){
+                $message->to(Input::get('user_name'), Input::get('first_name').' '.Input::get('last_name'))->subject('Email Verification');
             });
 
             \DB::commit();
