@@ -114,6 +114,7 @@ class UserController extends Controller
         } catch (\Exception $e) {
 
             \DB::rollback();
+            dd($e);
 
 
 

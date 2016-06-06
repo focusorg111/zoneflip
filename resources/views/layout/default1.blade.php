@@ -6,8 +6,14 @@
     <!-- Custom Theme files -->
     <!--theme style-->
     <link href="{{asset('assets/css/style.css')}}" rel="stylesheet" type="text/css" media="all" />
-    <script src="{{asset('assets/js/jquery.min.js')}}"></script>
+    <link href="{{asset('assets/css/jquery.auto-complete.css')}}" rel="stylesheet" type="text/css" media="all" />
+    <link href="{{asset('assets/css/jquery-ui.css')}}" rel="stylesheet" type="text/css" media="all" />
 
+    <script src="{{asset('assets/js/jquery.min.js')}}"></script>
+    <script src="{{asset('assets/js/jquery.auto-complete.js')}}"></script>
+    <script src="{{asset('assets/js/jquery.auto-complete.min.js')}}"></script>
+    <script src="{{asset('assets/js/jquery-ui.js')}}"></script>
+    <script src="{{asset('assets/js/jquery-ui.min.js')}}"></script>
     <!--//theme style-->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -43,6 +49,57 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         });
     </script>
     <!-- //the jScrollPane script -->
+
+    <script>
+
+        $(document).ready(function() {
+            jQuery.fn.extend({
+                propAttr: $.fn.prop || $.fn.attr
+            });
+            $( "#searchName" ).autocomplete({
+                        source: function(request, response) {
+                            var cat = $('.label-holder').attr('data-id');
+                            $.ajax({
+                                url: '{!! route('get.autocomplete') !!}',
+                                dataType: "json",
+                                data: {keyword: request.term, category: cat},
+                                success: function (data, textStatus, jqXHR) {
+                                    response($.map(data, function (value, key) {
+
+                                        var productName;
+
+                                        if (value.product_name.length > 20) {
+                                            productName = value.product_name.substring(0, 20);
+                                        } else {
+                                            productName = value.product_name;
+                                        }
+
+                                        return {
+                                            label: productName,
+                                            id: value.id
+                                        };
+                                    }));
+                                },
+                                select: function( event, ui ) {
+                                    // change display text and hidden value
+                                    var cat = $('.label-holder').attr('data-id');
+                                    var route = '{{ route('product.search-result') }}' + '/' + cat + '/' + ui.item.id + '/' + ui.item.value;
+                                   // window.location.href = route;
+                                }
+                            });
+
+                        },
+                        });
+        });
+
+
+
+
+
+    </script>
+
+
+
 </head>
 <body>
 <!--header-->
@@ -122,6 +179,14 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             </ul>
         </div>
         <!---->
+
+        <div class="row">
+            <div class="form-search">
+                <input type="text" name="searchName"  id="searchName" placeholder="search" autocomplete="off">
+            </div>
+
+
+
         <div class="cart box_1">
             <a href="checkout.html">
                 <div class="total">
@@ -138,6 +203,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     </div>
     <div class="clearfix"> </div>
 </div>
+</div>
+
 
 
 

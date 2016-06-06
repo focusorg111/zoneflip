@@ -15,6 +15,7 @@ use App\ProductImage;
 use Illuminate\Support\Facades\Redirect;
 
 
+
 class ProductController extends Controller
 {
 
@@ -263,5 +264,15 @@ class ProductController extends Controller
             return alert_messages();
         }
     }
+        public function autocomplete(Request $request)
+        {
+            $prod = $request->get('product_id');
+            $suggestions = Products::where('product_id', 'LIKE', '%'.$prod.'%')->get();
+              // dd($suggestions);
+            return $suggestions;
+        }
+
+
+
 
 }
