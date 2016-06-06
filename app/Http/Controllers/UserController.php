@@ -94,6 +94,7 @@ class UserController extends Controller
                 'user_type'=>$userType,
                 'verification_token'=>$token
             ]);
+
             $user_id = $userData['user_id'];
 
             Vendor::create([
@@ -113,6 +114,10 @@ class UserController extends Controller
         } catch (\Exception $e) {
 
             \DB::rollback();
+
+
+
+
         }
 
     }
@@ -217,10 +222,6 @@ class UserController extends Controller
                  return alert_messages();
               }
             }
-
-
-
-
 
 
     /**

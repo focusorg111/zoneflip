@@ -28,10 +28,6 @@
             <div class="panel-heading">Log in</div>
             <div class="panel-body">
                 <form role="form" action="{{route('admin.login')}}" method="post" id="login-form">
-
-                @include('common.messages')
-
-
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                     <fieldset>
                         <div class="form-group @if($errors->has('user_name')) has-error @endif">
