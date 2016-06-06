@@ -24,7 +24,7 @@ class ProductRequest extends Request
     public function rules()
     {
         return [
-            'product_name' => 'required|alpha_spaces',
+            'product_name' => 'required',
             'product_description' => 'required',
             'price' => 'required|numeric',
             'quantity' =>'required|numeric',

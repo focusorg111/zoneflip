@@ -1,9 +1,9 @@
 @extends('layout.default')
 @section('content')
     <div class="col-md-12">
-    <div class="col-md-6">
         <form method="get" action="{{route('get.venderlist')}}">
-        <select class="drop" name="approved_status">
+            <div class="col-md-3">
+        <select class="form-control" name="approved_status">
             <option value="0"
                     @if($status==0)
                     selected="selected"
@@ -21,27 +21,41 @@
                     >Rejected</option>
 
         </select>
-        <button type="submit" class=".btn btn-info">Filter</button>
+                </div>
+            <div class="col-md-2">
+        <button type="submit" class=".btn btn-info form-control">Filter</button>
+                </div>
         </form>
     </div>
-        <div class="row">
+    <br>
+    <br>
+    <br>
+    <br>
+        <div class="col-lg-12">
             <table class="table table-bordered">
+                <tr>
                 <th>Full Name</th>
                 <th>Company Name</th>
                 <th>Register Date</th>
-                <th>Actions</th>
+                <th style="width: 200px">Actions</th>
+                </tr>
+                @if(count($users))
                 @foreach($users as $user)
-                    <tr><td>{{$user->full_name}}</td>
-                    <td>{{$user->company_name}}</td>
-                    <td>{{$user->register_date}}</td>
-                    <td><button class="btn btn-info seller-detail" data-url="{{route('get.registerdetail',$user->user_id)}}" data-toggle="modal" data-target="#myModal" data-user-type="{{$user->user_id}}">Detail</button>
+                        <tr><td>{{$user->full_name}}</td>
+                        <td>{{$user->company_name}}</td>
+                        <td>{{$user->register_date}}</td>
+                            <td><button class="btn btn-info seller-detail" data-url="{{route('get.registerdetail',$user->user_id)}}" data-toggle="modal" data-target="#myModal" data-user-type="{{$user->user_id}}">Detail</button>
                     @if($user->is_approved!= \Config::get('constants.VENDOR_STATUS.APPROVE'))
                             <button class="btn btn-success check_approve" data-toggle="modal" data-target="#myModalApprove" data-status-type="{{\Config::get('constants.VENDOR_STATUS.APPROVE')}}" data-user-type="{{$user->user_id}}" data-user-name="{{$user->full_name}}">Approve</button></td></tr>
                     @else
                         <button class="btn btn-success check_approve" data-toggle="modal" data-target="#myModalApprove" data-status-type="{{\Config::get('constants.VENDOR_STATUS.REJECTED')}}" data-user-type="{{$user->user_id}}" data-user-name="{{$user->full_name}}">Reject</button></td></tr>
-
                     @endif
-                    @endforeach
+                @endforeach
+                @else
+                    <tr>
+                       <td colspan="4" align="center"> <text class="text-size">Data not found</text></td>
+                    </tr>
+                @endif
             </table>
             <div align="center">
                 {!! $users->appends(['approved_status' => $status])->render() !!}
