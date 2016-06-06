@@ -67,10 +67,10 @@
 
 
                 <div class="form-group">
-                    <label for="username" class="cols-sm-2 control-label">Username</label>
+                    <label for="username" class="cols-sm-2 control-label">Email</label>
                     <div class="cols-sm-10">
                         <div class="input-group @if($errors->has('user_name')) has-error @endif">
-                            <input type="text" class="form-control textbox-size" name="user_name" id="user_name" value="{{old('user_name')}}" placeholder="Enter your Username"/>
+                            <input type="text" class="form-control textbox-size" name="user_name" id="user_name" value="{{old('user_name')}}" placeholder="Enter your email"/>
                         </div>
                         @if($errors->has('user_name'))
                             <div class="input-group">

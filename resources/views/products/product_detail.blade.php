@@ -10,47 +10,49 @@
     !!}
         </div>
 
-        <div class="form-group">
+        <div class="form-group col-md-3">
             <label class="control-label">Choose category: </label>
             {!!
-            Form::select('category_id', array('' => 'Select Category') +$category,[$cat],array('id' => 'category_id'),
-            ['class' => 'form-control',
-            'id' => 'category_id',
+            Form::select('category_id', array('' => 'Select Category') +$category,[$cat],['id' => 'category_id','class' => 'form-control',
             'name'=>'category_id'
             ])
              !!}
+            </div>
 
-
+             <div class="form-group col-md-3">
             <label class="control-label">Choose sub-category: </label>
             {!!
-             Form::select('subcategory_id', array('' => 'Select Sub-Category')+$subCategory,[$sub],array('id' => 'subcategory_id'),
+             Form::select('subcategory_id', array('' => 'Select Sub-Category')+$subCategory,[$sub],
              ['class' => 'form-control',
             'id' => 'subcategory_id',
             'name'=>'subcategory_id'
              ])
              !!}
-        </div>
+             </div>
+        <div class="col-md-2">
+            <br>
+        {!! Form::button('filter',
+               [
+               'class'=>'.btn btn-info form-control',
+               'type'=>'submit'
+               ])
+               !!}
+            </div>
 
-
-
-        <div class="form-group">
-            <button type="submit" class=".btn btn-info">Filter</button>
-        </div>
-        <div>
-
-            {!! Form::close() !!}
-        </div>
+                 {!! Form::close() !!}
 
 </div>
-    <div class="row">
+
+
         <div class="col-md-12">
             <table class="table table-bordered">
+                <tr>
                 <th>Product Name</th>
                 <th>Category</th>
                 <th>Sub-category</th>
                 <th>Quantity</th>
                 <th>Price</th>
-                <th>Action</th>
+                <th style="width: 200px">Action</th>
                 </tr>
                 @foreach($productInfos as $productInfo)
                 <tr><td>{{$productInfo->product_name}}
@@ -58,8 +60,8 @@
                 <td>{{$productInfo->subcategory_name }}</td>
                     <td>{{$productInfo->quantity }}</td>
                 <td>{{$productInfo->price }}</td>
-                    <td> <a href="{{route('get.products-edit',$productInfo->product_id)}}">
-                            <span class="glyphicon glyphicon-edit"></span>
+                   <td> <a class="btn btn-default"  href="{{route('get.products-edit',$productInfo->product_id)}}">
+                           Edit
                         </a>
                     <a class="btn btn-default" href="{{route('product.manage-image',$productInfo->product_id)}}">Manage Image</a></td>
                 </tr>
@@ -68,7 +70,7 @@
 
            <div align="center"> {!!  $productInfos->render() !!}  </div>
         </div>
-    </div>
+
 
 
 

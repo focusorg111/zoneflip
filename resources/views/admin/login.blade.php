@@ -27,6 +27,7 @@
         <div class="login-panel panel panel-default">
             <div class="panel-heading">Log in</div>
             <div class="panel-body">
+                @include('common.messages')
                 <form role="form" action="{{route('admin.login')}}" method="post" id="login-form">
                     @include('common.messages')
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
@@ -46,11 +47,6 @@
                                     <div class="cols-sm-10 required">{{ $errors->first('password') }}</div>
                                 </div>
                             @endif
-                        </div>
-                        <div class="checkbox">
-                            <label>
-                                <input name="remember" type="checkbox" value="Remember Me">Remember Me
-                            </label>
                         </div>
                         <button type="submit" class="btn btn-primary" id="button">Login</button>
                         <a href="register">Register</a>

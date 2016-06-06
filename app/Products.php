@@ -66,7 +66,6 @@ class Products extends Model
         return $this
             ->join('product_images','product_images.product_id', '=', 'products.product_id')
             ->where('products.subcategory_id',$subcategory_id)
-            ->with('productimage')
             ->select(['product_images.product_image',
                 'products.product_name',
                 'products.price',
