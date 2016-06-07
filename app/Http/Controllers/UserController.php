@@ -104,20 +104,22 @@ class UserController extends Controller
                 'register_date'=> $current,'is_approved'=> 0]);
             //dd(Input::get('user_name'));
 
-           \Mail::send('seller.mail', array('first_name'=>$inputs['first_name'],'token'=>$token), function($message){
-                $message->to(Input::get('user_name'), Input::get('first_name').' '.Input::get('last_name'))->subject('Email Verification');
-            });
+            try {
+                \Mail::send('seller.mail', array('first_name'=>$inputs['first_name'],'token'=>$token), function($message) use ($inputs){
+                    $message->to($inputs['user_name'])->subject('Email Verification');
+                });
+            } catch(\Exception $e) {
+                //dd($e->getMessage());
+            }
+
 
             \DB::commit();
-            return Redirect(route('seller.register'))->with('flash_message', 'You Are Successfully Register')
+            return Redirect(route('seller.register'))->with('flash_message', 'You are successfully registered. Please verify your email.')
                 ->with('flash_type', 'alert-success');
         } catch (\Exception $e) {
 
             \DB::rollback();
             dd($e);
-
-
-
 
         }
 
@@ -126,18 +128,32 @@ class UserController extends Controller
     public function verifyEmail()
     {
         $inputs=\Request::all();
-      $vryToken=$inputs['token'];
+        $vryToken=$inputs['token'];
+        $adminEmail= \Config::get('constants.ADMIN_EMAIL.SUPER_ADMIN_EMAIL');
         $data=User::where('verification_token',$vryToken)->first();
+        $user= new User();
+        $vendors=$user->getVendorlist();
+
         if($data)
         {
            User::where('verification_token',$vryToken)->update(['verification_token'=>'','verification_email'=>1]);
+            try{
+                \Mail::send('admin.email',array('company_name'=>$vendors['company_name']), function($message) use ($adminEmail){
+                    $message->to($adminEmail)->subject('Approve Seller');
+                });
+            }
+            catch (\Exception $e) {
+                dd($e->getMessage());
+            }
+
+
             return Redirect::to(route('login'))
-                ->with('flash_message', 'You Are Successfully Verified...please Login')
+                ->with('flash_message', 'You are successfully verified.')
                 ->with('flash_type', 'alert-success');
         }
         else{
             return Redirect::to(route('login'))
-                ->with('flash_message', 'Something Wrong')
+                ->with('flash_message', 'Something Wrong.')
                 ->with('flash_type', 'alert-danger');
         }
 

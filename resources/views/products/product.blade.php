@@ -10,8 +10,9 @@
             @foreach($products as $product)
             <a href="single.html"><div class="product-grid">
                     <div class="more-product"><span> </span></div>
+                    @foreach($products->productImage as $productimage)
                     <div class="product-img b-link-stripe b-animate-go  thickbox">
-                        <img src="{{asset('assets/product_image/'.$product->product_image)}}" class="img-size" alt="">
+                        <img src="{{asset('assets/product_image/'.$productimage->product_image)}}" class="img-size" alt="">
                         <div class="b-wrapper">
                             <h4 class="b-animate b-from-left  b-delay03">
                                 <button><span class="glyphicon glyphicon-zoom-in" aria-hidden="true"></span>Quick View</button>
@@ -19,6 +20,7 @@
                         </div>
                     </div>
             </a>
+            @endforeach
             <div class="product-info simpleCart_shelfItem">
                 <div class="product-info-cust prt_name">
                     <h4>{{$product->product_name}}</h4>
