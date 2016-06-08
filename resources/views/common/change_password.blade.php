@@ -1,9 +1,7 @@
 @extends('layout.default')
 @section('content')
     <div class="row" align="center">
-        @if(Session::has('flash_message'))
-            <div class="alert alert-success"><em> {!! session('flash_message') !!}</em></div>
-        @endif
+
         <form action="{{route('update.change.password')}}" method="post" id="change-password-form">
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
             <div>
@@ -12,6 +10,7 @@
             <div class="panel panel-width">
 
                 <div class="form-group @if($errors->has('current_password')) has-error @endif">
+                   @include('common.messages')
                     <label>Current Password</label>
                     <input name="current_password" type="password" class="form-control text-width" value="{{old('current_password')}}">
                     @if($errors->has('current_password'))

@@ -18,7 +18,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="keywords" content="Wedding Store Responsive web template, Bootstrap Web Templates, Flat Web Templates, Andriod Compatible web template,
-Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyErricsson, Motorola web design" />
+     Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyErricsson, Motorola web design" />
     <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
     <!-- start menu -->
     <script src="{{asset('assets/js/simpleCart.min.js')}}"> </script>
@@ -28,6 +28,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <script>$(document).ready(function(){$(".memenu").memenu();});</script>
     <!-- /start menu -->
     <script src="{{asset('assets/js/responsiveslides.min.js')}}"></script>
+
     <script>
         $(function () {
             $("#slider").responsiveSlides({
@@ -62,7 +63,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             $.ajax({
                                 url: '{!! route('get.autocomplete') !!}',
                                 dataType: "json",
-                                data: {keyword: request.term, category: cat},
+                                data:
+                                {
+                                    keyword: request.term,
+                                    category: cat
+                                },
                                 success: function (data, textStatus, jqXHR) {
                                     response($.map(data, function (value, key) {
 
