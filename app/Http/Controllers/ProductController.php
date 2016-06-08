@@ -206,9 +206,7 @@ class ProductController extends Controller
               $extension = Input::file('file')->getClientOriginalExtension();
               $fileName = time() . '.' . $extension;
               dropZoneUploader($fileName, $destinationPath);
-
-              
-             ProductImage::create(['product_image' => $fileName, 'product_id' => $productId]);
+              ProductImage::create(['product_image' => $fileName, 'product_id' => $productId]);
               return $fileName;
           } catch (\Exception $e) {
              dd($e);
