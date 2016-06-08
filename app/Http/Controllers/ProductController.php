@@ -206,6 +206,7 @@ class ProductController extends Controller
               $extension = Input::file('file')->getClientOriginalExtension();
               $fileName = time() . '.' . $extension;
               $upload_success = Input::file('file')->move($destinationPath, $fileName);
+              
               ProductImage::create(['product_image' => $fileName, 'product_id' => $productId]);
           } catch (\Exception $e) {
               return alert_messages();
@@ -266,25 +267,20 @@ class ProductController extends Controller
     }
         public function autocomplete(Request $request)
         {
-            /*$name = Products::all();
-            $searchResult = Products::where('product_id', 'LIKE', '%'.$name.'%')
-                ->where('product_name')get();
-            dd($searchResult);*/
-
-
             $prod = $request->get('product_id');
-           // dd($prod);
+            // dd($prod);
             $queries = Products::where('product_id', 'LIKE', '%'.$prod.'%')
                 ->orWhere('product_name', 'LIKE', '%'.$prod.'%')
                 ->take(5)->get();
             dd($queries);
 
-           // $suggestions = Products::where('product_id', 'LIKE', '%'.$prod.'%')->get();
-              // dd($suggestions);
-          //  return $suggestions;
+
+
 
 
         }
+
+
 
 
 

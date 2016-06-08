@@ -1,6 +1,7 @@
 <?php
 use App\Category;
 // My common functions
+
 function is_superAdmin()
 {
 
@@ -26,6 +27,10 @@ function is_seller()
         return false;
     }
 }
+
+
+
+
 function get_navigation()
 {
     return Category::with(['subcategories'])->get();
