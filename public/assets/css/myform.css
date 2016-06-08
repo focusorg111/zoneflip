@@ -44,6 +44,10 @@ width:25px;
     width: 270px !important;
     height: 30px;
 }
-
-
+.dz-width
+{
+    width: 600px;
+    height: 300px;
+    margin: 50px;
+}
 

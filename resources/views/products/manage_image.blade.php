@@ -1,14 +1,15 @@
 @extends('layout.default')
 @section('content')
     <div>
-    <label class="text-size">Manage Images for {{$products->product_name}}</label>
+    <label class="text-size" style="margin:20px">Manage Images for {{$products->product_name}}</label>
     </div>
     <br>
     <br>
     <div>
         <form action="{{route('product.upload-image')}}"
-              class="dropzone"
+              class="dropzone dz-width"
               id="my-awesome-dropzone" name="file">
+            <div class="dz-message">Drop files here or click to upload.</div>
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
             <input name="product_id" type="hidden" value="{{$product_id}}">
         </form>
@@ -18,7 +19,7 @@
     <div>
             @foreach($productImages as $productImage)
                         <div class="col-md-3">
-                        <img src='{{asset('assets/product_image/'.$productImage->product_image)}}' width="200" height="200">
+                        <img src='{{asset('assets/product_image/thumbs/'.$productImage->product_image)}}'>
                             <br>
                             <br>
                             @if($productImage->is_main_image==1)
@@ -37,7 +38,7 @@
         Dropzone.options.myAwesomeDropzone = {
 
             success: function (response, data) {
-                location.reload();
+                //location.reload();
             }
         };
     </script>

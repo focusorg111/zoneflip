@@ -202,14 +202,22 @@ class ProductController extends Controller
           try {
               $input = Input::all();
               $productId = $input['product_id'];
-              $destinationPath = public_path() . '/assets/product_image';
+              $destinationPath = public_path() . '/assets/product_image/';
               $extension = Input::file('file')->getClientOriginalExtension();
               $fileName = time() . '.' . $extension;
+
               $upload_success = Input::file('file')->move($destinationPath, $fileName);
               
               ProductImage::create(['product_image' => $fileName, 'product_id' => $productId]);
+
+              dropZoneUploader($fileName, $destinationPath);
+
+              
+             ProductImage::create(['product_image' => $fileName, 'product_id' => $productId]);
+              return $fileName;
+
           } catch (\Exception $e) {
-              return alert_messages();
+             dd($e);
           }
     }
 
@@ -233,7 +241,7 @@ class ProductController extends Controller
            } elseif ($inputs['type'] == 0) {
                $productimage = ProductImage::where('image_id', $inputs['image_id'])->select('product_image')->first();
                $filename = $productimage['product_image'];
-               $fullPath = public_path() . '/assets/product_image';
+               $fullPath = public_path() . '/assets/product_image/thumbs';
                $image = $fullPath . '/' . $filename;
                if (\File::exists($image)) {
                    unlink($image);

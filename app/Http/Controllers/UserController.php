@@ -137,15 +137,15 @@ class UserController extends Controller
         $vryToken=$inputs['token'];
         $adminEmail= \Config::get('constants.ADMIN_EMAIL.SUPER_ADMIN_EMAIL');
         $data=User::where('verification_token',$vryToken)->first();
+        $userId=$data['user_id'];
         $user= new User();
-        $vendors=$user->getVendorlist();
-
+        $vendors=$user->getVendorlist($userId);
         if($data)
         {
            User::where('verification_token',$vryToken)->update(['verification_token'=>'','verification_email'=>1]);
             try{
                 \Mail::send('admin.email',array('company_name'=>$vendors['company_name']), function($message) use ($adminEmail){
-                    $message->to($adminEmail)->subject('Approve Seller');
+                    $message->to($adminEmail)->subject('New seller registration');
                 });
             }
             catch (\Exception $e) {

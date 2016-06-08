@@ -61,7 +61,7 @@ class AdminController extends Controller
             }
             Vendor::where('user_id', $userId)->update(['is_approved' => $status]);
             $user= new User();
-            $vendors=$user->getVendorlist();
+            $vendors=$user->getVendorlist($userId);
             if($status=1){
                 try{
                     \Mail::send('seller.response_email', array('first_name'=>$vendors['first_name']), function($message) use ($vendors){

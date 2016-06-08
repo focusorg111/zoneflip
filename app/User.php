@@ -63,10 +63,11 @@ class User extends Authenticatable
             ->first();
 
     }
-    public function getVendorlist()
+    public function getVendorlist($userId)
     {
         return $this
             ->join('vendors', 'users.user_id', '=', 'vendors.user_id')
+            ->where('users.user_id',$userId)
             ->select([ 'vendors.company_name',
                 'users.first_name',
                 'users.user_name',
