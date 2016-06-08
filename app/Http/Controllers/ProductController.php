@@ -64,7 +64,7 @@ class ProductController extends Controller
 
             \DB::commit();
              return Redirect::to(route('get.product-list'))
-                ->with('flash_message', 'Product Successfully Added')
+                ->with('flash_message', 'Product Successfully Added.')
                     ->with('flash_type', 'alert-success');
         } catch (\Exception $e) {
               \DB::rollback();
@@ -104,7 +104,7 @@ class ProductController extends Controller
              $productOjb = (new Products());
              $productInfos = $productOjb->getProductData($cat,$sub);
              return  view('products.product_detail',compact('productInfos','category','subCategory','cat','sub','users'))
-             ->with('flash_message', 'Successfully show product detail list')
+             ->with('flash_message', 'Successfully show product detail list.')
                  ->with('flash_type', 'alert-success');
              } catch (\Exception $e) {
              return alert_messages();
@@ -164,7 +164,7 @@ class ProductController extends Controller
             ]);
             \DB::commit();
             return Redirect::route('get.product-list')
-            ->with('flash_message', 'Product Successfully updated')
+            ->with('flash_message', 'Product Successfully updated.')
                 ->with('flash_type', 'alert-success');
         } catch (\Exception $e) {
             \DB::rollback();
@@ -258,9 +258,9 @@ class ProductController extends Controller
 
              $productOjb = (new Products());
              $products = $productOjb->getProductList($subcategory_id);
-            $image = Products::with(['productimage'])->get();
-            return view('products.product',compact('products','image'));
+            return view('products.product',compact('products'));
            } catch (\Exception $e) {
+            dd($e);
             return alert_messages();
         }
     }

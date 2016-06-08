@@ -60,6 +60,18 @@ class AdminController extends Controller
                 $status = 1;
             }
             Vendor::where('user_id', $userId)->update(['is_approved' => $status]);
+            $user= new User();
+            $vendors=$user->getVendorlist();
+            if($status=1){
+                try{
+                    \Mail::send('seller.response_email', array('first_name'=>$vendors['first_name']), function($message) use ($vendors){
+                        $message->to($vendors['user_name'])->subject('Approved Email');
+                    });
+                }
+                catch (\Exception $e) {
+                   // dd($e->getMessage());
+                }
+            }
             return Redirect::to(route('get.venderlist'))->with('flash_message', 'Successfully Approved.')
                 ->with('flash_type', 'alert-success');
         } catch (\Exception $e) {

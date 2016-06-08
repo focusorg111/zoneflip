@@ -64,17 +64,17 @@ class Products extends Model
     public  function getProductList($subcategory_id)
     {
         return $this
-            ->join('product_images','product_images.product_id', '=', 'products.product_id')
             ->where('products.subcategory_id',$subcategory_id)
-            ->select(['product_images.product_image',
+            ->with('productimage')
+            ->select([
+                'products.product_id',
                 'products.product_name',
                 'products.price',
                 'products.discount',
-                'product_images.is_main_image'
             ])->get();
     }
     public function productimage()
     {
-        return $this->hasOne(ProductImage::class, 'product_id')->where('is_main_image','=',1);
+        return $this->hasOne(ProductImage::class, 'product_id')->where('is_main_image',1);
     }
 }

@@ -63,4 +63,13 @@ class User extends Authenticatable
             ->first();
 
     }
+    public function getVendorlist()
+    {
+        return $this
+            ->join('vendors', 'users.user_id', '=', 'vendors.user_id')
+            ->select([ 'vendors.company_name',
+                'users.first_name',
+                'users.user_name',
+            ])->first();
+    }
 }
