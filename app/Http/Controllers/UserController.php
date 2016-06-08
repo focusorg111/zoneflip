@@ -104,6 +104,11 @@ class UserController extends Controller
                 'register_date'=> $current,'is_approved'=> 0]);
             //dd(Input::get('user_name'));
 
+
+          /* \Mail::send('seller.mail', array('first_name'=>$inputs['first_name'],'token'=>$token), function($message){
+                $message->to(Input::get('user_name'), Input::get('first_name').' '.Input::get('last_name'))->subject('Email Verification');
+            });*/
+
             try {
                 \Mail::send('seller.mail', array('first_name'=>$inputs['first_name'],'token'=>$token), function($message) use ($inputs){
                     $message->to($inputs['user_name'])->subject('Email Verification');
@@ -113,13 +118,14 @@ class UserController extends Controller
             }
 
 
+
             \DB::commit();
             return Redirect(route('seller.register'))->with('flash_message', 'You are successfully registered. Please verify your email.')
                 ->with('flash_type', 'alert-success');
         } catch (\Exception $e) {
 
             \DB::rollback();
-            dd($e);
+            //dd($e);
 
         }
 
@@ -234,8 +240,7 @@ class UserController extends Controller
             } else {
                 return Redirect::to(route('login'));
             }
-        }
-              catch (\Exception $e) {
+        } catch (\Exception $e) {
                  return alert_messages();
               }
             }

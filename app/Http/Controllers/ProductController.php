@@ -205,9 +205,15 @@ class ProductController extends Controller
               $destinationPath = public_path() . '/assets/product_image/';
               $extension = Input::file('file')->getClientOriginalExtension();
               $fileName = time() . '.' . $extension;
+
+              $upload_success = Input::file('file')->move($destinationPath, $fileName);
+              
+              ProductImage::create(['product_image' => $fileName, 'product_id' => $productId]);
+
               dropZoneUploader($fileName, $destinationPath);
               ProductImage::create(['product_image' => $fileName, 'product_id' => $productId]);
               return $fileName;
+
           } catch (\Exception $e) {
              dd($e);
           }
@@ -268,10 +274,19 @@ class ProductController extends Controller
         public function autocomplete(Request $request)
         {
             $prod = $request->get('product_id');
-            $suggestions = Products::where('product_id', 'LIKE', '%'.$prod.'%')->get();
-              // dd($suggestions);
-            return $suggestions;
+            // dd($prod);
+            $queries = Products::where('product_id', 'LIKE', '%'.$prod.'%')
+                ->orWhere('product_name', 'LIKE', '%'.$prod.'%')
+                ->take(5)->get();
+            dd($queries);
+
+
+
+
+
         }
+
+
 
 
 
