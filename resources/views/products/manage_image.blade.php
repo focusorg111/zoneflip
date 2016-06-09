@@ -19,6 +19,8 @@
     <div>
             @foreach($productImages as $productImage)
                         <div class="col-md-3">
+                            <br>
+                            <br>
                         <img src='{{asset('assets/product_image/thumbs/'.$productImage->product_image)}}'>
                             <br>
                             <br>

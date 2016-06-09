@@ -79,7 +79,7 @@ function createThumb($name, $filename, $new_w, $new_h)
         $old_y = imagesy($src_img);
         $ar = $old_x / $old_y;
 
-        if ($old_x > 400) {
+        if ($old_x > 50) {
             if ($new_w == $new_h) {
                 $thumb_w = $new_w;
                 $thumb_h = $new_h;
@@ -98,7 +98,7 @@ function createThumb($name, $filename, $new_w, $new_h)
         if (preg_match("/png/", $echeck)) {
             imagepng($dst_img, $filename);
         } else if(preg_match('/jpg|jpeg/', $echeck)) {
-            imagejpeg($dst_img, $filename, 100);
+            imagejpeg($dst_img, $filename,100);
         } else if(preg_match("/gif/", $echeck)) {
             imagegif($dst_img, $filename);
         }
@@ -143,7 +143,8 @@ function dropZoneUploader($fileName, $directory = '')
             createThumb($targetFilePath, $mediumFile, 200, 200);
             unlink($targetFilePath);
         } else {
-            createThumb($targetFilePath, $thumbFile, 50, 50);
+            createThumb($targetFilePath, $thumbFile, 200, 200);
+            unlink($targetFilePath);
         }
 
     }
