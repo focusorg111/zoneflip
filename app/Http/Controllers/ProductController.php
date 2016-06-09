@@ -205,19 +205,19 @@ class ProductController extends Controller
               $destinationPath = public_path() . '/assets/product_image/';
               $extension = Input::file('file')->getClientOriginalExtension();
               $fileName = time() . '.' . $extension;
-
-              $upload_success = Input::file('file')->move($destinationPath, $fileName);
-              
-              ProductImage::create(['product_image' => $fileName, 'product_id' => $productId]);
-
               dropZoneUploader($fileName, $destinationPath);
-
-              
-             ProductImage::create(['product_image' => $fileName, 'product_id' => $productId]);
+              $prodImage=ProductImage::where('product_id',$productId)->select(['product_image'])->count();
+              if($prodImage>0)
+              {
+               $mainImage=0;
+              }else{
+                  $mainImage=1;
+              }
+              ProductImage::create(['product_image' => $fileName, 'product_id' => $productId,'is_main_image'=>$mainImage]);
               return $fileName;
 
           } catch (\Exception $e) {
-             dd($e);
+            // dd($e);
           }
     }
 
@@ -235,9 +235,16 @@ class ProductController extends Controller
                ->where('image_id', $inputs['image_id']);
            if ($inputs['type'] == 1) {
 
-               $products->update(['is_main_image' => 1]);
+            $prodImage=ProductImage::where('product_id',$inputs['product_id'])->select(['product_image'])->update(['is_main_image'=>0]);
+             if($prodImage>0)
+             {
+                 $products->update(['is_main_image' => 1]);
+             }
+
+
            } elseif ($inputs['type'] == 2) {
                $products->update(['is_main_image' => 0]);
+
            } elseif ($inputs['type'] == 0) {
                $productimage = ProductImage::where('image_id', $inputs['image_id'])->select('product_image')->first();
                $filename = $productimage['product_image'];
