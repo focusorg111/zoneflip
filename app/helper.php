@@ -1,5 +1,6 @@
 <?php
 use App\Category;
+use App\Products;
 // My common functions
 
 function is_superAdmin()
@@ -29,15 +30,12 @@ function is_seller()
 }
 
 
-
-
 function get_navigation()
 {
     return Category::with(['subcategories'])->get();
 }
 
-
-  function alert_messages()
+function alert_messages()
 {
     return Redirect::back()
        ->with('flash_message', 'internal server errors')

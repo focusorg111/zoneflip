@@ -8,32 +8,30 @@
         <h2>Our Products</h2>
         <div class="col-md-9 product-model-sec">
             @foreach($products as $product)
-            <a href="single.html"><div class="product-grid">
-                    <div class="more-product"><span> </span></div>
-                    @foreach($products->productImage as $productimage)
-                    <div class="product-img b-link-stripe b-animate-go  thickbox">
-                        <img src="{{asset('assets/product_image/'.$productimage->product_image)}}" class="img-size" alt="">
-                        <div class="b-wrapper">
-                            <h4 class="b-animate b-from-left  b-delay03">
-                                <button><span class="glyphicon glyphicon-zoom-in" aria-hidden="true"></span>Quick View</button>
-                            </h4>
+                <a href="single.html"><div class="product-grid">
+                        <div class="more-product"><span> </span></div>
+                        <div class="product-img b-link-stripe b-animate-go  thickbox">
+                            <img src="{{asset('assets/product_image/thumbs/'.$product->product_image)}}" class="img-size" alt="">
+                            <div class="b-wrapper">
+                                <h4 class="b-animate b-from-left  b-delay03">
+                                    <button><span class="glyphicon glyphicon-zoom-in" aria-hidden="true"></span>Quick View</button>
+                                </h4>
+                            </div>
                         </div>
-                    </div>
-            </a>
-            @endforeach
-            <div class="product-info simpleCart_shelfItem">
-                <div class="product-info-cust prt_name">
-                    <h4>{{$product->product_name}}</h4>
-                    <span class="item_price">{{$product->price}}</span>
-                    <div class="ofr">
-                        <p class="disc">{{$product->discount}}</p>
-                    </div>
-                    <input type="text" class="item_quantity" value="1" />
-                    <input type="button" class="item_add items" value="ADD">
-                    <div class="clearfix"> </div>
-                </div>
+                </a>
+                <div class="product-info simpleCart_shelfItem">
+                    <div class="product-info-cust prt_name">
+                        <h4>{{$product->product_name}}</h4>
+                        <span class="item_price">{{$product->price}}</span>
+                        <div class="ofr">
+                            <p class="disc">{{$product->discount}}</p>
 
-            </div>
+                        <input type="button" class="item_add items" value="ADD">
+                        </div>
+                        <div class="clearfix"> </div>
+                    </div>
+
+                </div>
         </div>
 @endforeach
 </div>
