@@ -59,16 +59,16 @@
             });
             $( "#searchName" ).autocomplete({
                         source: function(request, response) {
-                            //var productId=$("#product_id").val();
-                            var cat = $('.label-holder').attr('data-id');
+                           // var productId=$("#product_id").val();
+                           var cat = $('.label-holder').attr('data-id');
                             $.ajax({
                                 url: '{!! route('get.autocomplete') !!}',
                                 dataType: "json",
                                 data:
                                 {
                                     keyword: request.term,
-                                    //product_id:productId
-                                   category: cat
+                                   // product_id:productId,
+                                    category: cat
                                 },
                                 success: function (data, textStatus, jqXHR) {
                                     response($.map(data, function (value, key) {
