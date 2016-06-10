@@ -275,8 +275,8 @@ class ProductController extends Controller
              $productOjb = (new Products());
              $products = $productOjb->getProductList($subcategory_id);
             return view('products.product',compact('products'));
-           } catch (\Exception $e) {
-            dd($e);
+        } catch (\Exception $e) {
+            //dd($e);
             return alert_messages();
         }
     }

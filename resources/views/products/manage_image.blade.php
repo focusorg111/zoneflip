@@ -40,7 +40,11 @@
         Dropzone.options.myAwesomeDropzone = {
 
             success: function (response, data) {
+
                location.reload();
+
+                location.reload();
+
             }
         };
     </script>
