@@ -282,19 +282,18 @@ class ProductController extends Controller
     }
         public function autocomplete(Request $request)
         {
-            $term = Input::get('term');
-
-            $results = array();
-
-            $queries = Products::where('product_id', 'LIKE', '%'.$term.'%')
-                ->orWhere('product_name', 'LIKE', '%'.$term.'%')
-                ->take(5)->get();
-                   dd($queries);
-           /* foreach ($queries as $query)
-            {
-                $results[] = [ 'id' => $query->id, 'value' => $query->first_name.' '.$query->last_name ];
-            }
-            return Response::json($results);*/
-
+            $inputs = \Request::all();
+            $productId=$inputs['product_id'];
+            $queries = Products::where('product_name', 'LIKE', '%'.$productId.'%')
+                ->take(5)->get(['product_name','product_id']);
+            return $queries;
         }
+
+    public function productSearch()
+    {
+
+    }
+
+
+
 }
