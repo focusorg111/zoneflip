@@ -74,33 +74,35 @@
                             product_id: productId,
                             // category: cat
                         }, success: function (data, textStatus, jqXHR) {
+                            //console.log(data);
                             response($.map(data, function (value, key) {
-
+                              // console.log(value.product_name);
                                 var productName;
 
                                 if (value.product_name.length > 20) {
                                     productName = value.product_name.substring(0, 20);
+
                                 } else {
                                     productName = value.product_name;
                                 }
 
                                 return {
                                     label: productName,
-                                    id: value.id
+                                    id: value.product_id
+
                                 };
                             }));
                         },
-                        select: function( event, ui ) {
-                            log( ui.item ?
-                            "Selected: " + ui.item.label :
-                            "Nothing selected, input was " + this.value);
-                            console.log('ui');
-                            var route = '{{ route('product.quickdetail') }}' + '/' + cat + '/' + ui.item.id + '/' + ui.item.value;
-                            window.location.href = route;
-                        },
+
                     });
-                }
-                    });
+                },
+                    select: function( event, ui ) {
+
+                        var route = '{{ route('product.quickdetail')}}' + '/' + ui.item.id;
+                        window.location.href = route;
+
+                    }
+            });
                 });
     </script>
 

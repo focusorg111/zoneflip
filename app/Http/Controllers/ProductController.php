@@ -289,28 +289,16 @@ class ProductController extends Controller
         {
 
             $inputs = \Request::all();
+           // $prodobj = (new Products());
+            //$prodinfo=$prodobj->getSearchProduct($category_name);
             $productId=$inputs['product_id'];
             $queries = Products::where('product_name', 'LIKE', '%'.$productId.'%')
                 ->take(5)->get(['product_name','product_id']);
+
+           // dd($queries);
             return $queries;
         }
 
-    public function productSearch()
-    {
-           $prod = $request->get('keee');
-            // dd($prod);
-            $queries = Products::
-              Where('product_name', 'LIKE', '%'.$prod.'%')
-                ->take(5)->get();
-            dd($queries);
-            $term = Input::get('term');
-
-
-
-
-
-
-        }
 
         public function quickView($productId)
         {
