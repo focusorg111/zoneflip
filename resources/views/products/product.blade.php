@@ -8,15 +8,19 @@
         <h2>Our Products</h2>
         <div class="col-md-9 product-model-sec">
             @foreach($products as $product)
-                <a href="single.html"><div class="product-grid">
+                <a href="{{route('product.quickdetail',$product->product_id)}}"><div class="product-grid">
                         <div class="more-product"><span> </span></div>
                         <div class="product-img b-link-stripe b-animate-go  thickbox">
-                            <img src="{{asset('assets/product_image/thumbs/'.$product->product_image)}}" class="img-size" alt="">
-                            <div class="b-wrapper">
-                                <h4 class="b-animate b-from-left  b-delay03">
-                                    <button><span class="glyphicon glyphicon-zoom-in" aria-hidden="true"></span>Quick View</button>
-                                </h4>
-                            </div>
+                            @if(isset($product->productimage->product_image))
+                            <img src="{{asset('assets/product_image/thumbs/'.$product->productimage->product_image)}}" class="img-size" alt="">
+                            @else
+                                <img src="{{asset('assets/product_image/thumbs/default.png')}}" class="img-size" alt="">
+                                @endif
+                                <div class="b-wrapper">
+                                    <h4 class="b-animate b-from-left  b-delay03">
+                                        <button><span class="glyphicon glyphicon-zoom-in" aria-hidden="true"></span>Quick View</button>
+                                    </h4>
+                                </div>
                         </div>
                 </a>
                 <div class="product-info simpleCart_shelfItem">

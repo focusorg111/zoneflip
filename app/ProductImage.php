@@ -11,5 +11,12 @@ class ProductImage extends Model
     protected $primaryKey ='image_id';
 
     protected $fillable =['product_id','product_image','is_main_image'];
+
+    public function products()
+    {
+        return $this->belongsTo(Products::class, 'product_id');
+    }
+
 }
+
 

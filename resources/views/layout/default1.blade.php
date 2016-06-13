@@ -8,7 +8,11 @@
     <link href="{{asset('assets/css/style.css')}}" rel="stylesheet" type="text/css" media="all" />
     <link href="{{asset('assets/css/jquery.auto-complete.css')}}" rel="stylesheet" type="text/css" media="all" />
     <link href="{{asset('assets/css/jquery-ui.css')}}" rel="stylesheet" type="text/css" media="all" />
+
     <link href="{{asset('assets/css/jquery-ui.min.css')}}" rel="stylesheet" type="text/css" media="all" />
+
+    <link rel="stylesheet" href="{{asset('assets/css/flexslider.css')}}" type="text/css" media="screen" />
+
 
     <script src="{{asset('assets/js/jquery.min.js')}}"></script>
     <script src="{{asset('assets/js/jquery.auto-complete.js')}}"></script>
