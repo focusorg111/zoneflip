@@ -79,6 +79,6 @@ class Products extends Model
     }
     public function quickProductImage()
     {
-        return $this->hasMany(ProductImage::class, 'product_id');
+        return $this->hasMany(ProductImage::class, 'product_id')->orderby('is_main_image',1);
     }
 }
