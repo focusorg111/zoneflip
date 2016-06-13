@@ -274,7 +274,12 @@ class ProductController extends Controller
 
              $productOjb = (new Products());
              $products = $productOjb->getProductList($subcategory_id);
-            return view('products.product',compact('products'));
+            if(count($products)){
+                return view('products.product',compact('products'));
+            }
+           else{
+               return Redirect::to(route('index'));
+           }
         } catch (\Exception $e) {
             //dd($e);
             return alert_messages();
@@ -282,10 +287,10 @@ class ProductController extends Controller
     }
         public function autocomplete(Request $request)
         {
-            $prod = $request->get('product_id');
+            $prod = $request->get('keee');
             // dd($prod);
-            $queries = Products::where('product_id', 'LIKE', '%'.$prod.'%')
-                ->orWhere('product_name', 'LIKE', '%'.$prod.'%')
+            $queries = Products::
+              Where('product_name', 'LIKE', '%'.$prod.'%')
                 ->take(5)->get();
             dd($queries);
 
@@ -295,7 +300,22 @@ class ProductController extends Controller
 
         }
 
+        public function quickView($productId)
+        {
+                $products=Products::with(['quickProductImage'])
+                    ->where('product_id',$productId)
+                    ->first();
+            if($products)
+            {
+                return view('products.quick_view',compact('products'));
+            }
+            else
+            {
+                return Redirect::to(route('index'));
+            }
 
+
+        }
 
 
 
