@@ -8,7 +8,11 @@
     <link href="{{asset('assets/css/style.css')}}" rel="stylesheet" type="text/css" media="all" />
     <link href="{{asset('assets/css/jquery.auto-complete.css')}}" rel="stylesheet" type="text/css" media="all" />
     <link href="{{asset('assets/css/jquery-ui.css')}}" rel="stylesheet" type="text/css" media="all" />
+
+    <link href="{{asset('assets/css/jquery-ui.min.css')}}" rel="stylesheet" type="text/css" media="all" />
+
     <link rel="stylesheet" href="{{asset('assets/css/flexslider.css')}}" type="text/css" media="screen" />
+
 
     <script src="{{asset('assets/js/jquery.min.js')}}"></script>
     <script src="{{asset('assets/js/jquery1.9.min.js')}}"></script>
@@ -59,54 +63,49 @@
             jQuery.fn.extend({
                 propAttr: $.fn.prop || $.fn.attr
             });
-            $( "#searchName" ).autocomplete({
-                        source: function(request, response) {
-                           // var productId=$("#product_id").val();
-                           var cat = $('.label-holder').attr('data-id');
-                            $.ajax({
-                                url: '{!! route('get.autocomplete') !!}',
-                                dataType: "json",
-                                data:
-                                {
-                                    keyword: request.term,
-                                   // product_id:productId,
-                                    category: cat
-                                },
-                                success: function (data, textStatus, jqXHR) {
-                                    response($.map(data, function (value, key) {
+            $("#product_id").autocomplete({
+                source: function (request, response) {
+                    var productId = $("#product_id").val();
+                    //var cat = $('.label-holder').attr('data-id');
+                    $.ajax({
+                        url: '{!! route('get.autocomplete') !!}',
+                        dataType: "json",
+                        data: {
+                            keyword: request.term,
+                            product_id: productId,
+                            // category: cat
+                        }, success: function (data, textStatus, jqXHR) {
+                            //console.log(data);
+                            response($.map(data, function (value, key) {
+                              // console.log(value.product_name);
+                                var productName;
 
-                                        var productName;
+                                if (value.product_name.length > 20) {
+                                    productName = value.product_name.substring(0, 20);
 
-                                        if (value.product_name.length > 20) {
-                                            productName = value.product_name.substring(0, 20);
-                                        } else {
-                                            productName = value.product_name;
-                                        }
-
-                                        return {
-                                            label: productName,
-                                            id: value.id
-                                        };
-                                    }));
-                                },
-                                select: function( event, ui ) {
-                                    // change display text and hidden value
-                                    var cat = $('.label-holder').attr('data-id');
-                                    var route = '{{ route('product.search-result') }}' + '/' + cat + '/' + ui.item.id + '/' + ui.item.value;
-                                   // window.location.href = route;
+                                } else {
+                                    productName = value.product_name;
                                 }
-                            });
 
+                                return {
+                                    label: productName,
+                                    id: value.product_id
+
+                                };
+                            }));
                         },
-                        });
-        });
 
+                    });
+                },
+                    select: function( event, ui ) {
 
+                        var route = '{{ route('product.quickdetail')}}' + '/' + ui.item.id;
+                        window.location.href = route;
 
-
-
+                    }
+            });
+                });
     </script>
-
 
 
 </head>
@@ -191,7 +190,7 @@
 
         <div class="row">
             <div class="form-search">
-                <input type="text" name="searchName"  id="searchName" placeholder="search" autocomplete="off">
+                <input type="text" name="product_name"  id="product_id" placeholder="search" autocomplete="off">
             </div>
 
 

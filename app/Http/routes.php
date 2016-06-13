@@ -23,7 +23,7 @@ Route::group(['middleware' => ['web']], function () {
 
 
     Route::get('/autocomplete',['as'=>'get.autocomplete','uses'=>'ProductController@autocomplete']);
-    Route::get('product/serach',['as'=>'product.search-result','uses'=>'ProductController@productSearch']);
+   // Route::get('product/serach',['as'=>'product.quickdetail','uses'=>'ProductController@productSearch']);
 
 
     Route::get('register',['as'=>'register.view','uses'=>'UserController@registerView']);
@@ -32,7 +32,7 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('email',['as'=>'verify.email','uses'=>'UserController@verifyEmail']);
     Route::get('/',['as'=>'index','uses'=> 'ProductController@index']);
     Route::get('productsllist/{id?}',['as'=>'product.list','uses'=> 'ProductController@productList']);
-    Route::get('product/detail/{id}',['as'=>'product.quickdetail','uses'=>'ProductController@quickView']);
+    Route::get('product/detail/{id?}',['as'=>'product.quickdetail','uses'=>'ProductController@quickView']);
 
     Route::group(['middleware' => ['auth']], function () {
         Route::get('dashboard',['as'=>'dashboard','uses'=>'DashboardController@index']);

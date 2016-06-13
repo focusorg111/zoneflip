@@ -81,4 +81,13 @@ class Products extends Model
     {
         return $this->hasMany(ProductImage::class, 'product_id')->orderby('is_main_image',1);
     }
+
+    public function getSearchProduct()
+    {
+        return $this
+            ->join('categories', 'categories.category_id', '=', 'products.category_id')
+            ->select(['categories.category_name',
+                'products.product_id',
+                'products.product_name']);
+    }
 }

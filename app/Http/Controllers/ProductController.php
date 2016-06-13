@@ -288,27 +288,17 @@ class ProductController extends Controller
         public function autocomplete(Request $request)
         {
 
-            $prod = $request->get('keee');
-            // dd($prod);
-            $queries = Products::
-              Where('product_name', 'LIKE', '%'.$prod.'%')
-                ->take(5)->get();
-            dd($queries);
-            $term = Input::get('term');
+            $inputs = \Request::all();
+           // $prodobj = (new Products());
+            //$prodinfo=$prodobj->getSearchProduct($category_name);
+            $productId=$inputs['product_id'];
+            $queries = Products::where('product_name', 'LIKE', '%'.$productId.'%')
+                ->take(5)->get(['product_name','product_id']);
 
-            $results = array();
-
-            $queries = Products::where('product_id', 'LIKE', '%'.$term.'%')
-                ->orWhere('product_name', 'LIKE', '%'.$term.'%')
-                ->take(5)->get();
-                   dd($queries);
-           /* foreach ($queries as $query)
-            {
-                $results[] = [ 'id' => $query->id, 'value' => $query->first_name.' '.$query->last_name ];
-            }
-            return Response::json($results);*/
-
+           // dd($queries);
+            return $queries;
         }
+
 
         public function quickView($productId)
         {
@@ -326,8 +316,6 @@ class ProductController extends Controller
 
 
         }
-
-
-
+    
 
 }
