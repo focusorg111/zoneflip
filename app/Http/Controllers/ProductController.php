@@ -296,8 +296,6 @@ class ProductController extends Controller
         {
 
             $inputs = \Request::all();
-           // $prodobj = (new Products());
-            //$prodinfo=$prodobj->getSearchProduct($category_name);
             $productId=$inputs['product_id'];
             $queries = Products::where('product_name', 'LIKE', '%'.$productId.'%')
                 ->take(5)->get(['product_name','product_id']);

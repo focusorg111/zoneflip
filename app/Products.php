@@ -81,7 +81,7 @@ class Products extends Model
     {
         return $this->hasMany(ProductImage::class, 'product_id')->orderby('is_main_image',1);
     }
-
+    
     public function getSearchProduct()
     {
         return $this
@@ -110,4 +110,5 @@ class Products extends Model
         return $this->hasOne(ProductImage::class, 'product_id')->where('is_main_image',1);
 
     }
+
 }
