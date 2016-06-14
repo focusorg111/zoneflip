@@ -24,7 +24,14 @@ class ProductController extends Controller
      */
     public function index()
     {
-        return view('index.index');
+        $productobj = new Products();
+        $recentProducts=$productobj->getRecentProductList();
+      //  dd($recentProducts);
+       /* foreach($recentProducts as $product)
+        {
+           dd($product);
+        }*/
+        return view('index.index',compact('recentProducts'));
     }
 
     /**
@@ -294,8 +301,7 @@ class ProductController extends Controller
             $productId=$inputs['product_id'];
             $queries = Products::where('product_name', 'LIKE', '%'.$productId.'%')
                 ->take(5)->get(['product_name','product_id']);
-
-           // dd($queries);
+            //dd($queries);
             return $queries;
         }
 
@@ -316,6 +322,6 @@ class ProductController extends Controller
 
 
         }
-    
+
 
 }

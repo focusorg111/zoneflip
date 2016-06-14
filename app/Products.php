@@ -90,4 +90,24 @@ class Products extends Model
                 'products.product_id',
                 'products.product_name']);
     }
+    public function getRecentProductList()
+    {
+        return $this
+            ->with('recentProduct')
+            ->select([
+                'product_id',
+                'product_name',
+                'price',
+                'discount',
+                'created_at'
+            ])
+            ->orderby('created_at','desc')->limit(10)
+            ->get();
+
+    }
+    public function recentProduct()
+    {
+        return $this->hasOne(ProductImage::class, 'product_id')->where('is_main_image',1);
+
+    }
 }

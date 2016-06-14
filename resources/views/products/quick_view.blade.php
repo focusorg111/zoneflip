@@ -39,7 +39,7 @@
                         <div class="single-para ">
                          <h4>{{$products->product_name}} </h4>
                             <h5 class="item_price">Rs.{{$products->price}}</h5>
-                            <p class="nv-bullet">{{$products->product_description}}% </p>
+                            <p class="nv-bullet">{{$products->product_description}}</p>
                             <a href="#" class="add-cart item_add">ADD TO CART</a>
                         </div>
                     </div>
