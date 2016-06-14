@@ -24,7 +24,14 @@ class ProductController extends Controller
      */
     public function index()
     {
-        return view('index.index');
+        $productobj = new Products();
+        $recentProducts=$productobj->getRecentProductList();
+      //  dd($recentProducts);
+       /* foreach($recentProducts as $product)
+        {
+           dd($product);
+        }*/
+        return view('index.index',compact('recentProducts'));
     }
 
     /**
@@ -301,7 +308,6 @@ class ProductController extends Controller
                 return alert_messages();
             }
         }
-
 
 
         public function quickView($productId)

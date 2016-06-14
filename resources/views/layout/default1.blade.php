@@ -15,6 +15,7 @@
 
 
     <script src="{{asset('assets/js/jquery.min.js')}}"></script>
+    <script src="{{asset('assets/js/jquery1.9.min.js')}}"></script>
     <script src="{{asset('assets/js/jquery.auto-complete.js')}}"></script>
     <script src="{{asset('assets/js/jquery.auto-complete.min.js')}}"></script>
     <script src="{{asset('assets/js/jquery-ui.js')}}"></script>

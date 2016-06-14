@@ -6,3 +6,5 @@ Homestead.json
 .env
 /config/database.php
 /.idea
+/public/images
+/public/assets/product_image

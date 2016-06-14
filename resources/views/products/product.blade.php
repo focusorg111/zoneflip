@@ -26,12 +26,13 @@
                 <div class="product-info simpleCart_shelfItem">
                     <div class="product-info-cust prt_name">
                         <h4>{{$product->product_name}}</h4>
-                        <span class="item_price">{{$product->price}}</span>
+                        <span class="item_price">Rs.{{$product->price}}</span>
                         <div class="ofr">
-                            <p class="disc">{{$product->discount}}</p>
-
-                        <input type="button" class="item_add items" value="ADD">
+                            <p class="disc">Dis.{{$product->discount}}%</p>
                         </div>
+                        <input type="text" class="item_quantity" value="1" />
+                        <input type="button" class="btn btn-primary" value="ADD TO CART">
+                        <div class="clearfix"> </div>
                         <div class="clearfix"> </div>
                     </div>
 

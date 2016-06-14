@@ -79,8 +79,36 @@ class Products extends Model
     }
     public function quickProductImage()
     {
-        return $this->hasMany(ProductImage::class, 'product_id');
+        return $this->hasMany(ProductImage::class, 'product_id')->orderby('is_main_image',1);
     }
+    
+    public function getSearchProduct()
+    {
+        return $this
+            ->join('categories', 'categories.category_id', '=', 'products.category_id')
+            ->select(['categories.category_name',
+                'products.product_id',
+                'products.product_name']);
+    }
+    public function getRecentProductList()
+    {
+        return $this
+            ->with('recentProduct')
+            ->select([
+                'product_id',
+                'product_name',
+                'price',
+                'discount',
+                'created_at'
+            ])
+            ->orderby('created_at','desc')->limit(10)
+            ->get();
 
+    }
+    public function recentProduct()
+    {
+        return $this->hasOne(ProductImage::class, 'product_id')->where('is_main_image',1);
+
+    }
 
 }
