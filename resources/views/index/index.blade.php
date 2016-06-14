@@ -48,18 +48,5 @@
         </div>
     </div>
 </div>
-    <script>
-        $(document).ready(function() {
-            $(window).scroll(function () {
-                if ($(window).scrollTop() + $(window).height() == $(document).height()) {
-                    alert("bottom!");
-                    $.ajax({
-                        method: 'get',
-                        url: '{{route("")}}',
-                    });
-                }
-            });
-        });
-    </script>
-@endsection
 
+@endsection

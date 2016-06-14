@@ -70,6 +70,8 @@ class CategorySeeder extends Seeder
             ['category_id' => $categoryId, 'subcategory_name' => 'Laptop Bages'],
             ['category_id' => $categoryId, 'subcategory_name' => 'Wallets'],
             ['category_id' => $categoryId, 'subcategory_name' => 'Belts'],
+            ['category_id' => $categoryId, 'subcategory_name' => 'School Bags'],
+
 
         ]);
 
