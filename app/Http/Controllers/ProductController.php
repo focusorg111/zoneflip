@@ -291,32 +291,42 @@ class ProductController extends Controller
     }
         public function autocomplete(Request $request)
         {
-
-            $inputs = \Request::all();
-            $productId=$inputs['product_id'];
-            $queries = Products::where('product_name', 'LIKE', '%'.$productId.'%')
-                ->take(5)->get(['product_name','product_id']);
-            //dd($queries);
-            return $queries;
+            try {
+                $inputs = \Request::all();
+                $productId = $inputs['product_id'];
+                $queries = Products::leftjoin('categories', 'categories.category_id', '=', 'products.category_id')
+                    ->where('product_name', 'LIKE', '%' . $productId . '%')
+                    ->orWhere('category_name', 'LIKE', '%' . $productId . '%')
+                    ->take(5)->get(['product_name', 'product_id', 'category_name']);
+                // dd($queries);
+                return $queries;
+            } catch (\Exception $e) {
+                //dd($e);
+                return alert_messages();
+            }
         }
 
 
         public function quickView($productId)
         {
+            try{
                 $products=Products::with(['quickProductImage'])
                     ->where('product_id',$productId)
                     ->first();
-            if($products)
-            {
-                return view('products.quick_view',compact('products'));
+                if($products)
+                {
+                    return view('products.quick_view',compact('products'));
+                }
+                else
+                {
+                    return Redirect::to(route('index'));
+                }
+            }catch (\Exception $e) {
+                //dd($e);
+                return alert_messages();
             }
-            else
-            {
-                return Redirect::to(route('index'));
-            }
-
-
         }
+
     public function showProductImage()
     {
         $inputs=\Request::all();

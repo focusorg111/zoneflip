@@ -23,7 +23,6 @@ Route::group(['middleware' => ['web']], function () {
 
 
     Route::get('/autocomplete',['as'=>'get.autocomplete','uses'=>'ProductController@autocomplete']);
-   // Route::get('product/serach',['as'=>'product.quickdetail','uses'=>'ProductController@productSearch']);
 
 
     Route::get('register',['as'=>'register.view','uses'=>'UserController@registerView']);

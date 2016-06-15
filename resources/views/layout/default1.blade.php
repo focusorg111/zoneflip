@@ -73,11 +73,11 @@
                         data: {
                             keyword: request.term,
                             product_id: productId,
-                            // category: cat
+                           // category: cat
                         }, success: function (data, textStatus, jqXHR) {
                             //console.log(data);
                             response($.map(data, function (value, key) {
-                              // console.log(value.product_name);
+                               console.log(value.product_name);
                                 var productName;
 
                                 if (value.product_name.length > 20) {
@@ -86,7 +86,6 @@
                                 } else {
                                     productName = value.product_name;
                                 }
-
                                 return {
                                     label: productName,
                                     id: value.product_id
@@ -101,7 +100,6 @@
 
                         var route = '{{ route('product.quickdetail')}}' + '/' + ui.item.id;
                         window.location.href = route;
-
                     }
             });
                 });
@@ -139,14 +137,16 @@
                         </div>
                     </div>
                 </li>
+
                 <li class="grid"><a href="{{route('contact.us')}}">Contact</a></li>
+
             </ul>
         </div>
         <!---->
 
         <div class="row">
             <div class="form-search">
-                <input type="text" name="product_name"  id="product_id" placeholder="search" autocomplete="off">
+                <input type="text" name="product_name" id="product_id" placeholder="search" autocomplete="off">
             </div>
 
 
