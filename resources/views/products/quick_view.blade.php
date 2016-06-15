@@ -40,7 +40,7 @@
                          <h4>{{$products->product_name}} </h4>
                             <h5 class="item_price">Rs.{{$products->price}}</h5>
                             <p class="nv-bullet">{{$products->product_description}}</p>
-                            <a href="#" class="add-cart item_add">ADD TO CART</a>
+                            <a class="add-cart item_add" data-product-id="{{$products->product_id}}">ADD TO CART</a>
                         </div>
                     </div>
                     <div class="clearfix"> </div>
@@ -48,4 +48,24 @@
             </div>
     </div>
     </div>
+    <script>
+
+        $(document).ready(function() {
+            $(".add-cart").click(function () {
+                var prodId =$(this).attr('data-product-id');
+                $.ajax({
+                    method: 'get',
+                    data: {
+                       product_id: prodId
+                    },
+                    url: '{{route('get.cart')}}'
+
+                });
+            });
+        });
+
+
+
+    </script>
     @endsection
+

@@ -8,13 +8,12 @@
     <link href="{{asset('assets/css/style.css')}}" rel="stylesheet" type="text/css" media="all" />
     <link href="{{asset('assets/css/jquery.auto-complete.css')}}" rel="stylesheet" type="text/css" media="all" />
     <link href="{{asset('assets/css/jquery-ui.css')}}" rel="stylesheet" type="text/css" media="all" />
-
     <link href="{{asset('assets/css/jquery-ui.min.css')}}" rel="stylesheet" type="text/css" media="all" />
-
     <link rel="stylesheet" href="{{asset('assets/css/flexslider.css')}}" type="text/css" media="screen" />
 
-
+    <script src="{{asset('assets/js/jquery.js')}}"></script>
     <script src="{{asset('assets/js/jquery.min.js')}}"></script>
+    <script src="{{asset('assets/js/jquery-1.11.1.min.js')}}"></script>
     <script src="{{asset('assets/js/jquery.auto-complete.js')}}"></script>
     <script src="{{asset('assets/js/jquery.auto-complete.min.js')}}"></script>
     <script src="{{asset('assets/js/jquery-ui.js')}}"></script>
@@ -149,10 +148,10 @@
 
 
         <div class="cart box_1">
-            <a href="checkout.html">
+            <a href="{{route('get.check')}}">
                 <div class="total">
                     <span class="simpleCart_total"></span> (<span id="simpleCart_quantity" class="simpleCart_quantity"></span>)</div>
-                <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
+                <span class="glyphicon glyphicon-shopping-cart"   aria-hidden="true"></span>
             </a>
             <p><a href="javascript:;" class="simpleCart_empty">Empty Cart</a></p>
             <div class="clearfix"> </div>
