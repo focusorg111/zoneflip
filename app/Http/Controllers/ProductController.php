@@ -277,16 +277,13 @@ class ProductController extends Controller
      */
     public function productList($subcategory_id)
     {
+        $inputs=\Request::all();
+        $categoryId=$inputs['category_id'];
         try {
-
-             $productOjb = (new Products());
+            $productOjb = (new Products());
              $products = $productOjb->getProductList($subcategory_id);
-            if(count($products)){
-                return view('products.product',compact('products'));
-            }
-           else{
-               return Redirect::to(route('index'));
-           }
+            return view('products.product',compact('products','subcategories'));
+
         } catch (\Exception $e) {
             //dd($e);
             return alert_messages();
@@ -320,6 +317,18 @@ class ProductController extends Controller
 
 
         }
+    public function showProductImage()
+    {
+        $inputs=\Request::all();
+        $productId=$inputs['product_id'];
+        $productobj = new Products();
+        $recentProducts=$productobj->getRProductList($productId);
+        /* foreach($recentProducts as $product)
+         {
+            dd($product);
+         }*/
+        return view('products.product_image',compact('recentProducts'));
+    }
 
 
 }

@@ -7,6 +7,7 @@
         </ol>
         <h2>Our Products</h2>
         <div class="col-md-9 product-model-sec">
+            @if(count($products))
             @foreach($products as $product)
                 <a href="{{route('product.quickdetail',$product->product_id)}}"><div class="product-grid">
                         <div class="more-product"><span> </span></div>
@@ -39,69 +40,31 @@
                 </div>
         </div>
 @endforeach
+        @else
+            <div class="text-size" style="margin: 55px">No matching products available.</div>
+            @endif
 </div>
     <div class="rsidebar span_1_of_left">
         <section  class="sky-form">
             <div class="product_right">
                 <h4 class="m_2"><span class="glyphicon glyphicon-minus" aria-hidden="true"></span>Categories</h4>
-                <div class="tab1">
+                <?php
+                $categories=get_navigation();
+                ?>
+                @foreach($categories as $category)
+                <div class="tab{{$category->category_id}}">
                     <ul class="place">
-                        <li class="sort">Home Decorates</li>
-                        <li class="by"><img src="images/do.png" alt=""></li>
+                        <li class="sort">{{$category->category_name}}</li>
+                        <li class="by"><img src="{{asset('assets/images/do.png')}}" alt=""></li>
                         <div class="clearfix"> </div>
                     </ul>
                     <div class="single-bottom">
-                        <a href="#"><p>Lanterns</p></a>
-                        <a href="#"><p>Wall Lamps</p></a>
-                        <a href="#"><p>Table Lamps</p></a>
-                        <a href="#"><p>Selling Lamps</p></a>
+                        @foreach($category->subcategories as $subcategory)
+                        <a href="{{route('product.list',$subcategory->subcategory_id)}}?category_id={{$subcategory->category_id}}"><p>{{ucwords($subcategory->subcategory_name)}}</p></a>
+                        @endforeach
                     </div>
                 </div>
-                <div class="tab2">
-                    <ul class="place">
-                        <li class="sort">Festive Needs</li>
-                        <li class="by"><img src="images/do.png" alt=""></li>
-                        <div class="clearfix"> </div>
-                    </ul>
-                    <div class="single-bottom">
-                        <a href="#"><p>Lanterns</p></a>
-                        <a href="#"><p>Disco Lights</p></a>
-                    </div>
-                </div>
-                <div class="tab3">
-                    <ul class="place">
-                        <li class="sort">Kitchen & Dining</li>
-                        <li class="by"><img src="images/do.png" alt=""></li>
-                        <div class="clearfix"> </div>
-                    </ul>
-                    <div class="single-bottom">
-                        <a href="#"><p>Lights & Lamps</p></a>
-                    </div>
-                </div>
-                <div class="tab4">
-                    <ul class="place">
-                        <li class="sort">Books</li>
-                        <li class="by"><img src="images/do.png" alt=""></li>
-                        <div class="clearfix"> </div>
-                    </ul>
-                    <div class="single-bottom">
-                        <a href="#"><p>Standing Lamps</p></a>
-                        <a href="#"><p>Lamps</p></a>
-                        <a href="#"><p>Led Lamps</p></a>
-                    </div>
-                </div>
-                <div class="tab5">
-                    <ul class="place">
-                        <li class="sort">Automotive</li>
-                        <li class="by"><img src="images/do.png" alt=""></li>
-                        <div class="clearfix"> </div>
-                    </ul>
-                    <div class="single-bottom">
-                        <a href="#"><p>Car Lights</p></a>
-                        <a href="#"><p>Stick Lights</p></a>
-                        <a href="#"><p>Thread Lights</p></a>
-                    </div>
-                </div>
+                @endforeach
 
                 <!--script-->
                 <script>
@@ -111,6 +74,7 @@
                         $(".tab3 .single-bottom").hide();
                         $(".tab4 .single-bottom").hide();
                         $(".tab5 .single-bottom").hide();
+                        $(".tab6 .single-bottom").hide();
 
                         $(".tab1 ul").click(function(){
                             $(".tab1 .single-bottom").slideToggle(300);
@@ -118,6 +82,7 @@
                             $(".tab3 .single-bottom").hide();
                             $(".tab4 .single-bottom").hide();
                             $(".tab5 .single-bottom").hide();
+                            $(".tab6 .single-bottom").hide();
                         })
                         $(".tab2 ul").click(function(){
                             $(".tab2 .single-bottom").slideToggle(300);
@@ -125,47 +90,46 @@
                             $(".tab3 .single-bottom").hide();
                             $(".tab4 .single-bottom").hide();
                             $(".tab5 .single-bottom").hide();
+                            $(".tab6 .single-bottom").hide();
                         })
                         $(".tab3 ul").click(function(){
                             $(".tab3 .single-bottom").slideToggle(300);
                             $(".tab4 .single-bottom").hide();
                             $(".tab5 .single-bottom").hide();
+                            $(".tab6 .single-bottom").hide();
                             $(".tab2 .single-bottom").hide();
                             $(".tab1 .single-bottom").hide();
                         })
                         $(".tab4 ul").click(function(){
                             $(".tab4 .single-bottom").slideToggle(300);
                             $(".tab5 .single-bottom").hide();
+                            $(".tab6 .single-bottom").hide();
                             $(".tab3 .single-bottom").hide();
                             $(".tab2 .single-bottom").hide();
                             $(".tab1 .single-bottom").hide();
                         })
                         $(".tab5 ul").click(function(){
                             $(".tab5 .single-bottom").slideToggle(300);
+                            $(".tab6 .single-bottom").hide();
                             $(".tab4 .single-bottom").hide();
                             $(".tab3 .single-bottom").hide();
                             $(".tab2 .single-bottom").hide();
                             $(".tab1 .single-bottom").hide();
                         })
+                        $(".tab6 ul").click(function(){
+                            $(".tab6 .single-bottom").slideToggle(300);
+                            $(".tab5 .single-bottom").hide();
+                            $(".tab4 .single-bottom").hide();
+                            $(".tab3 .single-bottom").hide();
+                            $(".tab2 .single-bottom").hide();
+                            $(".tab1 .single-bottom").hide();
+                        })
+
                     });
                 </script>
                 <!-- script -->
         </section>
 
-        <section  class="sky-form">
-            <h4><span class="glyphicon glyphicon-minus" aria-hidden="true"></span>DISCOUNTS</h4>
-            <div class="row row1 scroll-pane">
-                <div class="col col-4">
-                    <label class="checkbox"><input type="checkbox" name="checkbox" checked=""><i></i>Upto - 10% (20)</label>
-                </div>
-                <div class="col col-4">
-                    <label class="checkbox"><input type="checkbox" name="checkbox"><i></i>40% - 50% (5)</label>
-                    <label class="checkbox"><input type="checkbox" name="checkbox"><i></i>30% - 20% (7)</label>
-                    <label class="checkbox"><input type="checkbox" name="checkbox"><i></i>10% - 5% (2)</label>
-                    <label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Other(50)</label>
-                </div>
-            </div>
-        </section>
 
         <section  class="sky-form">
             <h4><span class="glyphicon glyphicon-minus" aria-hidden="true"></span>Price</h4>
@@ -177,8 +141,8 @@
             </ul>
         </section>
         <!---->
-        <script type="text/javascript" src="js/jquery-ui.min.js"></script>
-        <link rel="stylesheet" type="text/css" href="css/jquery-ui.css">
+        <script type="text/javascript" src="{{asset('assetsjs/jquery-ui.min.js')}}"></script>
+        <link rel="stylesheet" type="text/css" href="{{asset('assets/css/jquery-ui.css')}}">
         <script type='text/javascript'>//<![CDATA[
             $(window).load(function(){
                 $( "#slider-range" ).slider({
@@ -195,38 +159,6 @@
         </script>
         <!---->
 
-
-        <section  class="sky-form">
-            <h4><span class="glyphicon glyphicon-minus" aria-hidden="true"></span>Type</h4>
-            <div class="row row1 scroll-pane">
-                <div class="col col-4">
-                    <label class="checkbox"><input type="checkbox" name="checkbox" checked=""><i></i>Lights (30)</label>
-                </div>
-                <div class="col col-4">
-                    <label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Diwali Lights   (30)</label>
-                    <label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Tube Lights      (30)</label>
-                    <label class="checkbox"><input type="checkbox" name="checkbox"><i></i>LED Lights        (30)</label>
-                    <label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Bulbs  (30)</label>
-                    <label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Ceiling Lights  (30)</label>
-                </div>
-            </div>
-        </section>
-        <section  class="sky-form">
-            <h4><span class="glyphicon glyphicon-minus" aria-hidden="true"></span>Brand</h4>
-            <div class="row row1 scroll-pane">
-                <div class="col col-4">
-                    <label class="checkbox"><input type="checkbox" name="checkbox" checked=""><i></i>Everyday</label>
-                </div>
-                <div class="col col-4">
-                    <label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Anchor</label>
-                    <label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Philips</label>
-                    <label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Wipro</label>
-                    <label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Havells</label>
-                    <label class="checkbox"><input type="checkbox" name="checkbox" ><i></i>Ferolex</label>
-                    <label class="checkbox"><input type="checkbox" name="checkbox"><i></i>Gold Medal</label>
-                </div>
-            </div>
-        </section>
     </div>
     </div>
     </div>

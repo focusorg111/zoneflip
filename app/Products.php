@@ -81,7 +81,7 @@ class Products extends Model
     {
         return $this->hasMany(ProductImage::class, 'product_id')->orderby('is_main_image',1);
     }
-    
+
     public function getSearchProduct()
     {
         return $this
@@ -110,5 +110,25 @@ class Products extends Model
         return $this->hasOne(ProductImage::class, 'product_id')->where('is_main_image',1);
 
     }
+    public function getRProductList($productId)
+    {
+        return $this
+            ->where('product_id','<',$productId)
+            ->with('recentRProduct')
+            ->select([
+                'product_id',
+                'product_name',
+                'price',
+                'discount',
+                'created_at'
+            ])
+            ->orderby('created_at','desc')->limit(10)
+            ->get();
 
+    }
+    public function recentRProduct()
+    {
+        return $this->hasOne(ProductImage::class, 'product_id')->where('is_main_image',1);
+
+    }
 }

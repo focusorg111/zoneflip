@@ -257,6 +257,10 @@ class UserController extends Controller
 
     }
 
+    public function contactUs()
+    {
+        return view('admin.contact_us');
+    }
 
 }
 

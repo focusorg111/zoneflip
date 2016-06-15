@@ -33,6 +33,8 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('/',['as'=>'index','uses'=> 'ProductController@index']);
     Route::get('productsllist/{id?}',['as'=>'product.list','uses'=> 'ProductController@productList']);
     Route::get('product/detail/{id?}',['as'=>'product.quickdetail','uses'=>'ProductController@quickView']);
+    Route::get('show/image',['as'=>'show.image', 'uses'=>'ProductController@showProductImage']);
+    Route::get('contactus',['as'=>'contact.us','uses'=>'UserController@contactUs']);
 
     Route::group(['middleware' => ['auth']], function () {
         Route::get('dashboard',['as'=>'dashboard','uses'=>'DashboardController@index']);
