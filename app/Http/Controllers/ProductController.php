@@ -327,6 +327,7 @@ class ProductController extends Controller
             }
         }
 
+
     public function showProductImage()
     {
         $inputs=\Request::all();
