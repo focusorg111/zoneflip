@@ -271,7 +271,7 @@ display:inline-block;
 	padding:4em 0;
 }
 .feature-grid img {
-    width: 100%;
+    width: 60%;
     padding: 0em 2em 1em 2em;
 }
 .feature-grid {
@@ -617,7 +617,7 @@ background-position:-167px -36px;
 	vertical-align:top;
 	font-weight: 300;
 	overflow:hidden;
-	width: 100%;
+	/*width: 100%;*/
 }
 .b-link-stripe .b-wrapper{
 	position:absolute;
@@ -1159,7 +1159,7 @@ color:#8ce78a;
     width: 32%;
 	    margin-right: 5em;
 }
-.thumb-image { width: 323px;
+.thumb-image { width: 200px;
 	padding:1em;
  }
 

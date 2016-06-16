@@ -26,13 +26,17 @@
 
 <div class="items">
     <div class="container">
-        <div class="items-sec">
+        <div class="items-sec" >
             @foreach($recentProducts as $product)
-            <div class="col-md-3 feature-grid">
+            <div class="col-md-3 feature-grid" data-product-id="{{$product->product_id}}">
                 @if(isset($product->recentProduct->product_image))
-                <a href="product.html"><img src="{{asset('assets/product_image/thumbs/'.$product->recentProduct->product_image)}}" alt=""/>
+                    <div style="height: 200px">
+             <a href="{{route('product.quickdetail',$product->product_id)}}"><img src="{{asset('assets/product_image/thumbs/'.$product->recentProduct->product_image)}}" alt=""/></a>
+                    </div>
                  @else
-                        <a href="product.html"><img src="{{asset('assets/product_image/thumbs/default.png')}}" alt=""/>
+                    <div style="height: 200px">
+                        <a href="{{route('product.quickdetail',$product->product_id)}}"><img src="{{asset('assets/product_image/thumbs/default.png')}}" alt=""/></a>
+                        </div>
                    @endif
                     <div class="arrival-info">
                         <h4>{{$product->product_name}}</h4>
@@ -43,10 +47,52 @@
                         <a href="{{route('product.quickdetail',$product->product_id)}}"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>View</a>
                     </div>
                 </a>
-            </div>
+                     </div>
             @endforeach
         </div>
     </div>
 </div>
+    <script>
+        $(document).ready(function() {
+            var  complete=0;
+            $(window).scrollTop(0);
+            $(window).scroll(function () {
+                if ($(window).scrollTop() + $(window).height() == $(document).height()) {
+                  //  alert("bottom!");
+                    var  productId=    $('.items-sec').children().last().attr('data-product-id');
 
+                    $.ajax({
+                        method: 'get',
+                        data: {
+                            product_id: productId
+                        },
+                        beforeSend : function()
+                        {
+                          if(complete==1)
+                          {
+
+                              return false;
+                          }
+                        },
+                        url: '{{route("show.image")}}',
+                       success: function (data) {
+                           if(data=='')
+                           {
+                               complete=1;
+
+                           }
+                           else{
+                               $(".items-sec").append(data);
+                           }
+
+
+                        }
+                    });
+                }
+            });
+        });
+    </script>
 @endsection
+
+
+

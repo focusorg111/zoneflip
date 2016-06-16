@@ -6,6 +6,7 @@
     <!-- Custom Theme files -->
     <!--theme style-->
     <link href="{{asset('assets/css/style.css')}}" rel="stylesheet" type="text/css" media="all" />
+    <link href="{{asset('assets/css/myform.css')}}" rel="stylesheet" type="text/css" media="all" />
     <link href="{{asset('assets/css/jquery.auto-complete.css')}}" rel="stylesheet" type="text/css" media="all" />
     <link href="{{asset('assets/css/jquery-ui.css')}}" rel="stylesheet" type="text/css" media="all" />
     <link href="{{asset('assets/css/jquery-ui.min.css')}}" rel="stylesheet" type="text/css" media="all" />
@@ -110,12 +111,12 @@
 <div class="header-top">
     <div class="header-bottom">
         <div class="logo">
-            <h1><a href="index.html">ZONEFLIP</a></h1>
+            <h1><a >ZONEFLIP</a></h1>
         </div>
         <!---->
         <div class="top-nav">
             <ul class="memenu skyblue"><li class="active"><a href="{{route('index')}}">Home</a></li>
-                <li class="grid"><a href="#">Products</a>
+                <li class="grid"><a>Products</a>
                     <div class="mepanel">
                         <div class="row">
                             <?php
@@ -126,7 +127,7 @@
                                     <h4>{{ucwords($category->category_name)}}</h4>
                                     @foreach($category->subcategories as $subcategory)
                                         <ul>
-                                            <li><a href="{{route('product.list',$subcategory->subcategory_id)}}">{{ucwords($subcategory->subcategory_name)}}</a></li>
+                                            <li><a href="{{route('product.list',$subcategory->subcategory_id)}}?category_id={{$subcategory->category_id}}">{{ucwords($subcategory->subcategory_name)}}</a></li>
                                         </ul>
                                     @endforeach
                                 </div>
@@ -135,7 +136,9 @@
                         </div>
                     </div>
                 </li>
-                <li class="grid"><a href="contact.html">Contact</a></li>
+
+                <li class="grid"><a href="{{route('contact.us')}}">Contact</a></li>
+
             </ul>
         </div>
         <!---->
@@ -164,8 +167,6 @@
     <div class="clearfix"> </div>
 </div>
 </div>
-
-
 
 
 <div class="product-model">

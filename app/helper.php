@@ -77,7 +77,7 @@ function createThumb($name, $filename, $new_w, $new_h)
         $old_y = imagesy($src_img);
         $ar = $old_x / $old_y;
 
-        if ($old_x > 50) {
+        if ($old_x > 400) {
             if ($new_w == $new_h) {
                 $thumb_w = $new_w;
                 $thumb_h = $new_h;
@@ -141,7 +141,7 @@ function dropZoneUploader($fileName, $directory = '')
             createThumb($targetFilePath, $mediumFile, 200, 200);
             unlink($targetFilePath);
         } else {
-            createThumb($targetFilePath, $thumbFile, 200, 200);
+            createThumb($targetFilePath, $thumbFile, 400, 300);
             unlink($targetFilePath);
         }
 

@@ -27,8 +27,11 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('productsllist/{id?}',['as'=>'product.list','uses'=> 'ProductController@productList']);
     Route::get('/autocomplete',['as'=>'get.autocomplete','uses'=>'ProductController@autocomplete']);
     Route::get('product/detail/{id?}',['as'=>'product.quickdetail','uses'=>'ProductController@quickView']);
+    Route::get('show/image',['as'=>'show.image', 'uses'=>'ProductController@showProductImage']);
+    Route::get('contactus',['as'=>'contact.us','uses'=>'UserController@contactUs']);
     Route::get('/checkout',['as'=>'get.check','uses'=>'CartController@cart']);
     Route::get('product/cart',['as'=>'get.cart','uses'=>'CartController@addCart']);
+    Route::get('show/product',['as'=>'show.product', 'uses'=>'ProductController@showProduct']);
 
 
 

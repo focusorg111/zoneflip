@@ -50,4 +50,8 @@ width:25px;
     height: 300px;
     margin: 50px;
 }
+.img-width
+{
+    max-height: 100px;
+}
 

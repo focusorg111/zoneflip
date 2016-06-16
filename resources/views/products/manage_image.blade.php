@@ -18,11 +18,8 @@
     <br>
     <div>
             @foreach($productImages as $productImage)
-                        <div class="col-md-3">
-                            <br>
-                            <br>
-                        <img src='{{asset('assets/product_image/thumbs/'.$productImage->product_image)}}'>
-                            <br>
+                        <div class="col-md-4" style="padding: 20px;">
+                            <img src='{{asset('assets/product_image/thumbs/'.$productImage->product_image)}}' draggable="false">
                             <br>
                             @if($productImage->is_main_image==1)
                                 <a class="btn btn-success" href="{{route('product.main-image')}}?type=2&product_id={{$productImage->product_id}}&image_id={{$productImage->image_id}}">Remove Main Image</a>
