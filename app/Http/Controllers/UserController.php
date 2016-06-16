@@ -194,7 +194,7 @@ class UserController extends Controller
                     } else {
                         \Auth::logout();
                         return Redirect::to(route('login'))->with('flash_message', 'Your account must be approved first')
-                            ->with('flash_type', 'alert-danger');;
+                            ->with('flash_type', 'alert-danger');
                     }
                 }
             } else {

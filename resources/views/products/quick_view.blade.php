@@ -57,9 +57,14 @@
                     method: 'get',
                     data: {
                        product_id: prodId
-                    },
-                    url: '{{route('get.cart')}}'
 
+                    },
+                    url: '{{route('get.cart')}}',
+                    success: function (data) {
+                        console.log(data);
+                       // $('#subcategory_id').html(data);
+                        //console.log('hhhjngkn');
+                    }
                 });
             });
         });
