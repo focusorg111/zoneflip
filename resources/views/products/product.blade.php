@@ -2,14 +2,15 @@
 @section('content')
     <div class="container">
         <ol class="breadcrumb">
-            <li><a href="index.html">Home</a></li>
+            <li><a href="{{route('index')}}">Home</a></li>
             <li class="active">Products</li>
         </ol>
         <h2>Our Products</h2>
         <div class="col-md-9 product-model-sec">
             @if(count($products))
             @foreach($products as $product)
-                <a href="{{route('product.quickdetail',$product->product_id)}}"><div class="product-grid">
+                    <a href="{{route('product.quickdetail',$product->product_id)}}">
+                    <div class="product-grid"  data-product-id="{{$product->product_id}}" data-category-id="{{$product->category_id}}" data-subcategory-id="{{$product->subcategory_id}}">
                         <div class="more-product"><span> </span></div>
                         <div class="product-img b-link-stripe b-animate-go  thickbox">
                             @if(isset($product->productimage->product_image))
@@ -19,11 +20,11 @@
                                 @endif
                                 <div class="b-wrapper">
                                     <h4 class="b-animate b-from-left  b-delay03">
-                                        <button><span class="glyphicon glyphicon-zoom-in" aria-hidden="true"></span>Quick View</button>
+                                       <button><span class="glyphicon glyphicon-zoom-in" aria-hidden="true"></span>Quick View</button>
                                     </h4>
                                 </div>
                         </div>
-                </a>
+    </a>
                 <div class="product-info simpleCart_shelfItem">
                     <div class="product-info-cust prt_name">
                         <h4>{{$product->product_name}}</h4>
@@ -158,7 +159,55 @@
             });//]]>
         </script>
         <!---->
+        <script>
+            $(document).ready(function() {
+                var  complete=0;
+                $(window).scrollTop(0);
+                var  subId= $('.product-grid:last-child').attr('data-subcategory-id');
+                var  catId= $('.product-grid:last-child').attr('data-category-id');
+                $(window).scroll(function () {
+                    if ($(window).scrollTop() + $(window).height() == $(document).height()) {
+                        //  alert("bottom!");
+                        var  productId= $('.product-grid:last-child').attr('data-product-id');
+                        if(productId){
+                            $.ajax({
+                                method: 'get',
+                                async: false,
+                                data: {
+                                    product_id: productId,
+                                    subcategory_id:subId,
+                                    category_id:catId,
 
+                                },
+                                beforeSend : function()
+                                {
+                                    if(complete==1)
+                                    {
+
+                                        return false;
+                                    }
+                                },
+                                url: '{{route("show.product")}}',
+                                success: function (data) {
+                                    if(data=='')
+                                    {
+                                        complete=1;
+
+                                    }
+                                    else{
+                                        $(".product-model-sec").append(data);
+                                    }
+
+
+                                }
+                            });
+
+
+                        }
+                    }
+                });
+            });
+        </script>
     </div>
     </div>
     </div>

@@ -56,7 +56,6 @@
         $(document).ready(function() {
             var  complete=0;
             $(window).scrollTop(0);
-
             $(window).scroll(function () {
                 if ($(window).scrollTop() + $(window).height() == $(document).height()) {
                   //  alert("bottom!");
@@ -96,4 +95,4 @@
 @endsection
 
 
-@endsection
+

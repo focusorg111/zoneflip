@@ -169,8 +169,6 @@
 </div>
 
 
-
-
 <div class="product-model">
     @yield('content')
     </div>

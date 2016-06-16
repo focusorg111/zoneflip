@@ -71,12 +71,20 @@ class Products extends Model
                 'products.product_name',
                 'products.price',
                 'products.discount',
-            ])->get();
+                'products.created_at',
+                'products.subcategory_id',
+                'products.category_id',
+
+            ])
+            ->orderby('created_at','desc')
+            ->limit(2)
+            ->get();
     }
     public function productimage()
     {
         return $this->hasOne(ProductImage::class, 'product_id')->where('is_main_image',1);
     }
+
     public function quickProductImage()
     {
         return $this->hasMany(ProductImage::class, 'product_id')->orderby('is_main_image',1);
@@ -131,4 +139,26 @@ class Products extends Model
         return $this->hasOne(ProductImage::class, 'product_id')->where('is_main_image',1);
 
     }
+    public  function getProduct($productId,$subcategoryId)
+    {
+        return $this
+            ->where('product_id','<',$productId)
+            ->where('products.subcategory_id',$subcategoryId)
+            ->with('product')
+            ->select([
+                'products.product_id',
+                'products.product_name',
+                'products.price',
+                'products.discount',
+                'products.created_at'
+            ])
+            ->orderby('created_at','desc')
+            ->get();
+
+    }
+public function product()
+{
+    return $this->hasOne(ProductImage::class, 'product_id')->where('is_main_image',1);
+}
+
 }

@@ -341,5 +341,24 @@ class ProductController extends Controller
         return view('products.product_image',compact('recentProducts'));
     }
 
+    public function showProduct()
+    {
+
+        $inputs=\Request::all();
+        //dd($inputs);
+        $productId=$inputs['product_id'];
+        $categoryId=$inputs['category_id'];
+        $subcategoryId=$inputs['subcategory_id'];
+        $productOjb = (new Products());
+        $products = $productOjb->getProduct($productId,$subcategoryId);
+       if($products){
+           return view('products.show_product',compact('products'));
+       }
+        else{
+            return '';
+        }
+
+    }
+
 
 }
