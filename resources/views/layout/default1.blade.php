@@ -152,6 +152,7 @@
 
         <div class="cart box_1">
             <a href="{{route('get.check')}}">
+
                 <div class="total">
                     <span class="simpleCart_total"></span> (<span id="simpleCart_quantity" class="simpleCart_quantity"></span>)</div>
                 <span class="glyphicon glyphicon-shopping-cart"   aria-hidden="true"></span>

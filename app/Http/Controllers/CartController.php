@@ -21,19 +21,23 @@ class CartController extends Controller
     {
         $inputs = \Request::all();
         $productId = $inputs['product_id'];
-        $token = bin2hex(random_bytes(50));
-        Session(['token' => $token]);
-        $cart=Carts::create([
-        'user_id' =>$token,
-        'product_id'=>$productId,
-        'quantity'=>1]);
-        $quantity=$cart['quantity'];
+        $token = '';
+      // Session(['user_id' => $token]);
+        if(!Session('user_id')) {
+            $token = bin2hex(random_bytes(50));
+            Session(['user_id' => $token]);
+        } else {
+            $token = Session('user_id');
+        }
+
         $carts = Carts::where('user_id', $token)
-           ->where('product_id' , $productId)->select(['quantity'])->first();
-        if($cart['quantity']==1)
-        {
-            $carts->update(['quantity' => 2]);
-        }else{
+            ->where('product_id' , $productId)->select(['quantity'])->first();
+        if($carts){
+            $quantity=$carts['quantity']+1;
+            Carts::where('user_id', $token)
+                ->where('product_id' , $productId)->update(['quantity' => $quantity]);
+
+        } else {
             $cart=Carts::create([
                 'user_id' =>$token,
                 'product_id'=>$productId,
