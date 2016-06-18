@@ -61,9 +61,9 @@ class Products extends Model
             ->select(['products.product_name'])
             ->first();
     }
-    public  function getProductList($subcategory_id)
+    public  function getProductList($subcategory_id,$minimun,$maximum)
     {
-        return $this
+        $query=  $this
             ->where('products.subcategory_id',$subcategory_id)
             ->with('productimage')
             ->select([
@@ -75,10 +75,15 @@ class Products extends Model
                 'products.subcategory_id',
                 'products.category_id',
 
-            ])
+            ]);
+        if($minimun && $maximum){
+            $query->whereBetween('products.price',[$minimun,$maximum]);
+        }
+            $result = $query
             ->orderby('created_at','desc')
             ->limit(2)
             ->get();
+         return $result;
     }
     public function productimage()
     {
@@ -160,5 +165,4 @@ public function product()
 {
     return $this->hasOne(ProductImage::class, 'product_id')->where('is_main_image',1);
 }
-
 }
