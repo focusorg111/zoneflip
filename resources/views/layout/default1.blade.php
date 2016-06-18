@@ -151,12 +151,19 @@
 
 
         <div class="cart box_1">
-            <a href="{{route('get.check')}}">
 
+            <a href="{{route('get.check')}}">
                 <div class="total">
-                    <span class="simpleCart_total"></span> (<span id="simpleCart_quantity" class="simpleCart_quantity"></span>)</div>
-                <span class="glyphicon glyphicon-shopping-cart"   aria-hidden="true"></span>
+                        @foreach($cartPrice as $cart)
+                        {{$cart->price}}
+                        {{$cart->quantity}}
+                        {{$total=$cart['price']*$cart['quantity']}}
+                        {{$total+=1}}
+                        @endforeach
+                        <span class="simpleCart_total"></span> (<span id="simpleCart_quantity" class="simpleCart_quantity"></span>)</div>
+                    <span class="glyphicon glyphicon-shopping-cart"   aria-hidden="true"></span>
             </a>
+
             <p><a href="javascript:;" class="simpleCart_empty">Empty Cart</a></p>
             <div class="clearfix"> </div>
         </div>

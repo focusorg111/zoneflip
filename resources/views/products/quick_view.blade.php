@@ -62,9 +62,9 @@
                     },
                     url: '{{route('get.cart')}}',
                     success: function (data) {
-                        console.log(data);
-                       // $('#subcategory_id').html(data);
-                        //console.log('hhhjngkn');
+                        //console.log(data);
+                       //$('.simpleCart_empty').html(data);
+                       // console.log('hhhjngkn');
                     }
                 });
             });

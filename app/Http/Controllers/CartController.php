@@ -6,6 +6,7 @@ use App\Carts;
 use App\Products;
 use App\User;
 use Session;
+use DB;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -14,8 +15,16 @@ class CartController extends Controller
 {
     public function  cart()
     {
-        return view('carts.checkout');
+       $cartObj =new Carts();
+       $cartPrice=$cartObj->getCartData();
+
+       /*$cartPriceObj =new Carts();
+        $totalPrice=$cartPriceObj->getTotalPrice($quantity,$cartPrice);
+        dd($totalPrice);*/
+        return view('carts.checkout',compact('cartPrice'));
     }
+
+
 
     public function addCart()
     {
