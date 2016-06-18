@@ -3,7 +3,7 @@
 <div class="container">
     <div class="check-sec">
         <div class="col-md-3 cart-total">
-            <a class="continue" href="product.html">Continue to basket</a>
+            <a class="continue" href="product.quickdetail">Continue to basket</a>
             <div class="price-details">
                 <h3>Price Details</h3>
                 <span>Total</span>

@@ -58,9 +58,14 @@
                     method: 'get',
                     data: {
                        product_id: prodId
-                    },
-                    url: '{{route('get.cart')}}'
 
+                    },
+                    url: '{{route('get.cart')}}',
+                    success: function (data) {
+                        //console.log(data);
+                       //$('.simpleCart_empty').html(data);
+                       // console.log('hhhjngkn');
+                    }
                 });
             });
         });
