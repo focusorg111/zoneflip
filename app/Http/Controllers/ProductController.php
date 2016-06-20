@@ -281,8 +281,8 @@ class ProductController extends Controller
         try {
             $inputs=\Request::all();
             $categoryId=$inputs['category_id'];
-            $minimun=$inputs['minimum'];
-            $maximum=$inputs['maximum'];
+            $minimun= isset($inputs['minimum'])?$inputs['minimum']:0;
+            $maximum= isset($inputs['maximum'])?$inputs['maximum']:0;
             $productOjb = (new Products());
             $products = $productOjb->getProductList($subcategory_id,$minimun,$maximum);
             return view('products.product',compact('products','categoryId','subcategory_id'));
@@ -292,6 +292,11 @@ class ProductController extends Controller
             return alert_messages();
         }
     }
+
+    /**
+     * @param Request $request
+     * @return mixed
+     */
         public function autocomplete(Request $request)
         {
             try {
@@ -309,6 +314,10 @@ class ProductController extends Controller
             }
         }
 
+    /**
+     * @param $productId
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
 
         public function quickView($productId)
         {
@@ -330,7 +339,9 @@ class ProductController extends Controller
             }
         }
 
-
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function showProductImage()
     {
         $inputs=\Request::all();
@@ -344,6 +355,9 @@ class ProductController extends Controller
         return view('products.product_image',compact('recentProducts'));
     }
 
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View|string
+     */
     public function showProduct()
     {
 
