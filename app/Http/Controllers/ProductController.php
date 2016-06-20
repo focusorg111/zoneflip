@@ -272,20 +272,23 @@ class ProductController extends Controller
 
     }
     /**
+     * Show Product List according to subcategory
      * @param $subcategory_id
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function productList($subcategory_id)
     {
-        $inputs=\Request::all();
-        $categoryId=$inputs['category_id'];
         try {
+            $inputs=\Request::all();
+            $categoryId=$inputs['category_id'];
+            $minimun=$inputs['minimum'];
+            $maximum=$inputs['maximum'];
             $productOjb = (new Products());
-             $products = $productOjb->getProductList($subcategory_id);
-            return view('products.product',compact('products','subcategories'));
-
-        } catch (\Exception $e) {
-            //dd($e);
+            $products = $productOjb->getProductList($subcategory_id,$minimun,$maximum);
+            return view('products.product',compact('products','categoryId','subcategory_id'));
+        }
+        catch (\Exception $e) {
+            dd($e);
             return alert_messages();
         }
     }

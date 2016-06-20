@@ -135,27 +135,42 @@
         <section  class="sky-form">
             <h4><span class="glyphicon glyphicon-minus" aria-hidden="true"></span>Price</h4>
             <ul class="dropdown-menu1">
-                <li><a href="">
+                <li>
                         <div id="slider-range"></div>
                         <input type="text" id="amount" style="border: 0; font-weight: NORMAL;   font-family: 'Dosis-Regular';" />
-                    </a></li>
+                        <input name="minimun_price" type="hidden" id="min">
+                        <input name="maximum_price" type="hidden" id="max">
+                        <button class="btn btn btn-primary" id="search" type="submit" data-categroy-id="{{$categoryId}}">search</button>
+                    </li>
             </ul>
+            </form>
         </section>
         <!---->
         <script type="text/javascript" src="{{asset('assetsjs/jquery-ui.min.js')}}"></script>
         <link rel="stylesheet" type="text/css" href="{{asset('assets/css/jquery-ui.css')}}">
         <script type='text/javascript'>//<![CDATA[
             $(window).load(function(){
-                $( "#slider-range" ).slider({
-                    range: true,
-                    min: 0,
-                    max: 100000,
-                    values: [ 500, 100000 ],
-                    slide: function( event, ui ) {  $( "#amount" ).val( "$" + ui.values[ 0 ] + " - $" + ui.values[ 1 ] );
+                        $( "#slider-range" ).slider({
+                            range: true,
+                            min: 0,
+                            max: 100000,
+                            values: [ 500, 100000 ],
+                            slide: function( event, ui ) {
+                                $('#min').val(ui.values[ 0 ]);
+                                $('#max').val(ui.values[ 1 ]);
+                        $( "#amount" ).val( "Rs." + ui.values[ 0 ] + " - Rs." + ui.values[ 1 ] );
                     }
                 });
-                $( "#amount" ).val( "$" + $( "#slider-range" ).slider( "values", 0 ) + " - $" + $( "#slider-range" ).slider( "values", 1 ) );
-
+               $( "#amount" ).val( "Rs." + $( "#slider-range" ).slider( "values", 0 ) + " - Rs." + $( "#slider-range" ).slider( "values", 1 ) );
+               $('#search').click(function() {
+                   var cat =$('#search').attr('data-categroy-id');
+                   var min= $('#min').val();
+                   var max=$('#max').val();
+                   if(min && max){
+                       var url =location.protocol+'//'+location.host+location.pathname + "?category_id=" + cat + "&minimum=" + min + "&maximum=" + max;
+                       location.replace(url);
+                   }
+               });
             });//]]>
         </script>
         <!---->
