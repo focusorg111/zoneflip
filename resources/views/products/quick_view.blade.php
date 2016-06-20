@@ -57,14 +57,15 @@
                 $.ajax({
                     method: 'get',
                     data: {
-                       product_id: prodId
+                        product_id: prodId
 
                     },
                     url: '{{route('get.cart')}}',
                     success: function (data) {
-                        //console.log(data);
-                       //$('.simpleCart_empty').html(data);
-                       // console.log('hhhjngkn');
+
+                       // console.log(data);
+                   $('.simpleCart_total').html(data.total);
+                        $('.simpleCart_quantity').html(data.quantity);
                     }
                 });
             });

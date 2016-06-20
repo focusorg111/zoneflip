@@ -17,6 +17,7 @@ class Carts extends Model
      return $this
             ->join('products', 'products.product_id', '=', 'carts.product_id')
             ->select(['products.price',
+                'products.product_name',
                 'carts.product_id',
                 'carts.quantity',
             ])

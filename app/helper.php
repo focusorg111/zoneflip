@@ -1,5 +1,6 @@
 <?php
 use App\Category;
+use App\Carts;
 use App\Products;
 // My common functions
 
@@ -146,6 +147,8 @@ function dropZoneUploader($fileName, $directory = '')
         }
 
     }
+
+
 
 }
 ?>

@@ -18,7 +18,7 @@
     <script src="{{asset('assets/js/jquery.auto-complete.js')}}"></script>
     <script src="{{asset('assets/js/jquery.auto-complete.min.js')}}"></script>
     <script src="{{asset('assets/js/jquery-ui.js')}}"></script>
-    <script src="{{asset('assets/js/jquery-ui.min.js')}}"></script>
+
     <!--//theme style-->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -151,16 +151,9 @@
 
 
         <div class="cart box_1">
-
             <a href="{{route('get.check')}}">
                 <div class="total">
-                        @foreach($cartPrice as $cart)
-                        {{$cart->price}}
-                        {{$cart->quantity}}
-                        {{$total=$cart['price']*$cart['quantity']}}
-                        {{$total+=1}}
-                        @endforeach
-                        <span class="simpleCart_total"></span> (<span id="simpleCart_quantity" class="simpleCart_quantity"></span>)</div>
+                    <span class="simpleCart_total"></span> (<span id="simpleCart_quantity" class="simpleCart_quantity"></span>)</div>
                     <span class="glyphicon glyphicon-shopping-cart"   aria-hidden="true"></span>
             </a>
 

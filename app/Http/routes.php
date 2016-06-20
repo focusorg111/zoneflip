@@ -35,6 +35,7 @@ Route::group(['middleware' => ['web']], function () {
 
 
 
+
     Route::group(['middleware' => ['auth']], function () {
         Route::get('dashboard',['as'=>'dashboard','uses'=>'DashboardController@index']);
         Route::get('logout',['as'=>'logout','uses'=>'UserController@logout']);
