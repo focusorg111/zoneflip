@@ -33,7 +33,7 @@
                             <p class="disc">Dis.{{$product->discount}}%</p>
                         </div>
                         <input type="text" class="item_quantity" value="1" />
-                        <input type="button" class="btn btn-primary" value="ADD TO CART">
+                        <input type="button" class="btn btn-primary add-cart"  data-product-id="{{$product->product_id}}" value="ADD TO CART">
                         <div class="clearfix"> </div>
                         <div class="clearfix"> </div>
                     </div>
@@ -223,6 +223,32 @@
                 });
             });
         </script>
+
+        <script>
+
+            $(document).ready(function() {
+                $(".add-cart").click(function () {
+                    var prodId =$(this).attr('data-product-id');
+                    $.ajax({
+                        method: 'get',
+                        data: {
+                            product_id: prodId
+
+                        },
+                        url: '{{route('get.cart')}}',
+                        success: function (data) {
+
+                            // console.log(data);
+                            $('.simpleCart_total').html(data.total);
+                            $('.simpleCart_quantity').html(data.quantity);
+                        }
+                    });
+                });
+            });
+
+
+
+            </script>
     </div>
     </div>
     </div>
