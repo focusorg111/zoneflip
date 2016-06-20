@@ -25,82 +25,47 @@
                 <h3>OPTIONS</h3>
                 <h4>COUPONS</h4>
                 <a class="cpns" href="#">Apply Coupons</a>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
             </div>
         </div>
+
         <div class="col-md-9 cart-items">
             <h1>My Shopping Bag (2)</h1>
-            <script>$(document).ready(function(c) {
-                    $('.close1').on('click', function(c){
-                        $('.cart-header').fadeOut('slow', function(c){
-                            $('.cart-header').remove();
-                        });
-                    });
-                });
-            </script>
-            <div class="cart-header">
-                <div class="close1"> </div>
-                <div class="cart-sec simpleCart_shelfItem">
-                    <div class="cart-item cyc">
-                        <img src="images/p4.jpg" class="img-responsive" alt=""/>
-                    </div>
-                    <div class="cart-item-info">
-                        <h3><a href="single.html">Rock Light Emergency Lights</a><span>Model No: RL-5511S</span></h3>
-                        <ul class="qty">
-                            <li><p>Size : 5</p></li>
-                            <li><p>Qty : 1</p></li>
-                        </ul>
-                        <div class="delivery">
-                            <p>Service Charges : Rs.100.00</p>
-                            <span>Delivered in 2-3 bussiness days</span>
-                            <div class="clearfix"></div>
-                        </div>
-                    </div>
-                    <div class="clearfix"></div>
 
-                </div>
-            </div>
-            <script>$(document).ready(function(c) {
-                    $('.close2').on('click', function(c){
-                        $('.cart-header2').fadeOut('slow', function(c){
-                            $('.cart-header2').remove();
-                        });
-                    });
-                });
-            </script>
-            <div class="cart-header2">
-                <div class="close2"> </div>
-                <div class="cart-sec simpleCart_shelfItem">
-                    <div class="cart-item cyc">
-                        <img src="images/p3.jpg" class="img-responsive" alt=""/>
-                    </div>
-                    <div class="cart-item-info">
-                        <h3><a href="single.html">Show Lights</a><span>Model No: SL-3578</span></h3>
-                        <ul class="qty">
-                            <li><p>Size : 5</p></li>
-                            <li><p>Qty : 1</p></li>
-                        </ul>
-                        <div class="delivery">
-                            <p>Service Charges : Rs.100.00</p>
-                            <span>Delivered in 2-3 bussiness days</span>
-                            <div class="clearfix"></div>
-                        </div>
-                    </div>
-                    <div class="clearfix"></div>
-                </div>
-            </div>
+            <table class="table table-bordered">
+                <tr>
+                    <th>Product</th>
+                    <th>Quantity</th>
+                    <th>Price</th>
+                    <th style="width: 200px">Action</th>
+                </tr>
+                @foreach($cartPrices as $cartPrice)
+                    <tr><td>{{$cartPrice->product_name}}
+                        <td>{{$cartPrice->quantity }}</td>
+                        <td>{{$cartPrice->price}}</td>
+                        <td> <a class="btn btn-danger"  href="">
+                                Remove
+                            </a>
+                            <a class="btn btn-success" href="">To Wishlist</a></td>
+                    </tr>
+            @endforeach
+            </table>
+
+
         </div>
         <div class="clearfix"> </div>
     </div>
 </div>
 <!-- //check out -->
 <!---->
-<div class="subscribe">
-    <div class="container">
-        <h3>Newsletter</h3>
-        <form>
-            <input type="text" class="text" value="Email" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Email';}">
-            <input type="submit" value="Subscribe">
-        </form>
-    </div>
-</div>
+
     @endsection
